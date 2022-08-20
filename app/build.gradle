@@ -8,6 +8,7 @@ android {
     defaultConfig {
         applicationId "com.openclassrooms.realestatemanager"
         minSdkVersion 19
+        multiDexEnabled true
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
@@ -34,10 +35,38 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment:2.5.1'
     implementation 'androidx.navigation:navigation-ui:2.5.1'
+    implementation "androidx.fragment:fragment:1.5.2"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    //GLIDE
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    //Room
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor('android.arch.persistence.room:compiler:1.1.1')
+
+
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    //GOOGLE MAPS
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    //Youtube videos
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
+
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

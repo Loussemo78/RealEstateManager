@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#26C6DA</color>
+    <color name="colorPrimaryDark">#37474F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="fragment_on_click_real_estate_description_card_color">#ECEFF1</color>
+    <color name="fragment_on_click_real_estate_for_sale_status_color">#76FF03</color>
+    <color name="fragment_on_click_real_estate_sold_status_color">#D50000</color>
+    <color name="fragment_on_click_real_estate_status_cardview_color">#757575</color>
+
+    <color name="activity_add_real_estate_chose_date_button_color">#E91E63</color>
+
+    <color name="bottom_navigation_color_background">#BA68C8</color>
+    <color name="bottom_navigation_color_icon_selected">#A7FFEB</color>
+    <color name="bottom_navigation_color_icon_not_selected">#212121</color>
 </resources>

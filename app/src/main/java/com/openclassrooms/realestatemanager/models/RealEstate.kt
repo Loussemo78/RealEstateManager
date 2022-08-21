@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity
+@Entity (tableName = "real_estate_db")
 data class RealEstate(
         @PrimaryKey val id: Int,
         val type: String,

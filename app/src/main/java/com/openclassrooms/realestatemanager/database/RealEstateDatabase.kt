@@ -3,12 +3,9 @@ package com.openclassrooms.realestatemanager.database
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
-import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 import com.openclassrooms.realestatemanager.dao.RealEstateDao
 import com.openclassrooms.realestatemanager.models.RealEstate
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.internal.synchronized
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -20,7 +17,7 @@ abstract class RealEstateDatabase : RoomDatabase() {
 
     // --- SINGLETON ---
     companion object{
-
+        @Volatile
         private var INSTANCE: RealEstateDatabase? = null
 
         // Executors
@@ -30,14 +27,14 @@ abstract class RealEstateDatabase : RoomDatabase() {
         // --- INSTANCE --
 
           fun getInstance(context: Context): RealEstateDatabase? {
-               //synchronized(this){
+               synchronized(this){
                    if (INSTANCE == null) {
                        INSTANCE = Room.databaseBuilder(context.applicationContext,
                                RealEstateDatabase::class.java, "RealEstate")
-                               .addCallback(prepopulateDatabase())
+                               //.addCallback()
                                .build()
                    }
-               //}
+               }
 
             return INSTANCE
         }

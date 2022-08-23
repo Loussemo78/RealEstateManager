@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager
+package com.openclassrooms.realestatemanager.utility
 
 import androidx.room.TypeConverter
 import java.util.*

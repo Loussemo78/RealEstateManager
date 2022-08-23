@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.models
 import android.content.ContentValues
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 @Entity (tableName = "real_estate_db")
@@ -16,19 +17,19 @@ data class RealEstate(
         val numberOfBedRooms: Int,
         val description: String,
         val mainPhotoUrl: String,
-        val numberOfPhotos:Int,
+        val numberOfPhotos:Int?,
         val address:String,
-        val mainPhotoString: String,
+        val mainPhotoString: String?,
         val pointsOfInterest: String,
         val latitude:Double,
         val longitude:Double,
          val status:String,
         val entryDate:Date,
-        val dateOfSale:Date,
+        val dateOfSale:Date?,
         val realtor:String,
         val agentPhotoUrl:String,
-        val video:String
-        ){
+        val video:String?
+        ):Serializable{
     fun abstractLayer(values: ContentValues): RealEstate {
         val realEstate = RealEstate(id, type, price, surface, numberOfRooms, numberOfBathRooms, numberOfBedRooms,
                 description, mainPhotoUrl, numberOfPhotos, address, mainPhotoString, pointsOfInterest, latitude,
@@ -56,6 +57,10 @@ data class RealEstate(
         values.put("videoId", realEstate.price)
 
         return realEstate
+    }
+
+    companion object{
+        fun abstractLayer():Int = 1
     }
 }
 

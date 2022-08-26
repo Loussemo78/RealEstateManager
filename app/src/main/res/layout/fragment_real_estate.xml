@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_real_estate_main_linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/fragment_real_estate_imageView"
+        android:layout_width="@dimen/fragment_real_estate_imageview_size"
+        android:layout_height="@dimen/fragment_real_estate_imageview_size"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/fragment_real_estate_imageView"
+        app:layout_constraintTop_toTopOf="@id/fragment_real_estate_main_linear_layout">
+
+
+        <TextView
+            android:id="@+id/fragment_real_estate_item_type"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/fragment_real_estate_texviews_margin_start"
+            android:layout_marginTop="@dimen/fragment_real_estate_textviews_margin_top"
+            android:textStyle="bold"
+            android:textSize="@dimen/fragment_real_estate_textviews_size"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/fragment_real_estate_item_first_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fragment_real_estate_texviews_margin_start"
+            android:layout_marginTop="@dimen/fragment_real_estate_textviews_margin_top"
+            android:textSize="@dimen/fragment_real_estate_textviews_size" />
+
+        <TextView
+            android:id="@+id/fragment_real_estate_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fragment_real_estate_texviews_margin_start"
+            android:layout_marginTop="@dimen/fragment_real_estate_textviews_margin_top"
+            android:textSize="@dimen/fragment_real_estate_price_textview_size"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/fragment_real_estate_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_create_24"
+        android:background="@android:color/black"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fragment_real_estate_main_linear_layout"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_real_estate_main_linear_layout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

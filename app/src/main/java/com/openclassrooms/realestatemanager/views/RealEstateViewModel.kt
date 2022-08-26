@@ -25,4 +25,16 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
             repository.insertRealEstate(realEstate)
         }
     }
+
+    fun updateRealEstate(realEstate: RealEstate){
+        viewModelScope.launch (Dispatchers.IO) {
+            repository.updateRealEstate(realEstate)
+        }
+    }
+
+    fun deleteRealEstate(realEstate: RealEstate){
+        viewModelScope.launch (Dispatchers.IO) {
+            repository.deleteRealEstate(realEstate)
+        }
+    }
 }

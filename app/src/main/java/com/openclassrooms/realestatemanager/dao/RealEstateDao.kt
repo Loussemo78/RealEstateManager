@@ -9,14 +9,14 @@ import com.openclassrooms.realestatemanager.models.RealEstate
 @Dao
 interface RealEstateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRealEstate(realEstate: RealEstate?): Long
+    suspend fun insertRealEstate(realEstate: RealEstate?): Long
 
 
     @Query("SELECT * FROM real_estate_db WHERE id = :realEstateId")
     suspend fun getRealEstate(realEstateId: Long): LiveData<RealEstate?>?
 
     @Query("SELECT * FROM real_estate_db")
-    suspend fun getRealEstates(): LiveData<List<RealEstate?>?>?
+     fun getRealEstates(): LiveData<List<RealEstate>>
 
     @Update
     suspend fun updateRealEstate(realEstate: RealEstate?): Int

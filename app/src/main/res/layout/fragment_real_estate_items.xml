@@ -33,7 +33,7 @@
             android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/fragment_real_estate_item_first_location"
+            android:id="@+id/fragment_real_estate_item_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/fragment_real_estate_texviews_margin_start"

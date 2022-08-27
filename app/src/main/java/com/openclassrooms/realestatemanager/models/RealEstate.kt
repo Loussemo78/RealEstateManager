@@ -11,6 +11,7 @@ data class RealEstate(
         @PrimaryKey val id: Int,
         val type: String,
         val price: Int,
+        val place: String,
         val surface: Int,
         val numberOfRooms: Int,
         val numberOfBathRooms: Int,
@@ -26,35 +27,34 @@ data class RealEstate(
          val status:String,
         val entryDate:Date,
         val dateOfSale:Date?,
-        val realtor:String,
+        val agent:String,
         val agentPhotoUrl:String,
         val video:String?
         ):Serializable{
     fun abstractLayer(values: ContentValues): RealEstate {
-        val realEstate = RealEstate(id, type, price, surface, numberOfRooms, numberOfBathRooms, numberOfBedRooms,
+        val realEstate = RealEstate(id, type, price, place,surface, numberOfRooms, numberOfBathRooms, numberOfBedRooms,
                 description, mainPhotoUrl, numberOfPhotos, address, mainPhotoString, pointsOfInterest, latitude,
-                longitude, status, entryDate, dateOfSale, realtor, agentPhotoUrl, video
+                longitude, status, entryDate, dateOfSale, agent, agentPhotoUrl, video
         )
-
         values.put("type", realEstate.type)
         values.put("price", realEstate.price)
+        values.put("place", realEstate.place)
         values.put("surface", realEstate.surface)
         values.put("numberOfRooms", realEstate.numberOfRooms)
-        values.put("numberOfBathrooms", realEstate.price)
-        values.put("numberOfBedrooms", realEstate.price)
-        values.put("description", realEstate.price)
-        values.put("mainPhotoUrl", realEstate.price)
-        values.put("mainPhotoString", realEstate.price)
-        values.put("numberOfPhotos", realEstate.price)
-        values.put("firstLocation", realEstate.price)
-        values.put("latitude", realEstate.price)
-        values.put("longitude", realEstate.price)
-        values.put("status", realEstate.price)
-        values.put("entryDate", realEstate.price)
-        values.put("dateOfSale", realEstate.price)
-        values.put("agent", realEstate.price)
-        values.put("agentPhotoUrl", realEstate.price)
-        values.put("videoId", realEstate.price)
+        values.put("numberOfBathrooms", realEstate.numberOfBathRooms)
+        values.put("numberOfBedrooms", realEstate.numberOfBedRooms)
+        values.put("description", realEstate.description)
+        values.put("mainPhotoUrl", realEstate.mainPhotoUrl)
+        values.put("mainPhotoString", realEstate.mainPhotoString)
+        values.put("numberOfPhotos", realEstate.numberOfPhotos)
+        values.put("latitude", realEstate.latitude)
+        values.put("longitude", realEstate.longitude)
+        values.put("status", realEstate.status)
+        values.put("entryDate", realEstate.entryDate)
+        values.put(null, null)
+        values.put("agent", realEstate.agent)
+        values.put("agentPhotoUrl", realEstate.agentPhotoUrl)
+        values.put("videoId", realEstate.video)
 
         return realEstate
     }

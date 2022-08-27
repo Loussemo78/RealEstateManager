@@ -57,8 +57,8 @@ abstract class RealEstateDatabase : RoomDatabase() {
                 super.onCreate(db)
                 INSTANCE?.let {
                      scope.launch {
-                         INSTANCE?.realEstateDao?.insertRealEstate(RealEstate(0,"Loft",120000,423,
-                                 8,4,4, Utils.description(),
+                         INSTANCE?.realEstateDao?.insertRealEstate(RealEstate(0,"Loft",120000,"Manhattan",
+                                 8,4,4, 4,Utils.description(),
                                  "https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg",
                          null, "41 Great Jones Street Penthouse\n" +
                                  "Lafayette\n" +

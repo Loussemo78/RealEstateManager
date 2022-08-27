@@ -1,3 +1,10 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fragment_real_estate_imageview_size">150dp</dimen>
+    <dimen name="fragment_real_estate_textview_margin_start">15dp</dimen>
+    <dimen name="fragment_real_estate_textview_margin_top">8dp</dimen>
+    <dimen name="fragment_real_estate_textview_size">25sp</dimen>
+    <dimen name="fragment_real_estate_price_textview_size">30sp</dimen>
+
+
 </resources>

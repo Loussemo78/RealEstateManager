@@ -2,13 +2,16 @@ package com.openclassrooms.realestatemanager.models
 
 import android.content.ContentValues
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.io.Serializable
+import java.text.SimpleDateFormat
 import java.util.*
 
 @Entity (tableName = "real_estate_db")
 data class RealEstate(
-        @PrimaryKey val id: Int,
+        @PrimaryKey(autoGenerate = true)
+        val id: Long,
         val type: String,
         val price: Int,
         val place: String,
@@ -24,18 +27,28 @@ data class RealEstate(
         val pointsOfInterest: String,
         val latitude:Double,
         val longitude:Double,
-         val status:String,
+        val status:String,
         val entryDate:Date,
         val dateOfSale:Date?,
         val agent:String,
         val agentPhotoUrl:String,
-        val video:String?
+        val video:String
         ):Serializable{
+
+//    constructor(): this(0,"",0,"",0,0,
+//            0,0,"","",0,
+//            "","","",0.0,0.0,"",null,null,"","","")
+
+
+
     fun abstractLayer(values: ContentValues): RealEstate {
         val realEstate = RealEstate(id, type, price, place,surface, numberOfRooms, numberOfBathRooms, numberOfBedRooms,
                 description, mainPhotoUrl, numberOfPhotos, address, mainPhotoString, pointsOfInterest, latitude,
                 longitude, status, entryDate, dateOfSale, agent, agentPhotoUrl, video
         )
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+        values.put("id",realEstate.id)
         values.put("type", realEstate.type)
         values.put("price", realEstate.price)
         values.put("place", realEstate.place)
@@ -50,8 +63,8 @@ data class RealEstate(
         values.put("latitude", realEstate.latitude)
         values.put("longitude", realEstate.longitude)
         values.put("status", realEstate.status)
-        values.put("entryDate", realEstate.entryDate)
-        values.put(null, null)
+        values.put("entryDate", realEstate.entryDate.let { dateFormat.format(it) })
+        values.put("dateOfSale", realEstate.dateOfSale?.let { dateFormat.format(it) })
         values.put("agent", realEstate.agent)
         values.put("agentPhotoUrl", realEstate.agentPhotoUrl)
         values.put("videoId", realEstate.video)

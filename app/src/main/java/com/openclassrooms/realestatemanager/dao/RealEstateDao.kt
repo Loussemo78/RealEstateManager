@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.dao
 
-import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteQuery
@@ -13,7 +12,7 @@ interface RealEstateDao {
 
 
     @Query("SELECT * FROM real_estate_db WHERE id = :realEstateId")
-    suspend fun getRealEstate(realEstateId: Long): LiveData<RealEstate?>?
+     fun getRealEstate(realEstateId: Long): LiveData<RealEstate?>
 
     @Query("SELECT * FROM real_estate_db")
      fun getRealEstates(): LiveData<List<RealEstate>>
@@ -25,11 +24,11 @@ interface RealEstateDao {
     suspend fun deleteAll(): Int
 
     //Content Provider
-    @Query("SELECT * FROM real_estate_db")
-    suspend fun getRealEstatesWithCursor(): Cursor?
+//    @Query("SELECT * FROM real_estate_db")
+//    suspend fun getRealEstatesWithCursor(): Cursor?
 
     //Filter
     @RawQuery(observedEntities = [RealEstate::class])
-    suspend fun getRealEstatesFiltered(query: SupportSQLiteQuery?): LiveData<List<RealEstate?>?>?
+     fun getRealEstatesFiltered(query: SupportSQLiteQuery): LiveData<List<RealEstate>>
 
 }

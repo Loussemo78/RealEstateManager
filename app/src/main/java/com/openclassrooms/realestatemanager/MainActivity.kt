@@ -1,11 +1,11 @@
 package com.openclassrooms.realestatemanager
 
-import android.R.menu
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
+import com.openclassrooms.realestatemanager.views.RealEstateFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +17,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.activity_main_fragment_container_view_list,
+                        RealEstateFragment()).commit()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -24,23 +29,30 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id. -> {
-//                val intent = Intent(this, AddOrEditRealEstateActivity::class.java)
-//                val realEstate = RealEstate()
-//                intent.putExtra(ADD_REAL_ESTATE, realEstate as Serializable)
-//                startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE)
-//            }
-//            R.id.menu_search -> {
-//                if (realEstateFilteredList.size() !== 0) realEstateFilteredList.clear()
-//                val intent1 = Intent(this, SearchRealEstateProviderActivity::class.java)
-//                startActivity(intent1)
-//            }
-//            R.id.menu_clear_filter -> repository.resetFilter()
-//            else ->
-//                return super.onOptionsItemSelected(item)
-//        }
-//        return true
-//    }
+
+
+    private fun initializeBottomNavigationItemView(){
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+
+            when (item.itemId) {
+                R.id.page1 -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.activity_main_fragment_container_view_list,
+                                RealEstateFragment()).commit()
+                R.id.page2 -> {
+//                    val fragmentContainerViewDetail: Fragment? = supportFragmentManager
+//                            .findFragmentById(R.id.activity_main_fragment_container_view_detail)
+//                    if (fragmentContainerViewDetail == null) {
+//                        supportFragmentManager.beginTransaction().replace(
+//                                R.id.activity_main_fragment_container_view_list, MapsFragment())
+//                                .commit()
+//                    } else if (fragmentContainerViewDetail.isVisible()) {
+//                        supportFragmentManager.beginTransaction().replace(
+//                                R.id.activity_main_fragment_container_view_detail, MapsFragment()
+//                        ).commit()
+//                    }
+                }
+            }
+            true
+        }
+    }
 }

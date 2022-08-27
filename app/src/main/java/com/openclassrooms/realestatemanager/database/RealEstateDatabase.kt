@@ -14,8 +14,6 @@ import com.openclassrooms.realestatemanager.utility.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 @Database(entities =  [RealEstate::class], version = 1, exportSchema = false)
 @TypeConverters( RealEstateTypeConverter::class , DateConverter::class)
@@ -60,12 +58,12 @@ abstract class RealEstateDatabase : RoomDatabase() {
                          INSTANCE?.realEstateDao?.insertRealEstate(RealEstate(0,"Loft",120000,"Manhattan",
                                  8,4,4, 4,Utils.description(),
                                  "https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg",
-                         null, "41 Great Jones Street Penthouse\n" +
+                         0, "41 Great Jones Street Penthouse\n" +
                                  "Lafayette\n" +
                                  "NoHo\n" +
                                  "New York","","école",40.7830603,-73.9712488,
                                  "disponible",Utils.convertStringToDate("23/08/2022"),null,
-                                 "Mike House","https://i.ibb.co/Y71g9LB/Christian-Haag.jpg",null
+                                 "Mike House","https://i.ibb.co/Y71g9LB/Christian-Haag.jpg",""
                          ))
                      }
                 }

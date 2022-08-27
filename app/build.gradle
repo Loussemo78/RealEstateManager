@@ -57,9 +57,9 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-    implementation"androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation"androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
+    //View model and Live Data
+    implementation"androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
@@ -87,8 +87,7 @@ dependencies {
 
 
 
-    //ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
+
 
     //Gson
     implementation 'com.google.code.gson:gson:2.9.0'

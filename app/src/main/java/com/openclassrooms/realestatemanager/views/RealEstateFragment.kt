@@ -14,27 +14,37 @@ import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBi
 
 class RealEstateFragment: Fragment() {
 
-private var binding : FragmentRealEstateListBinding? = null
+private lateinit var binding : FragmentRealEstateListBinding
 private lateinit var realEstateViewModel: RealEstateViewModel
-//private var adapter: RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>? = null
+private var layoutManager: RecyclerView.LayoutManager? = null
+private lateinit var adapter: RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = binding?.root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = binding.root
 
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
-
-    }
-
-    private fun initRecyclerView(){
-        binding?.recyclerView?.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun displayRealEstateList(){
-        realEstateViewModel.getAllRealEstates().observe(this, Observer {
-            binding?.recyclerView?.adapter = RealEstateRecyclerViewAdapter(it)
+        realEstateViewModel.getAllRealEstates().observe(viewLifecycleOwner, Observer {
+            adapter = RealEstateRecyclerViewAdapter(it)
+            binding.recyclerView.adapter
+            adapter.
+            //adapter?.notifyDataSetChanged()
         })
+        //initRecyclerView()
+        //displayRealEstateList()
     }
+
+//    private fun initRecyclerView(){
+//        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+//        adapter = RealEstateRecyclerViewAdapter(it)
+//        binding.recyclerView.adapter
+//    }
+
+//    private fun displayRealEstateList(){
+////        realEstateViewModel.getAllRealEstates().observe(viewLifecycleOwner, Observer {
+////
+////        })
+//    }
 }

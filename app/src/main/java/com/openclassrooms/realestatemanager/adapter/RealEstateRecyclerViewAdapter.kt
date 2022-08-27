@@ -16,7 +16,7 @@ import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateItemsB
 import com.openclassrooms.realestatemanager.models.RealEstate
 import java.util.ArrayList
 
-class RealEstateRecyclerViewAdapter(private val itemsList: ArrayList<RealEstate>): RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>() {
+class RealEstateRecyclerViewAdapter(private val itemsList: List<RealEstate>): RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RealEstateRecyclerViewAdapter.RealEstateViewHolder {
         val binding = FragmentRealEstateItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -25,7 +25,6 @@ class RealEstateRecyclerViewAdapter(private val itemsList: ArrayList<RealEstate>
 
     override fun onBindViewHolder(holder: RealEstateViewHolder, position: Int) {
         holder.bind(itemsList[position])
-
     }
 
 

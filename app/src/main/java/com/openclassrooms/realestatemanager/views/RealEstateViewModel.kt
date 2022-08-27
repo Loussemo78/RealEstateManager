@@ -20,6 +20,11 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
         readAll = repository.getAllRealEstates()
     }
 
+
+    fun getAllRealEstates():LiveData<List<RealEstate>>{
+       return repository.getAllRealEstates()
+    }
+
     fun addRealEstate(realEstate: RealEstate){
         viewModelScope.launch (Dispatchers.IO) {
             repository.insertRealEstate(realEstate)

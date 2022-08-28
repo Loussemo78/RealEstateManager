@@ -11,7 +11,6 @@ import com.openclassrooms.realestatemanager.models.RealEstate
 
 class RealEstateRecyclerViewAdapter(private val itemsList: List<RealEstate>) : RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>() {
 
-    private val mRealEstateList: MutableList<RealEstate> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RealEstateRecyclerViewAdapter.RealEstateViewHolder {
         val binding = FragmentRealEstateItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -41,10 +40,7 @@ class RealEstateRecyclerViewAdapter(private val itemsList: List<RealEstate>) : R
         }
     }
 
-    fun setRealEstateList(realEstateList: MutableList<RealEstate>) {
-        mRealEstateList.clear()
-        mRealEstateList.addAll(realEstateList)
-    }
+
 
 
 

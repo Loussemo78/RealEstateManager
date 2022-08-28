@@ -5,7 +5,13 @@ import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
+import com.openclassrooms.realestatemanager.models.RealEstate
+import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +24,17 @@ class MainActivity : AppCompatActivity() {
         val view: View = binding.root
         setContentView(view)
 
+        GlobalScope.launch(Dispatchers.Main) {
+
+            val repository = RealEstateRepository(this@MainActivity)
+            val realEstateObject = RealEstate(1,"Type",12 ,"Place",
+                    1500,2,3,1,"Description"
+                    ,"PhotoUrl",3,"Address","mainPhoto",
+                    "points",47.244854, 3.346571, "Status", Date(2022,3,12),Date(2022,3,12),"Agent"
+                    ,"photoUrl","video")
+
+            repository.insertRealEstate(realEstateObject)
+        }
         supportFragmentManager.beginTransaction()
                 .replace(R.id.activity_main_fragment_container_view_list,
                         RealEstateFragment()).commit()

@@ -15,8 +15,7 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
     private var readAll: LiveData<List<RealEstate>>
 
     init {
-        val realEstateDB = RealEstateDatabase.getInstance(application)!!.realEstateDao
-        repository = RealEstateRepository(realEstateDB)
+        repository = RealEstateRepository(application.applicationContext)
         readAll = repository.getAllRealEstates()
     }
 

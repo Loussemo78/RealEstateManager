@@ -11,40 +11,33 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
+import com.openclassrooms.realestatemanager.models.RealEstate
 
 class RealEstateFragment: Fragment() {
 
 private lateinit var binding : FragmentRealEstateListBinding
 private lateinit var realEstateViewModel: RealEstateViewModel
-private var layoutManager: RecyclerView.LayoutManager? = null
-private lateinit var adapter: RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = binding.root
+private lateinit var recyclerView: RecyclerView
 
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View{
+        binding = FragmentRealEstateListBinding.inflate(inflater, container, false)
+        recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
+        realEstateViewModel.getAllRealEstates().observe(viewLifecycleOwner, Observer {
+
+            recyclerView.adapter = RealEstateRecyclerViewAdapter(it)
+        })
+
+        return  binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
-        realEstateViewModel.getAllRealEstates().observe(viewLifecycleOwner, Observer {
-            adapter = RealEstateRecyclerViewAdapter(it)
-            binding.recyclerView.adapter
-            adapter.
-            //adapter?.notifyDataSetChanged()
-        })
-        //initRecyclerView()
-        //displayRealEstateList()
     }
 
-//    private fun initRecyclerView(){
-//        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-//        adapter = RealEstateRecyclerViewAdapter(it)
-//        binding.recyclerView.adapter
-//    }
 
-//    private fun displayRealEstateList(){
-////        realEstateViewModel.getAllRealEstates().observe(viewLifecycleOwner, Observer {
-////
-////        })
-//    }
+
 }

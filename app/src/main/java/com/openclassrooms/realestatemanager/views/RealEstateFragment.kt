@@ -40,4 +40,9 @@ private lateinit var recyclerView: RecyclerView
 
 
 
+    companion object {
+        fun newInstance() = RealEstateFragment()
+    }
+
+
 }

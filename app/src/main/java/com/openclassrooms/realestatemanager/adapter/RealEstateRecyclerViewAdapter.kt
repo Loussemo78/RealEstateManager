@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.adapter
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,7 @@ class RealEstateRecyclerViewAdapter(private val itemsList: List<RealEstate>) : R
             binding.fragmentRealEstateItemType.text = realEstate.type
             binding.fragmentRealEstateItemPlace.text = realEstate.place
             binding.fragmentRealEstateItemPrice.text = realEstate.price.toString()
+
 
         }
     }

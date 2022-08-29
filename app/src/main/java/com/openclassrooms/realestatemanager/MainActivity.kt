@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
+import com.openclassrooms.realestatemanager.views.MapFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
             repository.insertRealEstate(realEstateObject)
         }
+        initializeBottomNavigationItemView()
         supportFragmentManager.beginTransaction()
                 .replace(R.id.activity_main_fragment_container_view_list,
                         RealEstateFragment()).commit()
@@ -56,17 +58,9 @@ class MainActivity : AppCompatActivity() {
                         .replace(R.id.activity_main_fragment_container_view_list,
                                 RealEstateFragment()).commit()
                 R.id.page2 -> {
-//                    val fragmentContainerViewDetail: Fragment? = supportFragmentManager
-//                            .findFragmentById(R.id.activity_main_fragment_container_view_detail)
-//                    if (fragmentContainerViewDetail == null) {
-//                        supportFragmentManager.beginTransaction().replace(
-//                                R.id.activity_main_fragment_container_view_list, MapsFragment())
-//                                .commit()
-//                    } else if (fragmentContainerViewDetail.isVisible()) {
-//                        supportFragmentManager.beginTransaction().replace(
-//                                R.id.activity_main_fragment_container_view_detail, MapsFragment()
-//                        ).commit()
-//                    }
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.activity_main_fragment_container_view_list,
+                                    MapFragment()).commit()
                 }
             }
             true

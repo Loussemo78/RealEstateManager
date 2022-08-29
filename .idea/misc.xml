@@ -4,6 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/drawable/bottom_navigation_colors.xml" value="0.137" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-land/fragment_real_estate_detail.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-land/layout.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-sw600dp-land/fragment_real_estate_detail.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-sw600dp-land/layout3.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-sw600dp/fragment_real_estate_detail.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-sw600dp/fragment_real_estate_photos.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-sw600dp/fragment_tablet.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout-sw600dp/layout2.xml" value="0.1" />
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/activity_add_or_create_real_estate.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/activity_search_real_estate.xml" value="0.1" />
@@ -15,6 +24,9 @@
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/fragment_real_estate_photos.xml" value="0.1" />
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/fragment_real_estate_photos_list.xml" value="0.1" />
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/fragment_tablet.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/layout.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/layout2.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/layout/layout3.xml" value="0.1" />
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.28802083333333334" />
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/menu/main_menu.xml" value="0.28802083333333334" />
       </map>

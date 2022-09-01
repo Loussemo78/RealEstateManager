@@ -6,7 +6,23 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="description">Description</string>
+    <string name="google_maps_api_key">AIzaSyBNaYHRy_wAQNg8c2zXiyJ3uLL_eFSFFTs</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="agent_in_charge">Agent in charge</string>
+    <string name="surface">Surface</string>
+    <string name="number_of_rooms">Number of rooms</string>
+    <string name="number_of_bathrooms">Number of bathrooms</string>
+    <string name="number_of_bedrooms">Number of bedrooms</string>
+    <string name="location">Location</string>
+    <string name="points_of_interest">Points of interest</string>
+    <string name="price">Price</string>
+    <string name="entry_date">Entry date</string>
+    <string name="sale_date">Sale date</string>
+    <string name="map">Map</string>
+    <string name="media">Media</string>
+    <string name="video">Video</string>
+    <string name="click_on_an_element_in_the_list">Click on an element in the list to display details
+     </string>
 </resources>

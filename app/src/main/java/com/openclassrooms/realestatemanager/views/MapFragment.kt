@@ -10,10 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
+import com.openclassrooms.realestatemanager.MainActivity
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FragmentMapBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
+import com.openclassrooms.realestatemanager.utility.TAG_DETAILS_FRAGMENT
 
 
 class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -29,7 +34,12 @@ class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
         return binding.root
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // MAP
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
+    }
 
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -38,10 +48,14 @@ class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newYork, 11F))
 
         viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
+        viewModel
         realEstateList = mutableListOf<RealEstate>()
 
-        viewModel.getAllRealEstates().observe(viewLifecycleOwner , Observer {
-            it.forEach {
+        viewModel.getAllRealEstates().observe(viewLifecycleOwner , Observer { estates->
+            estates.forEach {
+                val realEstateId = it.id.toString()
+                val latLng = LatLng(it.latitude, it.longitude)
+                map.addMarker(MarkerOptions().position(latLng).title(realEstateId))
                 realEstateList.add(it)
             }
         })
@@ -51,7 +65,14 @@ class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-        TODO("Not yet implemented")
+        val id = p0.title!!.toLong()
+        (activity as MainActivity).setFragment(
+                RealEstateDetailFragment.newInstance(id),
+                true,
+                TAG_DETAILS_FRAGMENT
+        )
+
+        return true
     }
 
 

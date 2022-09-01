@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
+import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
 import com.openclassrooms.realestatemanager.views.MapFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import kotlinx.coroutines.Dispatchers
@@ -66,4 +68,18 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
+    fun setFragment(fragment: Fragment, addBackStack: Boolean, tag: String) {
+        val transaction = supportFragmentManager.beginTransaction()
+            when (tag) {
+                TAG_REAL_ESTATE_FRAGMENT -> transaction.replace(R.id.activity_main_fragment_container_view_list, fragment, tag)
+                else -> transaction.replace(R.id.activity_main_fragment_container_view_list, fragment, tag)
+            }
+//         else {
+//            transaction.replace(R.id.main_frame, fragment, tag)
+//        }
+        if (addBackStack) transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
 }

@@ -78,6 +78,8 @@ class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
     companion object{
         fun newInstance() = MapFragment()
+        const val MAPS_MARKER_CLICK_REAL_ESTATE = "MAPS_MARKER_CLICK_REAL_ESTATE"
+
     }
 
 }

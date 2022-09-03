@@ -2,9 +2,7 @@ package com.openclassrooms.realestatemanager.utility
 
 import android.content.Context
 import android.net.wifi.WifiManager
-import android.util.Log
 import java.text.DateFormat
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -62,5 +60,11 @@ object Utils {
         val date: Date
         date = simpleDateFormat.parse(stringDate)
         return date
+    }
+
+    fun convertDateToString(date: Date?): String? {
+        if (date == null) return ""
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+        return simpleDateFormat.format(date)
     }
 }

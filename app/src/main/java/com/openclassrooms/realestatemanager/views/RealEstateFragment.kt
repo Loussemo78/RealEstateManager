@@ -13,6 +13,7 @@ import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapte
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 
+
 class RealEstateFragment: Fragment() {
 
 private lateinit var binding : FragmentRealEstateListBinding
@@ -30,18 +31,44 @@ private lateinit var recyclerView: RecyclerView
 
             recyclerView.adapter = RealEstateRecyclerViewAdapter(it)
         })
-
         return  binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
+//    fun handleRealEstate(realEstate: RealEstate) {
+//        val RealEstateDetailFragment = RealEstateDetailFragment()
+//        val args = Bundle()
+//        args.putSerializable(KEY, realEstate)
+//        RealEstateDetailFragment.arguments = args
+//        val fragmentContainerViewDetail = parentFragmentManager.findFragmentById(
+//                R.id.activity_main_fragment_container_view_detail)
+//
+//
+//        if (fragmentContainerViewDetail == null) {
+//            parentFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.activity_main_fragment_container_view_list,
+//                            RealEstateDetailFragment)
+//                    .addToBackStack(RealEstateDetailFragment::class.java.simpleName)
+//                    .commit()
+//        } else if (fragmentContainerViewDetail.isVisible) { //on tablet
+//            parentFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.activity_main_fragment_container_view_detail,
+//                            RealEstateDetailFragment)
+//                    .commit()
+//        }
+//    }
 
 
     companion object {
         fun newInstance() = RealEstateFragment()
+        const val KEY = "RealEstateClicked"
+
     }
 
 

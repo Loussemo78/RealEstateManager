@@ -19,15 +19,14 @@
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintTop_toTopOf="parent" />
 
-<!--        &lt;!&ndash; Real estate Photos &ndash;&gt;-->
-<!--        <fragment-->
-<!--            android:id="@+id/fragment_on_click_real_estate_fragment"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:name="com.openclassrooms.realestatemanager.fragment.RealEstatePhotosFragment"-->
-<!--            map:layout_constraintStart_toStartOf="parent"-->
-<!--            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_image_view" />-->
-<!--        &lt;!&ndash; Real estate Photos &ndash;&gt;-->
+        <!-- Real estate Photos -->
+        <fragment
+            android:id="@+id/fragment_on_click_real_estate_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_image_view" />
+        <!-- Real estate Photos -->
 
         <!-- Description Title-->
         <androidx.cardview.widget.CardView

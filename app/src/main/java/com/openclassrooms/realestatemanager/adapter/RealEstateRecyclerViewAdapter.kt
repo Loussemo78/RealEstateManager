@@ -17,7 +17,7 @@ import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 
 
-class RealEstateRecyclerViewAdapter(private val itemsList: List<RealEstate>) : RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>() {
+class RealEstateRecyclerViewAdapter(private val context: Context ,private val itemsList: List<RealEstate>) : RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RealEstateRecyclerViewAdapter.RealEstateViewHolder {
@@ -35,10 +35,9 @@ class RealEstateRecyclerViewAdapter(private val itemsList: List<RealEstate>) : R
     inner class RealEstateViewHolder(private val binding: FragmentRealEstateItemsBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(realEstate: RealEstate) {
-            val url = "https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg"
-            val imageView = binding.fragmentRealEstateImageView
+             val imageView = binding.fragmentRealEstateImageView
             Glide.with(context)
-                    .load(url)
+                    .load(realEstate.mainPhotoUrl)
                     .into(imageView)
 
             binding.fragmentRealEstateItemType.text = realEstate.type
@@ -46,38 +45,34 @@ class RealEstateRecyclerViewAdapter(private val itemsList: List<RealEstate>) : R
             binding.fragmentRealEstateItemPrice.text = realEstate.price.toString()
 
             binding.fragmentRealEstateImageView.setOnClickListener {
-                // val fm = (context as MainActivity).supportFragmentManager
-                val fragment = RealEstateDetailFragment()
-                val parentFragmentManager = fragment.parentFragmentManager
+
+                val activity = context as MainActivity
                 val fragmentDetail = RealEstateDetailFragment()
                 val bundle = Bundle()
                 bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
                 fragmentDetail.arguments = bundle
 
-                val fragmentContainerViewDetail = parentFragmentManager.findFragmentById(
+                val fragmentContainerViewDetail =  activity.supportFragmentManager.findFragmentById(
                         R.id.activity_main_fragment_container_view_detail)
 
 
                 if (fragmentContainerViewDetail == null) {
-                    parentFragmentManager
+                    activity.supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.activity_main_fragment_container_view_list,
-                                    RealEstateDetailFragment())
+                                fragmentDetail)
                             .addToBackStack(RealEstateDetailFragment::class.java.simpleName)
                             .commit()
                 } else if (fragmentContainerViewDetail.isVisible) { //on tablet
-                    parentFragmentManager
+                    activity.supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.activity_main_fragment_container_view_detail,
-                                    RealEstateDetailFragment())
+                                fragmentDetail)
                             .commit()
                 }
 
 
-//                fm.beginTransaction()
-//                        .replace(R.id.activity_main_fragment_container_view_detail,fragmentDetail)
-//                        .addToBackStack(null)
-//                        .commit()
+
 
             }
 

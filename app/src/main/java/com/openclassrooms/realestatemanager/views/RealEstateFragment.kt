@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.openclassrooms.realestatemanager.MainActivity
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
@@ -29,7 +30,7 @@ private lateinit var recyclerView: RecyclerView
         realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
         realEstateViewModel.getAllRealEstates().observe(viewLifecycleOwner, Observer {
 
-            recyclerView.adapter = RealEstateRecyclerViewAdapter(it)
+            recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it)
         })
         return  binding.root
     }

@@ -19,6 +19,9 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
         readAll = repository.getAllRealEstates()
     }
 
+    fun getRealEstate(id: Long): LiveData<RealEstate> {
+        return repository.getRealEstate(id)
+    }
 
     fun getAllRealEstates():LiveData<List<RealEstate>>{
        return repository.getAllRealEstates()

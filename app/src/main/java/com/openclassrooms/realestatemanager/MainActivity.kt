@@ -3,8 +3,8 @@ package com.openclassrooms.realestatemanager
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentActivity() {
     private lateinit var binding: ActivityMainBinding
 
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             val repository = RealEstateRepository(this@MainActivity)
             val realEstateObject = RealEstate(1,"Type",12 ,"Place",
                     1500,2,3,1,"Description"
-                    ,"PhotoUrl",3,"Address","mainPhoto",
+                    ,"https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg",3,"Address","mainPhoto",
                     "points",47.244854, 3.346571, "Status", Date(2022,3,12),Date(2022,3,12),"Agent"
                     ,"photoUrl","video")
 

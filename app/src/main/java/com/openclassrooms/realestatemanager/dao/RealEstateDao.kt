@@ -12,7 +12,7 @@ interface RealEstateDao {
 
 
     @Query("SELECT * FROM real_estate_db WHERE id = :realEstateId")
-     fun getRealEstate(realEstateId: Long): LiveData<RealEstate?>
+     fun getRealEstate(realEstateId: Long): LiveData<RealEstate>
 
     @Query("SELECT * FROM real_estate_db")
      fun getRealEstates(): LiveData<List<RealEstate>>

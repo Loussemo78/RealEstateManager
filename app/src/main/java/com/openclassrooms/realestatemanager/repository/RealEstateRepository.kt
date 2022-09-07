@@ -22,4 +22,6 @@ class RealEstateRepository( val context: Context) {
 
     fun getAllRealEstates():LiveData<List<RealEstate>> =
             dao.getRealEstates()
+    fun getRealEstate( id: Long): LiveData<RealEstate> =
+            dao.getRealEstate(id)
 }

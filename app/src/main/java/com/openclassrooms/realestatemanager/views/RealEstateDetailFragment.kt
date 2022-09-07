@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,10 +20,11 @@ import com.openclassrooms.realestatemanager.utility.Utils
 import java.util.*
 
 
-class RealEstateDetailFragment:Fragment(),OnMapReadyCallback {
+class RealEstateDetailFragment:Fragment() {
 
 private lateinit var binding:FragmentRealEstateDetailBinding
 private lateinit var realEstate:RealEstate
+private var realEstateId:Int = 0
     private lateinit var  map: GoogleMap
 
 
@@ -30,19 +32,25 @@ private lateinit var realEstate:RealEstate
 
         binding = FragmentRealEstateDetailBinding.inflate(inflater,container,false)
         if (arguments?.getSerializable(RealEstateFragment.KEY) != null) {
-            realEstate = requireArguments().getSerializable(RealEstateFragment.KEY) as RealEstate
+            realEstateId = requireArguments().getInt(RealEstateFragment.KEY)
         } else if (arguments?.getSerializable(MapFragment.MAPS_MARKER_CLICK_REAL_ESTATE) != null) {
-            realEstate = (arguments?.getSerializable(MapFragment.MAPS_MARKER_CLICK_REAL_ESTATE) as RealEstate)
+            realEstateId = arguments?.getInt(MapFragment.MAPS_MARKER_CLICK_REAL_ESTATE)!!
         }
 
+        var realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
+        realEstateViewModel.getRealEstate(realEstateId.toLong()).observe(viewLifecycleOwner
+        ) {
+            displayData(it)// it = realEstate;
+        }
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+      private fun displayData(realEstate: RealEstate) {
+
         Glide.with(binding.fragmentOnClickRealEstateImageView.context)
                 .load(realEstate.mainPhotoUrl)
-                .into(binding.fragmentOnClickRealEstateImageView)
+                .into(binding.fragmentOnClickRealEstateAgentPhoto)
+
 
         binding.fragmentOnClickRealEstateDescription.text = realEstate.description
 
@@ -85,7 +93,14 @@ private lateinit var realEstate:RealEstate
 
         val supportMapFragment = this.childFragmentManager
                 .findFragmentById(R.id.fragment_on_click_real_estate_map_fragment) as SupportMapFragment?
-        supportMapFragment!!.getMapAsync(this)
+        supportMapFragment!!.getMapAsync(OnMapReadyCallback {
+            map = it
+            if (realEstate.latitude != 0.0 && realEstate.longitude != 0.0) {
+                val realEstateLatLng = LatLng(realEstate.latitude, realEstate.longitude)
+                map.addMarker(MarkerOptions().position(realEstateLatLng).title("Real estate marker"))
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18f))
+            }
+        })
 
     }
 
@@ -103,12 +118,5 @@ private lateinit var realEstate:RealEstate
         }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-        if (realEstate.latitude != 0.0 && realEstate.longitude != 0.0) {
-            val realEstateLatLng = LatLng(realEstate.latitude, realEstate.longitude)
-            map.addMarker(MarkerOptions().position(realEstateLatLng).title("Real estate marker"))
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18f))
-        }
-    }
+
 }

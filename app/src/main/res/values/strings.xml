@@ -23,6 +23,23 @@
     <string name="map">Map</string>
     <string name="media">Media</string>
     <string name="video">Video</string>
-    <string name="click_on_an_element_in_the_list">Click on an element in the list to display details
-     </string>
+    <string name="click_on_an_element_in_the_list">Click on an element in the list to display details</string>
+
+    <string-array name="real_estate_types">
+        <item>Loft</item>
+        <item>Penthouse</item>
+        <item>Flat</item>
+        <item>House</item>
+        <item>Duplex</item>
+    </string-array>
+
+    <string-array name="real_estate_status">
+        <item>For sale</item>
+        <item>Sold</item>
+    </string-array>
+
+    <string-array name="real_estate_agent">
+        <item>Jessica C. Campbell</item>
+        <item>Christian Haag</item>
+    </string-array>
 </resources>

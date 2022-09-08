@@ -10,29 +10,29 @@ import java.util.*
 
 @Entity (tableName = "real_estate_db")
 data class RealEstate(
-        @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
         val id: Long,
-        val type: String,
-        val price: Int,
-        val place: String,
-        val surface: Int,
-        val numberOfRooms: Int,
-        val numberOfBathRooms: Int,
-        val numberOfBedRooms: Int,
-        val description: String,
-        val mainPhotoUrl: String,
-        val numberOfPhotos:Int?,
-        val address:String,
-        val mainPhotoString: String?,
-        val pointsOfInterest: String,
-        val latitude:Double,
-        val longitude:Double,
-        val status:String,
-        val entryDate:Date,
-        val dateOfSale:Date?,
-        val agent:String,
-        val agentPhotoUrl:String,
-        val video:String
+    var type: String,
+    var price: Int,
+    var place: String,
+    var surface: Int,
+    var numberOfRooms: Int,
+    var numberOfBathRooms: Int,
+    var numberOfBedRooms: Int,
+    var description: String,
+    val mainPhotoUrl: String,
+    val numberOfPhotos:Int?,
+    val address:String,
+    var mainPhotoString: String?,
+    var pointsOfInterest: String,
+    val latitude:Double,
+    val longitude:Double,
+    var status:String,
+    var entryDate:Date,
+    var dateOfSale:Date?,
+    var agent:String,
+    var agentPhotoUrl:String,
+    var video:String
         ):Serializable{
 
 

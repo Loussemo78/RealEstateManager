@@ -35,9 +35,7 @@ data class RealEstate(
         val video:String
         ):Serializable{
 
-//    constructor(): this(0,"",0,"",0,0,
-//            0,0,"","",0,
-//            "","","",0.0,0.0,"",null,null,"","","")
+
 
 
 

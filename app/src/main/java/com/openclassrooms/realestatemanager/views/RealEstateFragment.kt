@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.MainActivity
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
-import com.openclassrooms.realestatemanager.models.RealEstate
 
 
 class RealEstateFragment: Fragment() {
@@ -34,6 +33,8 @@ private lateinit var recyclerView: RecyclerView
         })
         return  binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,6 +70,7 @@ private lateinit var recyclerView: RecyclerView
     companion object {
         fun newInstance() = RealEstateFragment()
         const val KEY = "RealEstateClicked"
+        const val EDIT_REAL_ESTATE = "RealEstateToEdit"
 
     }
 

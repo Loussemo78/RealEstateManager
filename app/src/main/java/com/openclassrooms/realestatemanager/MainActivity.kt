@@ -1,10 +1,12 @@
 package com.openclassrooms.realestatemanager
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
@@ -17,8 +19,13 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class MainActivity : FragmentActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    companion object{
+        val ADD_REAL_ESTATE_REQUEST_CODE = 100
+        val ADD_REAL_ESTATE = "ADD_REAL_ESTATE"
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +33,7 @@ class MainActivity : FragmentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
+
 
         GlobalScope.launch(Dispatchers.Main) {
 
@@ -50,7 +58,25 @@ class MainActivity : FragmentActivity() {
         return true
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_add -> {
+                val intent = Intent(this, AddOrCreateRealEstateActivity::class.java)
+////                val realEstate = RealEstate()
+//                intent.putExtra(TAG_REAL_ESTATE_FRAGMENT, realEstate as Serializable )
+//                startActivityForResult(intent,ADD_REAL_ESTATE_REQUEST_CODE)
+               // startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE)
+            }
+//            R.id.menu_search -> {
+//                if (realEstateFilteredList.size() !== 0) realEstateFilteredList.clear()
+//                val intent1 = Intent(this, SearchRealEstateProviderActivity::class.java)
+//                startActivity(intent1)
+//            }
+//            R.id.menu_clear_filter -> repository.resetFilter()
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 
     private fun initializeBottomNavigationItemView(){
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
@@ -68,6 +94,10 @@ class MainActivity : FragmentActivity() {
             true
         }
     }
+
+    private fun setToolbar() {
+    }
+
 
     fun setFragment(fragment: Fragment, addBackStack: Boolean, tag: String) {
         val transaction = supportFragmentManager.beginTransaction()

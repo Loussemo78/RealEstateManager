@@ -1,9 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddOrCreateRealEstateActivity">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Type-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".AddOrEditRealEstateActivity">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/type"
+                android:layout_margin="@dimen/activity_add_real_estate_margin" />
+
+            <Spinner
+                android:id="@+id/activity_add_or_edit_real_estate_type_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_add_real_estate_margin" />
+
+        </LinearLayout>
+        <!-- Type-->
+
+        <!-- Status-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:layout_margin="@dimen/activity_add_real_estate_margin" />
+
+            <Spinner
+                android:id="@+id/activity_add_or_edit_real_estate_status_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_add_real_estate_margin" />
+
+        </LinearLayout>
+        <!-- Status-->
+
+        <!-- Agent -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/agent_in_charge"
+                android:layout_margin="@dimen/activity_add_real_estate_margin" />
+
+            <Spinner
+                android:id="@+id/activity_add_or_edit_real_estate_agent_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_add_real_estate_margin" />
+
+        </LinearLayout>
+        <!-- Agent -->
+
+        <!-- First location -->
+        <EditText
+
+            android:id="@+id/activity_add_or_edit_real_estate_first_location_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/borough_or_neighborhood"
+            android:inputType="text|none"
+            android:layout_margin="@dimen/activity_add_real_estate_margin" />
+
+        <!-- Price -->
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_price_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal|none"
+            android:digits="0123456789.,"
+            android:hint="@string/price_in_dollar"
+            android:layout_margin="15dp" />
+
+        <!-- Description -->
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_description_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text|none"
+            android:hint="@string/description"
+            android:layout_margin="15dp" />
+
+        <!-- Main Photo button-->
+        <Button
+            android:id="@+id/activity_add_or_edit_real_estate_button_main_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners"
+            android:text="@string/add_main_photo"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Main Photo -->
+        <ImageView
+            android:id="@+id/activity_add_or_edit_real_estate_main_photo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Photos button -->
+        <Button
+            android:id="@+id/activity_add_or_edit_real_estate_pick_photos_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/add_other_photos"
+            android:textColor="@android:color/white" />
+
+        <!-- Photos -->
+<!--        <fragment-->
+<!--            android:id="@+id/activity_add_or_edit_real_estate_pick_photos_fragment"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="15dp"-->
+<!--            android:name="com.openclassrooms.realestatemanager.fragment.PickPhotosFragment" />-->
+
+        <!-- Surface -->
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_surface_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/surface_in_square_meter"
+            android:layout_margin="15dp" />
+
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_number_of_rooms_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/number_of_rooms"
+            android:layout_margin="15dp" />
+
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_number_of_bathrooms_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/number_of_bathrooms"
+            android:layout_margin="15dp" />
+
+
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_number_of_bedrooms_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/number_of_bedrooms"
+            android:layout_margin="15dp" />
+
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_address_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/address"
+            android:layout_margin="15dp" />
+
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_points_of_interest_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/points_of_interest"
+            android:layout_margin="15dp" />
+
+        <!-- Video Id-->
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_video_id_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/video_id"
+            android:layout_margin="15dp"/>
+
+        <!-- Entry Date -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/activity_add_or_edit_real_estate_entry_date_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:hint="@string/entry_date"
+                android:layout_margin="15dp" />
+
+            <Button
+                android:id="@+id/activity_add_or_edit_real_estate_entry_date_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corners"
+                android:text="@string/choose_date"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/activity_add_real_estate_chose_date_button_color" />
+
+        </LinearLayout>
+
+        <!-- Sale date -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/activity_add_or_edit_real_estate_sale_date_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date|none"
+                android:hint="@string/sale_date"
+                android:layout_margin="15dp" />
+
+            <Button
+                android:id="@+id/activity_add_or_edit_real_estate_sale_date_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_date"
+                android:textColor="@android:color/white"
+                android:background="@drawable/rounded_corners"
+                app:backgroundTint="@color/activity_add_real_estate_chose_date_button_color" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/activity_add_or_edit_real_estate_ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_corners"
+            app:backgroundTint="#E040FB"
+            android:text="@string/ok"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
+
+</ScrollView>
+

@@ -24,6 +24,14 @@
     <string name="price_in_dollar">Price in dollar</string>
     <string name="add_main_photo">Add Main Photo</string>
     <string name="add_other_photos">Add other photos</string>
+    <string name="search">Search</string>
+    <string name="minimum_price_in_dollar">Minimum price in dollar</string>
+    <string name="maximum_price_in_dollar">Maximum price in dollar</string>
+    <string name="minimum_surface_in_square_meters">Minimum surface in sq m</string>
+    <string name="maximum_surface_in_square_meters">Maximum surface in sq m</string>
+    <string name="minimum_number_of_photos">Minimum number of photos</string>
+    <string name="put_on_the_market_since_in_days">Put on the market since (dd/MM/yyyy)</string>
+    <string name="sale_since_in_days">Sale since (dd/MM/yyyy)</string>
     <string name="surface_in_square_meter">Surface in square meter</string>
     <string name="address">Address</string>
     <string name="ok">OK</string>

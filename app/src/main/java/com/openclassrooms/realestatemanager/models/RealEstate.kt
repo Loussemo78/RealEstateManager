@@ -11,30 +11,29 @@ import java.util.*
 @Entity (tableName = "real_estate_db")
 data class RealEstate(
     @PrimaryKey(autoGenerate = true)
-        val id: Long,
-    var type: String,
-    var price: Int,
-    var place: String,
-    var surface: Int,
-    var numberOfRooms: Int,
-    var numberOfBathRooms: Int,
-    var numberOfBedRooms: Int,
-    var description: String,
-    val mainPhotoUrl: String,
-    val numberOfPhotos:Int?,
-    val address:String,
-    var mainPhotoString: String?,
-    var pointsOfInterest: String,
-    val latitude:Double,
-    val longitude:Double,
-    var status:String,
-    var entryDate:Date,
-    var dateOfSale:Date?,
-    var agent:String,
-    var agentPhotoUrl:String,
-    var video:String
+        val id: Long = 0,
+    var type: String = "",
+    var price: Int = 0,
+    var place: String = "",
+    var surface: Int = 0,
+    var numberOfRooms: Int = 0,
+    var numberOfBathRooms: Int = 0,
+    var numberOfBedRooms: Int = 0,
+    var description: String = "",
+    val mainPhotoUrl: String = "",
+    val numberOfPhotos:Int? = 0,
+    val address:String = "",
+    var mainPhotoString: String? = "",
+    var pointsOfInterest: String = "",
+    val latitude:Double = 0.0,
+    val longitude:Double = 0.0,
+    var status:String = "",
+    var entryDate:Date?= null ,
+    var dateOfSale:Date? = null,
+    var agent:String = "",
+    var agentPhotoUrl:String = "",
+    var video:String = ""
         ):Serializable{
-
 
 
 
@@ -61,7 +60,7 @@ data class RealEstate(
         values.put("latitude", realEstate.latitude)
         values.put("longitude", realEstate.longitude)
         values.put("status", realEstate.status)
-        values.put("entryDate", realEstate.entryDate.let { dateFormat.format(it) })
+        values.put("entryDate", realEstate.entryDate?.let { dateFormat.format(it) })
         values.put("dateOfSale", realEstate.dateOfSale?.let { dateFormat.format(it) })
         values.put("agent", realEstate.agent)
         values.put("agentPhotoUrl", realEstate.agentPhotoUrl)

@@ -11,6 +11,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="agent_in_charge">Agent in charge</string>
+    <string name="type">Type</string>
+    <string name="status">Status</string>
     <string name="surface">Surface</string>
     <string name="number_of_rooms">Number of rooms</string>
     <string name="number_of_bathrooms">Number of bathrooms</string>
@@ -18,11 +20,20 @@
     <string name="location">Location</string>
     <string name="points_of_interest">Points of interest</string>
     <string name="price">Price</string>
+    <string name="borough_or_neighborhood">Borough or Neighborhood</string>
+    <string name="price_in_dollar">Price in dollar</string>
+    <string name="add_main_photo">Add Main Photo</string>
+    <string name="add_other_photos">Add other photos</string>
+    <string name="surface_in_square_meter">Surface in square meter</string>
+    <string name="address">Address</string>
+    <string name="ok">OK</string>
+    <string name="choose_date">Choose Date</string>
     <string name="entry_date">Entry date</string>
     <string name="sale_date">Sale date</string>
     <string name="map">Map</string>
     <string name="media">Media</string>
     <string name="video">Video</string>
+    <string name="video_id">Video Id (11 characters)</string>
     <string name="click_on_an_element_in_the_list">Click on an element in the list to display details</string>
 
     <string-array name="real_estate_types">

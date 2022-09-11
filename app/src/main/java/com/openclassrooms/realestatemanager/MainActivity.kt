@@ -61,16 +61,13 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_add -> {
-                val intent = Intent(this, AddOrCreateRealEstateActivity::class.java)
-////                val realEstate = RealEstate()
-//                intent.putExtra(TAG_REAL_ESTATE_FRAGMENT, realEstate as Serializable )
+                val intent = Intent(this,AddOrCreateRealEstateActivity::class.java)
+                startActivity(intent)
+
 //                startActivityForResult(intent,ADD_REAL_ESTATE_REQUEST_CODE)
-               // startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE)
+//               startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE)
             }
 //            R.id.menu_search -> {
-//                if (realEstateFilteredList.size() !== 0) realEstateFilteredList.clear()
-//                val intent1 = Intent(this, SearchRealEstateProviderActivity::class.java)
-//                startActivity(intent1)
 //            }
 //            R.id.menu_clear_filter -> repository.resetFilter()
             else -> return super.onOptionsItemSelected(item)
@@ -94,10 +91,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
-    private fun setToolbar() {
-    }
-
 
     fun setFragment(fragment: Fragment, addBackStack: Boolean, tag: String) {
         val transaction = supportFragmentManager.beginTransaction()

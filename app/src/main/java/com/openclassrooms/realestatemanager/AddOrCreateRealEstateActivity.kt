@@ -4,13 +4,11 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.*
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -31,7 +29,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity() , AdapterView.OnItemSe
     val PICK_PHOTO_FOR_OTHER_PHOTOS = 3
 
     private lateinit var binding: ActivityAddOrCreateRealEstateBinding
-    private lateinit var newRealEstate: RealEstate
+    private lateinit var  newRealEstate: RealEstate
     var othersPhotosList: ArrayList<RealEstatePhotos>? = null
 
     var lastSelectedDayOfMonth = 0
@@ -48,23 +46,50 @@ class AddOrCreateRealEstateActivity : AppCompatActivity() , AdapterView.OnItemSe
         binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
+        newRealEstate = RealEstate()
+        //If intent coming from AddRealEstate
+//        if (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
+//            newRealEstate = (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) as RealEstate)
+//        } //Else if intent coming from EditRealEstate
+//        else if (intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+//            newRealEstate = intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) as RealEstate
+//        }
 
         othersPhotosList = ArrayList<RealEstatePhotos>()
+        initializeSpinners()
 
-        //If intent coming from AddRealEstate
-        if (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
-            newRealEstate = (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) as RealEstate)
-        } //Else if intent coming from EditRealEstate
-        else if (intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-            newRealEstate = intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) as RealEstate
+        selectMainPhotoIntent()
+        selectOtherPhotosIntent()
+
+
+        initializeButtonSelectEntryDate();
+        initializeButtonSelectSaleDate();
+
+        //if editing, set all value in spinners, editTexts and ImageViews
+        if (newRealEstate == intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE)) {
+            initializeRealEstateToEdit();
         }
+        initializeFinishButton();
+
+
     }
 
+    private fun initializeSpinners() {
+        val spinnerType = binding.activityAddOrEditRealEstateTypeSpinner
+        val spinnerStatus = binding.activityAddOrEditRealEstateStatusSpinner
+        val spinnerAgent = binding.activityAddOrEditRealEstateAgentSpinner
+        initializeSpinnerAdapter(spinnerType, R.array.real_estate_types)
+        initializeSpinnerAdapter(spinnerStatus, R.array.real_estate_status)
+        initializeSpinnerAdapter(spinnerAgent, R.array.real_estate_agent)
+        spinnerType.onItemSelectedListener = this
+        spinnerStatus.onItemSelectedListener = this
+        spinnerAgent.onItemSelectedListener = this
+    }
 
-    private fun initializeSpinnerAdapter(resourceArray:Int , spinner: Spinner){
-        val adapter = ArrayAdapter.createFromResource(this, resourceArray, R.layout.s)
+    private fun initializeSpinnerAdapter(spinner: Spinner,resourceArray:Int){
+        val adapter = ArrayAdapter.createFromResource(this, resourceArray, R.layout.support_simple_spinner_dropdown_item)
 
-        adapter.setDropDownViewResource(R.layout.su)
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
 
         spinner.adapter
     }
@@ -135,6 +160,23 @@ class AddOrCreateRealEstateActivity : AppCompatActivity() , AdapterView.OnItemSe
             builder.show()
         }
     }
+
+    private fun initializeButtonSelectEntryDate() {
+        binding.activityAddOrEditRealEstateEntryDateButton.setOnClickListener { view ->
+            selectDate(
+                binding.activityAddOrEditRealEstateEntryDateEditText
+            )
+        }
+    }
+
+    private fun initializeButtonSelectSaleDate() {
+        binding.activityAddOrEditRealEstateSaleDateButton.setOnClickListener { view ->
+            selectDate(
+                binding.activityAddOrEditRealEstateSaleDateEditText
+            )
+        }
+    }
+
 
     private fun selectDate(editText: EditText) {
         //Get current Date
@@ -297,70 +339,67 @@ class AddOrCreateRealEstateActivity : AppCompatActivity() , AdapterView.OnItemSe
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        takePhotoOrGalleryOnActivityResult(requestCode, resultCode, data)
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        takePhotoOrGalleryOnActivityResult(requestCode, resultCode, data)
+//    }
 
-    private fun takePhotoOrGalleryOnActivityResult(
-        requestCode: Int, resultCode: Int,
-        data: Intent?
-    ) {
-        if (requestCode == TAKE_PICTURE) {
-            if (resultCode == RESULT_OK) {
-                //set image in ImageView from camera
-                val selectedImage = data!!.extras!!["data"] as Bitmap?
-                binding.activityAddOrEditRealEstateMainPhoto.setImageBitmap(selectedImage)
+//    private fun takePhotoOrGalleryOnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        if (requestCode == TAKE_PICTURE) {
+//            if (resultCode == RESULT_OK) {
+//                //set image in ImageView from camera
+//                val selectedImage = data!!.extras!!["data"] as Bitmap
+//                binding.activityAddOrEditRealEstateMainPhoto.setImageBitmap(selectedImage)
 //                val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(this, selectedImage)
-                val imageUriToString = RealEstatePhotos.uriToString(imageUri)
-                newRealEstate.mainPhotoString = imageUriToString
-            }
-        } else if (requestCode == PICK_PHOTO) {
-            if (resultCode == RESULT_OK) {
-                //set image in ImageView from gallery
-                val selectedImage = data!!.data
-                binding.activityAddOrEditRealEstateMainPhoto.setImageURI(selectedImage)
-                val selectedImageToString = RealEstatePhotos.uriToString(selectedImage!!)
-                newRealEstate.mainPhotoString = selectedImageToString
-            }
-        } else if (requestCode == TAKE_PICTURE_FOR_OTHER_PHOTOS) {
-            if (resultCode == RESULT_OK) {
-                //set image in othersPhotosList from camera
-                val selectedImage = data!!.extras!!["data"] as Bitmap?
+//                val imageUriToString = RealEstatePhotos.uriToString(imageUri)
+//                newRealEstate.mainPhotoString = imageUriToString
+//            }
+//        } else if (requestCode == PICK_PHOTO) {
+//            if (resultCode == RESULT_OK) {
+//                //set image in ImageView from gallery
+//                val selectedImage = data!!.data
+//                binding.activityAddOrEditRealEstateMainPhoto.setImageURI(selectedImage)
+//                val selectedImageToString = RealEstatePhotos.uriToString(selectedImage!!)
+//                newRealEstate.mainPhotoString = selectedImageToString
+//            }
+//        } else if (requestCode == TAKE_PICTURE_FOR_OTHER_PHOTOS) {
+//            if (resultCode == RESULT_OK) {
+//                //set image in othersPhotosList from camera
+//                val selectedImage = data!!.extras!!["data"] as Bitmap
+////                val realEstatePhotos = RealEstatePhotos()
+//                //Set photo uri
+//                val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(this, selectedImage)
+//                val imageUriToString = RealEstatePhotos.uriToString(imageUri)
+////                realEstatePhotos.setPhotoUri(imageUriToString)
+//                othersPhotosList!!.add(realEstatePhotos)
+//                //Set photo description
+////                if (othersPhotosList!!.size != 0) {
+////                    val photoDescription: String = MyPickPhotosRecyclerViewAdapter.map
+////                        .get(othersPhotosList!!.size - 1)
+////                    realEstatePhotos.setDescription(photoDescription)
+////                    mNewRealEstate.setPhotos(othersPhotosList)
+////                }
+//            }
+//        } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
+//            if (resultCode == RESULT_OK) {
+//                //set image in othersPhotosList from gallery
+//                val selectedImage = data!!.data
 //                val realEstatePhotos = RealEstatePhotos()
-                //Set photo uri
-//                val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(this, selectedImage)
-                val imageUriToString = RealEstatePhotos.uriToString(imageUri)
-//                realEstatePhotos.setPhotoUri(imageUriToString)
-                othersPhotosList!!.add(realEstatePhotos)
-                //Set photo description
-//                if (othersPhotosList!!.size != 0) {
-//                    val photoDescription: String = MyPickPhotosRecyclerViewAdapter.map
-//                        .get(othersPhotosList!!.size - 1)
-//                    realEstatePhotos.setDescription(photoDescription)
-//                    mNewRealEstate.setPhotos(othersPhotosList)
-//                }
-            }
-        } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
-            if (resultCode == RESULT_OK) {
-                //set image in othersPhotosList from gallery
-                val selectedImage = data!!.data
-                val realEstatePhotos = RealEstatePhotos()
-                val imageUriToString = RealEstatePhotos.uriToString(selectedImage!!)
-//                realEstatePhotos.setPhotoUri(imageUriToString)
-                othersPhotosList!!.add(realEstatePhotos)
-                //Set photo description
-//                if (othersPhotosList!!.size != 0) {
-//                    val photoDescription: String = MyPickPhotosRecyclerViewAdapter.map.get(
-//                        othersPhotosList!!.size - 1
-//                    )
-//                    realEstatePhotos.setDescription(photoDescription)
-//                    newRealEstate.setP
-//                        .setPhotos(othersPhotosList)
-//                }
-            }
-        }
-    }
+//                val imageUriToString = RealEstatePhotos.uriToString(selectedImage!!)
+////                realEstatePhotos.setPhotoUri(imageUriToString)
+//                othersPhotosList!!.add(realEstatePhotos)
+//                //Set photo description
+////                if (othersPhotosList!!.size != 0) {
+////                    val photoDescription: String = MyPickPhotosRecyclerViewAdapter.map.get(
+////                        othersPhotosList!!.size - 1
+////                    )
+////                    realEstatePhotos.setDescription(photoDescription)
+////                    newRealEstate.setP
+////                        .setPhotos(othersPhotosList)
+////                }
+//            }
+//        }
+//    }
 
 
 }

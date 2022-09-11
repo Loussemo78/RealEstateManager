@@ -64,12 +64,12 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this,AddOrCreateRealEstateActivity::class.java)
                 startActivity(intent)
 
-//                startActivityForResult(intent,ADD_REAL_ESTATE_REQUEST_CODE)
-//               startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE)
             }
-//            R.id.menu_search -> {
-//            }
-//            R.id.menu_clear_filter -> repository.resetFilter()
+            R.id.menu_search -> {
+                val intent = Intent(this,SearchRealEstateActivity::class.java)
+                startActivity(intent)
+            }
+          //  R.id.menu_clear_filter -> repository.resetFilter()
             else -> return super.onOptionsItemSelected(item)
         }
         return true

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/micha/.gradle/caches/transforms-3/8055973256d9135dca29ef1aa5f5e31e/transformed/jetified-play-services-base-18.0.1/res/drawable/common_google_signin_btn_icon_dark.xml" value="0.2735" />
         <entry key="..\:/Users/micha/.gradle/caches/transforms-3/cd757182b4e85c77ede4418f92101a0c/transformed/appcompat-1.5.0/res/layout/support_simple_spinner_dropdown_item.xml" value="0.28802083333333334" />
         <entry key="..\:/Users/micha/AppData/Local/Android/Sdk/platforms/android-33/data/res/layout/simple_spinner_dropdown_item.xml" value="0.28802083333333334" />
         <entry key="..\:/Users/micha/Documents/RealEstateManager/app/src/main/res/drawable/bottom_navigation_colors.xml" value="0.137" />

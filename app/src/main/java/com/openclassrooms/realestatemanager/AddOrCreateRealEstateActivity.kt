@@ -254,7 +254,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity() , AdapterView.OnItemSe
         newRealEstate.type = type
         newRealEstate.status = status
         newRealEstate.agent = agent
-        if (agent == "Jessica C. Campbell") {
+        if (agent == "Michael  Mfoundou") {
             newRealEstate.agentPhotoUrl = "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg"
         } else {
             newRealEstate.agentPhotoUrl = "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg"
@@ -301,7 +301,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity() , AdapterView.OnItemSe
         //Set mNewRealEstate all value selected previously
         // If intent comes from Main Activity to add a real estate so pass data back
         if (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
-            binding.activityAddOrEditRealEstateOkButton.setOnClickListener { view ->
+            binding.activityAddOrEditRealEstateOkButton.setOnClickListener {
                 setNewRealEstateValue()
                 val intent = Intent()
                 intent.putExtra(MainActivity.ADD_REAL_ESTATE, newRealEstate as Serializable)
@@ -313,9 +313,8 @@ class AddOrCreateRealEstateActivity : AppCompatActivity() , AdapterView.OnItemSe
             binding.activityAddOrEditRealEstateOkButton.setOnClickListener { view ->
 
                 //Verify if when "Sold" status is selected that Sale date has a value
-                if (binding.activityAddOrEditRealEstateStatusSpinner.selectedItem.toString()
-                        .equals("For sale") || binding.activityAddOrEditRealEstateStatusSpinner
-                        .selectedItem.toString().equals("Sold") &&
+                if (binding.activityAddOrEditRealEstateStatusSpinner.selectedItem.toString() == "For sale" || binding.activityAddOrEditRealEstateStatusSpinner
+                        .selectedItem.toString() == "Sold" &&
                     !binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
                         .isEmpty()
                 ) {

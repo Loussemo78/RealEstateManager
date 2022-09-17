@@ -11,13 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RealEstateViewModel(application: Application):AndroidViewModel(application) {
-    private val repository: RealEstateRepository
-    private var readAll: LiveData<List<RealEstate>>
-
-    init {
-        repository = RealEstateRepository(application.applicationContext)
-        readAll = repository.getAllRealEstates()
-    }
+    private val repository: RealEstateRepository = RealEstateRepository(application.applicationContext)
+    private var readAll: LiveData<List<RealEstate>> = repository.getAllRealEstates()
 
     fun getRealEstate(id: Long): LiveData<RealEstate> {
         return repository.getRealEstate(id)

@@ -9,9 +9,9 @@ import java.io.Serializable
 
 
 data class RealEstatePhotos (
-        val photoUri : String,
-        val photoUrl : String,
-        val description : String,
+        var photoUri : String = "",
+        val photoUrl : String = "",
+        val description :String = "",
         ):Serializable{
                 companion object{
                         fun uriToString(uri: Uri): String? {

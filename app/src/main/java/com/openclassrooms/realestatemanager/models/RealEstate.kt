@@ -7,11 +7,12 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
-@Entity (tableName = "real_estate_db")
+@Entity(tableName = "real_estate_db")
 data class RealEstate(
     @PrimaryKey(autoGenerate = true)
-        val id: Long = 0,
+    val id: Long = 0,
     var type: String = "",
     var price: Int = 0,
     var place: String = "",
@@ -21,31 +22,49 @@ data class RealEstate(
     var numberOfBedRooms: Int = 0,
     var description: String = "",
     val mainPhotoUrl: String = "",
-    val numberOfPhotos:Int? = 0,
-    val address:String = "",
+    val numberOfPhotos: Int? = 0,
+    val address: String = "",
     var mainPhotoString: String? = "",
     var pointsOfInterest: String = "",
-    val latitude:Double = 0.0,
-    val longitude:Double = 0.0,
-    var status:String = "",
-    var entryDate:Date?= null ,
-    var dateOfSale:Date? = null,
-    var agent:String = "",
-    var agentPhotoUrl:String = "",
-    var video:String = ""
-        ):Serializable{
-
-
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+    var status: String = "",
+    var entryDate: Date? = null,
+    var dateOfSale: Date? = null,
+    var agent: String = "",
+    var agentPhotoUrl: String = "",
+    var video: String = ""
+) : Serializable {
 
 
     fun abstractLayer(values: ContentValues): RealEstate {
-        val realEstate = RealEstate(id, type, price, place,surface, numberOfRooms, numberOfBathRooms, numberOfBedRooms,
-                description, mainPhotoUrl, numberOfPhotos, address, mainPhotoString, pointsOfInterest, latitude,
-                longitude, status, entryDate, dateOfSale, agent, agentPhotoUrl, video
+        val realEstate = RealEstate(
+            id,
+            type,
+            price,
+            place,
+            surface,
+            numberOfRooms,
+            numberOfBathRooms,
+            numberOfBedRooms,
+            description,
+            mainPhotoUrl,
+            numberOfPhotos,
+            address,
+            mainPhotoString,
+            pointsOfInterest,
+            latitude,
+            longitude,
+            status,
+            entryDate,
+            dateOfSale,
+            agent,
+            agentPhotoUrl,
+            video
         )
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
-        values.put("id",realEstate.id)
+        values.put("id", realEstate.id)
         values.put("type", realEstate.type)
         values.put("price", realEstate.price)
         values.put("place", realEstate.place)
@@ -69,8 +88,8 @@ data class RealEstate(
         return realEstate
     }
 
-    companion object{
-        fun abstractLayer():Int = 1
+    companion object {
+        fun abstractLayer(): Int = 1
     }
 }
 

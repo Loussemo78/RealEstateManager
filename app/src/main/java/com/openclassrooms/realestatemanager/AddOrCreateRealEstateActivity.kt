@@ -87,11 +87,11 @@ class AddOrCreateRealEstateActivity : AppCompatActivity() , AdapterView.OnItemSe
     }
 
     private fun initializeSpinnerAdapter(spinner: Spinner,resourceArray:Int){
-        val adapter = ArrayAdapter.createFromResource(this, resourceArray, R.layout.support_simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter.createFromResource(this, resourceArray , android.R.layout.simple_spinner_item)
 
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        spinner.adapter
+        spinner.adapter = adapter
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {

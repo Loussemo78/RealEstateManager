@@ -20,6 +20,9 @@ interface RealEstateDao {
     @Update
     suspend fun updateRealEstate(realEstate: RealEstate?): Int
 
+    @Delete
+    suspend fun deleteRealEstate(realEstate: RealEstate?): Int
+
     @Query("DELETE FROM real_estate_db")
     suspend fun deleteAll(): Int
 

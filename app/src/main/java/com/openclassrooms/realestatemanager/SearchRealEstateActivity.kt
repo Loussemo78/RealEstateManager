@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager
 
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -102,6 +101,7 @@ class SearchRealEstateActivity : AppCompatActivity() {
             critaries.pointOfInterest = pointOfInterest
             critaries.entryDateInDate = entryDateInDate
             critaries.saleDateInDate = saleDateInDate
+
 
             //repository.setFilter(critaries)
 

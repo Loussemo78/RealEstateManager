@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -131,6 +132,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     fun setFragment(fragment: Fragment, addBackStack: Boolean, tag: String) {
         val transaction = supportFragmentManager.beginTransaction()
             when (tag) {

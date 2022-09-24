@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.openclassrooms.realestatemanager.databinding.ActivitySearchRealEstateBinding
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import com.openclassrooms.realestatemanager.utility.Utils
+import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
+import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -94,14 +97,14 @@ class SearchRealEstateActivity : AppCompatActivity() {
                 t.printStackTrace() //if it's not an integer
             }
 
-            val entryDateInDate: Date = Utils.convertStringToDate(entryDate)
+            val entryDateInDate: Date? = Utils.convertStringToDate(entryDate)
             try {
                 critaries.entryDateInDate = entryDateInDate
             } catch (t: Throwable) {
                 t.printStackTrace() //if it's not an integer
             }
 
-            val saleDateInDate: Date = Utils.convertStringToDate(saleDate)
+            val saleDateInDate: Date? = Utils.convertStringToDate(saleDate)
             try {
                 critaries.saleDateInDate = saleDateInDate
             } catch (t: Throwable) {
@@ -115,11 +118,37 @@ class SearchRealEstateActivity : AppCompatActivity() {
 
             GlobalScope.launch(Dispatchers.Main) {
                 repository.setFilter(critaries)
+                Toast.makeText(applicationContext,"filter submit ok", Toast.LENGTH_SHORT).show()
+                val bundle = Bundle()
+                bundle.putBoolean("isFiltered", true)
+                bundle.putInt("minimumPrice", minimumPrice.toInt())
+                bundle.putInt("maximumPrice", maximumPrice.toInt())
+                bundle.putInt("minimumSurface", minimumSurface.toInt())
+                bundle.putInt("maximumSurface", maximumSurface.toInt())
+                bundle.putString("firstLocation", firstLocation)
+                bundle.putString("pointOfInterest", pointOfInterest)
+                bundle.putInt("numberOfPhotos", numberOfPhotos.toInt())
+                bundle.putString("minimumEntryDate", entryDateInDate.toString())
+                bundle.putString("minimumSaleDate", saleDateInDate.toString())
+
+                val activity = this@SearchRealEstateActivity
+                val fragmentDetail = RealEstateFragment()
+                fragmentDetail.arguments = bundle
+
+                val fragmentContainerViewList =  activity.supportFragmentManager.findFragmentById(R.id.activity_main_fragment_container_view_list)
+
+                 if (fragmentContainerViewList?.isVisible == true){
+                     activity.supportFragmentManager
+                         .beginTransaction()
+                         .replace(R.id.activity_main_fragment_container_view_list, fragmentDetail)
+                          .addToBackStack(RealEstateFragment::class.java.simpleName)
+                         .commit()
+                 }else{
+
+                 }
+
+
             }
-//            val intent = Intent()
-//            //intent.putExtra(MainActivity.ADD_REAL_ESTATE, filterCritaries )
-//            setResult(RESULT_OK, intent)
-//            Toast.makeText(this,"filter submit ok", Toast.LENGTH_SHORT).show()
             finish()
 
         }

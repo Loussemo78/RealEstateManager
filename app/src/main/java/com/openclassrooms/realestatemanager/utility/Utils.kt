@@ -55,10 +55,12 @@ object Utils {
                 "Nulla blandit ornare est, vel condimentum risus. Pellentesque ac blandit arcu."
     }
 
-    fun convertStringToDate(stringDate: String?): Date {
+    fun convertStringToDate(stringDate: String?): Date? {
         val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
-        val date: Date
-        date = simpleDateFormat.parse(stringDate)
+        var date: Date? = null
+        if (stringDate != null){
+            date = simpleDateFormat.parse(stringDate)
+        }
         return date
     }
 

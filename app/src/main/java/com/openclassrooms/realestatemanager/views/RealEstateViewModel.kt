@@ -4,10 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.openclassrooms.realestatemanager.database.RealEstateQuery
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class RealEstateViewModel(application: Application):AndroidViewModel(application) {
     private val repository: RealEstateRepository = RealEstateRepository(application.applicationContext)
@@ -19,8 +21,19 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
         return repository.getRealEstate(id)
     }
 
-    fun getAllRealEstates():LiveData<List<RealEstate>>{
-       return repository.getAllRealEstates()
+    fun getAllRealEstates(isFiltered: Boolean?,
+                          minimumPrice: Int?, maximumPrice: Int?,
+                          minimumSurface: Int?, maximumSurface: Int?,
+                          firstLocation: String, numberOfPhotos: Int?,
+                          pointOfInterest: String?, minimumEntryDate: Date?,
+                          minimumSaleDate: Date?
+    ):LiveData<List<RealEstate>>{
+        if (isFiltered == true){
+            repository.getRealEstatesFiltered(RealEstateQuery.generateQuery(minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation,numberOfPhotos,pointOfInterest.toString(),minimumEntryDate,minimumSaleDate))
+        }else{
+            return readAll
+        }
+        return readAll
     }
 
     fun addRealEstate(realEstate: RealEstate){
@@ -34,6 +47,7 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
             repository.updateRealEstate(realEstate)
         }
     }
+
 
     fun deleteRealEstate(realEstate: RealEstate){
         viewModelScope.launch (Dispatchers.IO) {

@@ -19,6 +19,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FragmentMapBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.utility.TAG_DETAILS_FRAGMENT
+import com.openclassrooms.realestatemanager.utility.Utils
 
 
 class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -50,8 +51,21 @@ class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
         viewModel
         realEstateList = mutableListOf<RealEstate>()
+        val isFiltered =  arguments?.getBoolean("isFiltered")
+        val minimumPrice =   arguments?.getInt("minimumPrice")
+        val   maximumPrice = arguments?.getInt("maximumPrice")
+        val   minimumSurface = arguments?.getInt("minimumSurface")
+        val maximumSurface =  arguments?.getInt("maximumSurface")
+        val firstLocation =  arguments?.getString("firstLocation")
+        val pointOfInterest =  arguments?.getString("pointOfInterest")
+        val numberOfPhotos = arguments?.getInt("numberOfPhotos")
+        val minimumEntryDate =  arguments?.getString("minimumEntryDate")
+        val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
-        viewModel.getAllRealEstates().observe(viewLifecycleOwner , Observer { estates->
+        viewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),pointOfInterest?.toInt(),numberOfPhotos.toString(),
+            Utils.convertStringToDate(minimumEntryDate),
+            Utils.convertStringToDate(minimumSaleDate)).observe(viewLifecycleOwner, Observer {
+                estates->
             estates.forEach {
                 val realEstateId = it.id.toString()
                 val latLng = LatLng(it.latitude, it.longitude)

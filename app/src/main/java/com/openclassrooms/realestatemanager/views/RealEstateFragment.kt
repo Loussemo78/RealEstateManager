@@ -16,6 +16,7 @@ import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapte
 import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
+import com.openclassrooms.realestatemanager.utility.Utils
 
 
 class RealEstateFragment: Fragment() {
@@ -33,7 +34,28 @@ private lateinit var recyclerView: RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
-        realEstateViewModel.getAllRealEstates().observe(viewLifecycleOwner, Observer {
+//        bundle.putBoolean("isFiltered", true)
+//        bundle.putInt("minimumPrice", minimumPrice.toInt())
+//        bundle.putInt("maximumPrice", maximumPrice.toInt())
+//        bundle.putInt("maximumSurface", maximumSurface.toInt())
+//        bundle.putString("firstLocation", firstLocation)
+//        bundle.putString("pointOfInterest", pointOfInterest)
+//        bundle.putInt("numberOfPhotos", numberOfPhotos.toInt())
+//        bundle.putString("minimumEntryDate", entryDateInDate.toString())
+//        bundle.putString("minimumSaleDate", saleDateInDate.toString())
+      val isFiltered =  arguments?.getBoolean("isFiltered")
+     val minimumPrice =   arguments?.getInt("minimumPrice")
+     val   maximumPrice = arguments?.getInt("maximumPrice")
+     val   minimumSurface = arguments?.getInt("minimumSurface")
+      val maximumSurface =  arguments?.getInt("maximumSurface")
+      val firstLocation =  arguments?.getString("firstLocation")
+       val pointOfInterest =  arguments?.getString("pointOfInterest")
+       val numberOfPhotos = arguments?.getInt("numberOfPhotos")
+       val minimumEntryDate =  arguments?.getString("minimumEntryDate")
+       val minimumSaleDate = arguments?.getString("minimumSaleDate")
+
+
+        realEstateViewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),pointOfInterest?.toInt(),numberOfPhotos.toString(),Utils.convertStringToDate(minimumEntryDate),Utils.convertStringToDate(minimumSaleDate)).observe(viewLifecycleOwner, Observer {
 
             recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it)
         })

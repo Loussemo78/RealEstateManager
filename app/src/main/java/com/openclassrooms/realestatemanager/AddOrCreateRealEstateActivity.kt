@@ -290,10 +290,10 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
         // val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
         val pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.text
             .toString()
-        val entryDate: Date = Utils.convertStringToDate(
+        val entryDate: Date ?= Utils.convertStringToDate(
             binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
         )
-        val saleDate: Date = Utils.convertStringToDate(
+        val saleDate: Date ? = Utils.convertStringToDate(
             binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
         )
         val videoId = binding.activityAddOrEditRealEstateVideoIdEditText.text.toString()

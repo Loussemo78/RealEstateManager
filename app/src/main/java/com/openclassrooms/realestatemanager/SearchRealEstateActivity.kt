@@ -1,12 +1,19 @@
 package com.openclassrooms.realestatemanager
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.openclassrooms.realestatemanager.databinding.ActivitySearchRealEstateBinding
+import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import com.openclassrooms.realestatemanager.utility.Utils
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.Serializable
 import java.util.*
 
 
@@ -14,12 +21,15 @@ class SearchRealEstateActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchRealEstateBinding
     private lateinit var viewModel: RealEstateViewModel
+    private lateinit var repository: RealEstateRepository
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchRealEstateBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
+        repository = RealEstateRepository(applicationContext)
         viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
         initializeSearchItems()
     }
@@ -103,8 +113,13 @@ class SearchRealEstateActivity : AppCompatActivity() {
             critaries.saleDateInDate = saleDateInDate
 
 
-            //repository.setFilter(critaries)
-
+            GlobalScope.launch(Dispatchers.Main) {
+                repository.setFilter(critaries)
+            }
+//            val intent = Intent()
+//            //intent.putExtra(MainActivity.ADD_REAL_ESTATE, filterCritaries )
+//            setResult(RESULT_OK, intent)
+//            Toast.makeText(this,"filter submit ok", Toast.LENGTH_SHORT).show()
             finish()
 
         }

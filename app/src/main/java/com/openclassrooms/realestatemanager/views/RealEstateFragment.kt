@@ -1,5 +1,7 @@
 package com.openclassrooms.realestatemanager.views
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.MainActivity
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
+import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
+import com.openclassrooms.realestatemanager.models.RealEstate
 
 
 class RealEstateFragment: Fragment() {
@@ -19,6 +23,8 @@ class RealEstateFragment: Fragment() {
 private lateinit var binding : FragmentRealEstateListBinding
 private lateinit var realEstateViewModel: RealEstateViewModel
 private lateinit var recyclerView: RecyclerView
+
+   private val EDIT_REQUEST_CODE = 25
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View{
@@ -41,6 +47,16 @@ private lateinit var recyclerView: RecyclerView
 
     }
 
+   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EDIT_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                val realEstate = data?.getSerializableExtra(EDIT_REAL_ESTATE) as RealEstate?
+                val realEstateHandlerThread = RealEstateHandlerThread("UpdateRealEstateInDatabase")
+                realEstateHandlerThread.startUpdateRealEstateHandler(realEstate, realEstateViewModel)
+            }
+        }
+    }
 //    fun handleRealEstate(realEstate: RealEstate) {
 //        val RealEstateDetailFragment = RealEstateDetailFragment()
 //        val args = Bundle()

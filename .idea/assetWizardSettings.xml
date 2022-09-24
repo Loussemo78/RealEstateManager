@@ -33,8 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_shop_24" />
-                            <entry key="sourceFile" value="C:\Users\micha\Documents\RealEstateManager" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="icons8_android_os" />
+                            <entry key="sourceFile" value="C:\Users\micha\Downloads\icons8-android-os.svg" />
                           </map>
                         </option>
                       </PersistentState>

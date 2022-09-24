@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
+import com.openclassrooms.realestatemanager.di.DI
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
@@ -36,6 +37,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var  realEstateHandlerThread: RealEstateHandlerThread
     private lateinit var viewModel: RealEstateViewModel
+    private lateinit var  repository: RealEstateRepository
+
+    private lateinit var realEstateFilteredList: ArrayList<RealEstate>
 
 
     companion object{
@@ -58,6 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         checkPermissionsGranted()
 
+        repository =  DI.getRepository(application)
         GlobalScope.launch(Dispatchers.Main) {
 
             val repository = RealEstateRepository(this@MainActivity)
@@ -70,13 +75,16 @@ class MainActivity : AppCompatActivity() {
             repository.insertRealEstate(realEstateObject)
         }
         initializeBottomNavigationItemView()
-        realEstateHandlerThread = RealEstateHandlerThread("insertRealEstate")
 
         viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.activity_main_fragment_container_view_list,
                         RealEstateFragment()).commit()
+        realEstateHandlerThread = RealEstateHandlerThread("insertRealEstate")
+
+        realEstateFilteredList = ArrayList()
+
 
     }
 
@@ -93,10 +101,14 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.menu_search -> {
+//                if (realEstateFilteredList.size != 0)
+//                    realEstateFilteredList.clear()
+
                 val intent = Intent(this,SearchRealEstateActivity::class.java)
                 startActivity(intent)
             }
-          //  R.id.menu_clear_filter -> repository.resetFilter()
+            R.id.menu_clear_filter -> repository.resetFilter()
+
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -192,7 +204,7 @@ class MainActivity : AppCompatActivity() {
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
 
         notificationBuilder
-            .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+            .setSmallIcon(R.drawable.icons8_android_os)
             .setContentTitle(title)
             .setContentText(message)
             .setAutoCancel(true)

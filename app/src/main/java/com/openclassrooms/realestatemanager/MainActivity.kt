@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             val realEstateObject = RealEstate(1,"Type",12 ,"Place",
                     1500,2,3,1,"Description"
                     ,"https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg",3,"Address","mainPhoto",
-                    "points",40.75691, -73.97619, "Status", Date(2022,3,12),Date(2022,3,12),"Agent"
+                    "points",40.75691, -73.97619, "Status", "12/03/2022","17/03/2022","Agent"
                     ,"photoUrl","video")
 
             repository.insertRealEstate(realEstateObject)
@@ -97,16 +97,24 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_add -> {
-                val intent = Intent(this,AddOrCreateRealEstateActivity::class.java)
-                startActivity(intent)
+
+               supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activity_main_fragment_container_view_list, AddOrCreateRealEstateFragment())
+                    .addToBackStack(RealEstateFragment::class.java.simpleName)
+                    .commit()
+
 
             }
             R.id.menu_search -> {
 //                if (realEstateFilteredList.size != 0)
 //                    realEstateFilteredList.clear()
 
-                val intent = Intent(this,SearchRealEstateActivity::class.java)
-                startActivity(intent)
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activity_main_fragment_container_view_list, SearchRealEstateFragment())
+                    .addToBackStack(RealEstateFragment::class.java.simpleName)
+                    .commit()
             }
             R.id.menu_clear_filter -> repository.resetFilter()
 

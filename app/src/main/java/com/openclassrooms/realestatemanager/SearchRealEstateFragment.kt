@@ -1,26 +1,24 @@
 package com.openclassrooms.realestatemanager
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.format.DateFormat
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.openclassrooms.realestatemanager.databinding.ActivitySearchRealEstateBinding
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import com.openclassrooms.realestatemanager.utility.Utils
-import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.Serializable
 import java.util.*
 
 
-class SearchRealEstateActivity : AppCompatActivity() {
+class SearchRealEstateFragment : Fragment() {
 
     private lateinit var binding: ActivitySearchRealEstateBinding
     private lateinit var viewModel: RealEstateViewModel
@@ -29,12 +27,21 @@ class SearchRealEstateActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        repository = RealEstateRepository(requireActivity())
+        viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = ActivitySearchRealEstateBinding.inflate(layoutInflater)
         val view: View = binding.root
-        setContentView(view)
-        repository = RealEstateRepository(applicationContext)
-        viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
         initializeSearchItems()
+        return view
     }
 
     private fun initializeSearchItems() {
@@ -97,14 +104,14 @@ class SearchRealEstateActivity : AppCompatActivity() {
                 t.printStackTrace() //if it's not an integer
             }
 
-            val entryDateInDate: Date? = Utils.convertStringToDate(entryDate)
+            val entryDateInDate: String? = entryDate
             try {
                 critaries.entryDateInDate = entryDateInDate
             } catch (t: Throwable) {
                 t.printStackTrace() //if it's not an integer
             }
 
-            val saleDateInDate: Date? = Utils.convertStringToDate(saleDate)
+            val saleDateInDate: String? = saleDate
             try {
                 critaries.saleDateInDate = saleDateInDate
             } catch (t: Throwable) {
@@ -118,7 +125,7 @@ class SearchRealEstateActivity : AppCompatActivity() {
 
             GlobalScope.launch(Dispatchers.Main) {
                 repository.setFilter(critaries)
-                Toast.makeText(applicationContext,"filter submit ok", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(),"filter submit ok", Toast.LENGTH_SHORT).show()
                 val bundle = Bundle()
                 bundle.putBoolean("isFiltered", true)
                 bundle.putInt("minimumPrice", minimumPrice.toInt())
@@ -131,25 +138,24 @@ class SearchRealEstateActivity : AppCompatActivity() {
                 bundle.putString("minimumEntryDate", entryDateInDate.toString())
                 bundle.putString("minimumSaleDate", saleDateInDate.toString())
 
-                val activity = this@SearchRealEstateActivity
+
                 val fragmentDetail = RealEstateFragment()
                 fragmentDetail.arguments = bundle
 
-                val fragmentContainerViewList =  activity.supportFragmentManager.findFragmentById(R.id.activity_main_fragment_container_view_list)
 
-                 if (fragmentContainerViewList?.isVisible == true){
-                     activity.supportFragmentManager
+                    // if (fragmentContainerViewList?.isVisible == true){
+                     requireActivity().supportFragmentManager
                          .beginTransaction()
                          .replace(R.id.activity_main_fragment_container_view_list, fragmentDetail)
                           .addToBackStack(RealEstateFragment::class.java.simpleName)
                          .commit()
-                 }else{
+               //  }else{
 
-                 }
+              //   }
 
 
             }
-            finish()
+           activity?.supportFragmentManager?.popBackStack()
 
         }
 
@@ -164,8 +170,8 @@ class SearchRealEstateActivity : AppCompatActivity() {
          var firstLocation: String? = "",
          var numberOfPhotos: Int? = 0,
          var pointOfInterest: String? = "",
-         var entryDateInDate: Date? = null,
-         var saleDateInDate: Date? = null
+         var entryDateInDate: String? = "",
+         var saleDateInDate: String? = "",
     ) {
 
     }

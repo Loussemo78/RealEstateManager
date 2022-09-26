@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.sqlite.db.SupportSQLiteQuery
-import com.openclassrooms.realestatemanager.SearchRealEstateActivity
-import com.openclassrooms.realestatemanager.SearchRealEstateActivity.SearchCritaries
+import com.openclassrooms.realestatemanager.SearchRealEstateFragment
+import com.openclassrooms.realestatemanager.SearchRealEstateFragment.SearchCritaries
 import com.openclassrooms.realestatemanager.dao.RealEstateDao
 import com.openclassrooms.realestatemanager.database.RealEstateDatabase
 import com.openclassrooms.realestatemanager.database.RealEstateQuery
@@ -17,7 +17,7 @@ class RealEstateRepository( val context: Context) {
 
     private val dao : RealEstateDao = RealEstateDatabase.getInstance(context)?.realEstateDao!!
     private var realEstates: LiveData<List<RealEstate>>
-    private val filter = MutableLiveData<SearchRealEstateActivity.SearchCritaries?>(null)
+    private val filter = MutableLiveData<SearchRealEstateFragment.SearchCritaries?>(null)
 
      init {
         realEstates = Transformations.switchMap(filter

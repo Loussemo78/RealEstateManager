@@ -17,15 +17,16 @@ import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.utility.Utils
+import java.text.SimpleDateFormat
 
 
 class RealEstateFragment: Fragment() {
 
-private lateinit var binding : FragmentRealEstateListBinding
-private lateinit var realEstateViewModel: RealEstateViewModel
-private lateinit var recyclerView: RecyclerView
+    private lateinit var binding : FragmentRealEstateListBinding
+    private lateinit var realEstateViewModel: RealEstateViewModel
+    private lateinit var recyclerView: RecyclerView
 
-   private val EDIT_REQUEST_CODE = 25
+    private val EDIT_REQUEST_CODE = 25
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View{
@@ -43,19 +44,19 @@ private lateinit var recyclerView: RecyclerView
 //        bundle.putInt("numberOfPhotos", numberOfPhotos.toInt())
 //        bundle.putString("minimumEntryDate", entryDateInDate.toString())
 //        bundle.putString("minimumSaleDate", saleDateInDate.toString())
-      val isFiltered =  arguments?.getBoolean("isFiltered")
-     val minimumPrice =   arguments?.getInt("minimumPrice")
-     val   maximumPrice = arguments?.getInt("maximumPrice")
-     val   minimumSurface = arguments?.getInt("minimumSurface")
-      val maximumSurface =  arguments?.getInt("maximumSurface")
-      val firstLocation =  arguments?.getString("firstLocation")
-       val pointOfInterest =  arguments?.getString("pointOfInterest")
-       val numberOfPhotos = arguments?.getInt("numberOfPhotos")
-       val minimumEntryDate =  arguments?.getString("minimumEntryDate")
-       val minimumSaleDate = arguments?.getString("minimumSaleDate")
+        val isFiltered =  arguments?.getBoolean("isFiltered")
+        val minimumPrice =   arguments?.getInt("minimumPrice")
+        val   maximumPrice = arguments?.getInt("maximumPrice")
+        val   minimumSurface = arguments?.getInt("minimumSurface")
+        val maximumSurface =  arguments?.getInt("maximumSurface")
+        val firstLocation =  arguments?.getString("firstLocation")
+        val pointOfInterest =  arguments?.getString("pointOfInterest")
+        val numberOfPhotos = arguments?.getInt("numberOfPhotos")
+        val minimumEntryDate =  arguments?.getString("minimumEntryDate")
+        val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
 
-        realEstateViewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),pointOfInterest?.toInt(),numberOfPhotos.toString(),Utils.convertStringToDate(minimumEntryDate),Utils.convertStringToDate(minimumSaleDate)).observe(viewLifecycleOwner, Observer {
+        realEstateViewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),numberOfPhotos,pointOfInterest?.toString(),minimumEntryDate,minimumSaleDate).observe(viewLifecycleOwner, Observer {
 
             recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it)
         })
@@ -69,7 +70,7 @@ private lateinit var recyclerView: RecyclerView
 
     }
 
-   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == EDIT_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {

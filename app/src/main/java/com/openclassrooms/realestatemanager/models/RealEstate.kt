@@ -29,8 +29,8 @@ data class RealEstate(
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,
     var status: String = "",
-    var entryDate: Date? = null,
-    var dateOfSale: Date? = null,
+    var entryDate: String = "",
+    var dateOfSale: String = "",
     var agent: String = "",
     var agentPhotoUrl: String = "",
     var video: String = ""
@@ -62,7 +62,6 @@ data class RealEstate(
             agentPhotoUrl,
             video
         )
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
         values.put("id", realEstate.id)
         values.put("type", realEstate.type)
@@ -79,8 +78,8 @@ data class RealEstate(
         values.put("latitude", realEstate.latitude)
         values.put("longitude", realEstate.longitude)
         values.put("status", realEstate.status)
-        values.put("entryDate", realEstate.entryDate?.let { dateFormat.format(it) })
-        values.put("dateOfSale", realEstate.dateOfSale?.let { dateFormat.format(it) })
+        values.put("entryDate", realEstate.entryDate)
+        values.put("dateOfSale", realEstate.dateOfSale)
         values.put("agent", realEstate.agent)
         values.put("agentPhotoUrl", realEstate.agentPhotoUrl)
         values.put("videoId", realEstate.video)

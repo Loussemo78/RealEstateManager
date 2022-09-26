@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager
 
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
@@ -8,15 +9,18 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealEstateBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
+import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
 import com.openclassrooms.realestatemanager.utility.Utils
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
@@ -24,10 +28,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.Serializable
+import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     val TAKE_PICTURE = 0
     val PICK_PHOTO = 1
@@ -49,9 +54,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
-        val view: View = binding.root
-        setContentView(view)
+
         newRealEstate = RealEstate()
 
         realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
@@ -64,6 +67,19 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
 //            newRealEstate = intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) as RealEstate
 //        }
 
+
+
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
+        val view: View = binding.root
+
         othersPhotosList = ArrayList<RealEstatePhotos>()
         initializeSpinners()
 
@@ -75,12 +91,12 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
         initializeButtonSelectSaleDate();
 
         //if editing, set all value in spinners, editTexts and ImageViews
-        if (newRealEstate == intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE)) {
+        if (newRealEstate == activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE)) {
             initializeRealEstateToEdit();
         }
         initializeFinishButton();
 
-
+        return view
     }
 
     private fun initializeSpinners() {
@@ -97,7 +113,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
 
     private fun initializeSpinnerAdapter(spinner: Spinner, resourceArray: Int) {
         val adapter = ArrayAdapter.createFromResource(
-            this,
+            requireActivity(),
             resourceArray,
             android.R.layout.simple_spinner_item
         )
@@ -126,7 +142,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
         binding.activityAddOrEditRealEstateButtonMainPhoto.setOnClickListener { view ->
             val options =
                 arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Cancel")
-            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(  requireActivity())
             builder.setTitle("Choose real estate main photo")
             builder.setItems(options,
                 DialogInterface.OnClickListener { dialogInterface, i ->
@@ -152,7 +168,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
             val options =
                 arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Cancel")
             val builder =
-                AlertDialog.Builder(this)
+                AlertDialog.Builder(requireActivity())
             builder.setTitle("Choose real estate other photos")
             builder.setItems(
                 options
@@ -197,15 +213,23 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
         lastSelectedDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
         lastSelectedMonth = calendar.get(Calendar.MONTH)
         lastSelectedYear = calendar.get(Calendar.YEAR)
+
+
         val dateSetListener =
-            OnDateSetListener { datePicker, i, i1, i2 ->
-                editText.setText(i2.toString() + "/" + (i1 + 1) + "/" + i)
-                lastSelectedDayOfMonth = i2
-                lastSelectedMonth = i1
-                lastSelectedYear = i
+            OnDateSetListener { _, year, monthOfYear, dayOfMonth  ->
+
+                calendar.set(year, monthOfYear, dayOfMonth)
+
+                val dateString = simpleDateFormat.format(calendar.time)
+
+                editText.setText(dateString)
+                lastSelectedDayOfMonth = dayOfMonth
+                lastSelectedMonth = monthOfYear
+                lastSelectedYear = year
+
             }
         val datePickerDialog = DatePickerDialog(
-            this,
+            requireActivity(),
             dateSetListener, lastSelectedYear, lastSelectedMonth, lastSelectedDayOfMonth
         )
         datePickerDialog.show()
@@ -258,12 +282,10 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
         //binding.activityAddOrEditRealEstateAddressEditText.text(newRealEstate.getSecondLocation())
         binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText(newRealEstate.pointsOfInterest)
         binding.activityAddOrEditRealEstateEntryDateEditText.setText(
-            Utils.convertDateToString(
-                newRealEstate.entryDate
-            )
+            newRealEstate.entryDate
         )
         binding.activityAddOrEditRealEstateSaleDateEditText.setText(
-            Utils.convertDateToString(newRealEstate.dateOfSale)
+            newRealEstate.dateOfSale
         )
         binding.activityAddOrEditRealEstateVideoIdEditText.setText(newRealEstate.video)
     }
@@ -290,12 +312,8 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
         // val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
         val pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.text
             .toString()
-        val entryDate: Date ?= Utils.convertStringToDate(
-            binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
-        )
-        val saleDate: Date ? = Utils.convertStringToDate(
-            binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
-        )
+        val entryDate: String ?=  binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
+        val saleDate: String ? =   binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
         val videoId = binding.activityAddOrEditRealEstateVideoIdEditText.text.toString()
         newRealEstate.place = firstLocation
         newRealEstate.price = price
@@ -310,13 +328,14 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
         //Set latitude and longitude
         //  LocationUtil.getLocationFromAddress(this, mNewRealEstate, secondLocation)
         newRealEstate.pointsOfInterest = pointsOfInterest
-        newRealEstate.entryDate = entryDate
-        newRealEstate.dateOfSale = saleDate
+        newRealEstate.entryDate = entryDate.toString()
+        newRealEstate.dateOfSale = saleDate.toString()
         newRealEstate.video = videoId
 
         GlobalScope.launch(Dispatchers.Main) {
 
             realEstateViewModel.addRealEstate(newRealEstate)
+            requireActivity().supportFragmentManager.popBackStack()
 
         }
     }
@@ -331,7 +350,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
 //                } //
             //Verify if when "Sold" status is selected that Sale date has a value
             // else
-            if (intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+            if (activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
                 if (binding.activityAddOrEditRealEstateStatusSpinner.selectedItem.toString() == "For sale" || binding.activityAddOrEditRealEstateStatusSpinner
                         .selectedItem.toString() == "Sold" &&
                     binding.activityAddOrEditRealEstateSaleDateEditText.text.toString().isNotEmpty()
@@ -342,12 +361,12 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
                         RealEstateFragment.EDIT_REAL_ESTATE,
                         newRealEstate as Serializable
                     )
-                    setResult(RESULT_OK, intent)
-                    finish()
+                   // setResult(RESULT_OK, intent)
+                 //   finish()
                 } // Toast to inform user that he put "Sold" status without sale date value
                 else {
                     Toast.makeText(
-                        this,
+                        requireActivity(),
                         "Oops ...You specified Sold status without value to sale date",
                         Toast.LENGTH_LONG
                     ).show()
@@ -356,9 +375,9 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
                 setNewRealEstateValue()
                 val intent = Intent()
                 intent.putExtra(MainActivity.ADD_REAL_ESTATE, newRealEstate as Serializable)
-                setResult(RESULT_OK, intent)
-                Toast.makeText(this,"submit ok",Toast.LENGTH_SHORT).show()
-                finish()
+              //  setResult(RESULT_OK, intent)
+                Toast.makeText(requireActivity(),"submit ok",Toast.LENGTH_SHORT).show()
+              //  finish()
             }
 
         }
@@ -379,7 +398,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
                 //set image in ImageView from camera
                 val selectedImage = data!!.extras!!["data"] as Bitmap
                 binding.activityAddOrEditRealEstateMainPhoto.setImageBitmap(selectedImage)
-                val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(this, selectedImage)
+                val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(requireActivity(), selectedImage)
                 val imageUriToString = RealEstatePhotos.uriToString(imageUri)
                 newRealEstate.mainPhotoString = imageUriToString
             }
@@ -397,7 +416,7 @@ class AddOrCreateRealEstateActivity : AppCompatActivity(), AdapterView.OnItemSel
                 val selectedImage = data!!.extras!!["data"] as Bitmap
                 val realEstatePhotos = RealEstatePhotos()
                 //Set photo uri
-                val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(this, selectedImage)
+                val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(requireActivity(), selectedImage)
                 val imageUriToString = RealEstatePhotos.uriToString(imageUri)
                 realEstatePhotos.photoUri = imageUriToString.toString()
                 othersPhotosList!!.add(realEstatePhotos)

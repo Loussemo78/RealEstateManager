@@ -71,7 +71,7 @@ private var realEstateId:Int = 0
         }
 
 
-        val dateOfSale: Date? = realEstate.dateOfSale
+        val dateOfSale: String? = realEstate.dateOfSale
 
 
         val surface: String = realEstate.surface.toString() + " sq" + " m"
@@ -87,8 +87,8 @@ private var realEstateId:Int = 0
      //   binding.fragmentOnClickRealEstateLocationValue.setText(mRealEstate.getSecondLocation())
         binding.fragmentOnClickRealEstatePointsOfInterestValue.text = realEstate.pointsOfInterest
         binding.fragmentOnClickRealEstatePriceValue.text = "$" + realEstate.price
-        binding.fragmentOnClickRealEstateEntryDateValue.text = Utils.convertDateToString(realEstate.entryDate)
-        if (dateOfSale != null) binding.fragmentOnClickRealEstateSaleDateValue.text = Utils.convertDateToString(dateOfSale)
+        binding.fragmentOnClickRealEstateEntryDateValue.text = realEstate.entryDate
+        if (dateOfSale != null) binding.fragmentOnClickRealEstateSaleDateValue.text = dateOfSale
 
 
         val supportMapFragment = this.childFragmentManager

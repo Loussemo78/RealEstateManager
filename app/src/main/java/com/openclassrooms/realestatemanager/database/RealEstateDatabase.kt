@@ -67,7 +67,7 @@ abstract class RealEstateDatabase : RoomDatabase() {
                                         "Lafayette\n" +
                                         "NoHo\n" +
                                         "New York", "", "école", 40.7830603, -73.9712488,
-                                "disponible", Utils.convertStringToDate("23/08/2022"), null,
+                                "disponible", "23/08/2022", "23/08/2022",
                                 "Mike House", "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg", ""
                             )
                         )

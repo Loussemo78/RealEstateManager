@@ -63,8 +63,8 @@ class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
         viewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),pointOfInterest?.toInt(),numberOfPhotos.toString(),
-            Utils.convertStringToDate(minimumEntryDate),
-            Utils.convertStringToDate(minimumSaleDate)).observe(viewLifecycleOwner, Observer {
+            minimumEntryDate,
+            minimumSaleDate).observe(viewLifecycleOwner, Observer {
                 estates->
             estates.forEach {
                 val realEstateId = it.id.toString()

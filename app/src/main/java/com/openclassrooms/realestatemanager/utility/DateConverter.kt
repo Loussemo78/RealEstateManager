@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.utility
 
 import androidx.room.TypeConverter
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DateConverter {
@@ -12,5 +13,9 @@ class DateConverter {
     @TypeConverter
     fun fromDate(date: Date?): Long? {
         return if (date == null) null else date.getTime()
+    }
+    companion object {
+
+            val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
     }
 }

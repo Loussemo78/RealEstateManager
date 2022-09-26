@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.utility
 
 import android.content.Context
 import android.net.wifi.WifiManager
+import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,7 +30,7 @@ object Utils {
      */
     val todayDate: String
         get() {
-            val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd")
+            val dateFormat: DateFormat = simpleDateFormat
             return dateFormat.format(Date())
         }
 
@@ -56,7 +57,7 @@ object Utils {
     }
 
     fun convertStringToDate(stringDate: String?): Date? {
-        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+
         var date: Date? = null
         if (stringDate != null){
             date = simpleDateFormat.parse(stringDate)
@@ -66,7 +67,7 @@ object Utils {
 
     fun convertDateToString(date: Date?): String? {
         if (date == null) return ""
-        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val simpleDateFormat = simpleDateFormat
         return simpleDateFormat.format(date)
     }
 }

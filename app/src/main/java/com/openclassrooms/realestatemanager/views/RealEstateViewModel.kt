@@ -25,8 +25,8 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
                           minimumPrice: Int?, maximumPrice: Int?,
                           minimumSurface: Int?, maximumSurface: Int?,
                           firstLocation: String, numberOfPhotos: Int?,
-                          pointOfInterest: String?, minimumEntryDate: Date?,
-                          minimumSaleDate: Date?
+                          pointOfInterest: String?, minimumEntryDate: String?,
+                          minimumSaleDate: String?
     ):LiveData<List<RealEstate>>{
         if (isFiltered == true){
             repository.getRealEstatesFiltered(RealEstateQuery.generateQuery(minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation,numberOfPhotos,pointOfInterest.toString(),minimumEntryDate,minimumSaleDate))

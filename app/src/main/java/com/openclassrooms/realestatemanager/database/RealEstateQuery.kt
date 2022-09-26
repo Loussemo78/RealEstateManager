@@ -14,15 +14,15 @@ class RealEstateQuery {
             minimumPrice: Int?, maximumPrice: Int?,
             minimumSurface: Int?, maximumSurface: Int?,
             firstLocation: String, numberOfPhotos: Int?,
-            pointOfInterest: String, minimumEntryDate: Date?,
-            minimumSaleDate: Date?
+            pointOfInterest: String, minimumEntryDate: String?,
+            minimumSaleDate: String?
         ): SupportSQLiteQuery {
 
             // List of bind parameters
             val args: MutableList<Any> = ArrayList()
 
             // Beginning of query string
-            val selectString = " SELECT * FROM RealEstate"
+            val selectString = " SELECT * FROM real_estate_db"
             var whereString = " WHERE "
             if (minimumPrice != null && minimumPrice >= 0) {
                 args.add(minimumPrice)
@@ -50,11 +50,11 @@ class RealEstateQuery {
             }
             if (minimumEntryDate != null) {
                 whereString += "entryDate >= ? AND "
-                DateConverter().fromDate(minimumEntryDate)?.let { args.add(it) }
+                minimumEntryDate.let { args.add(it) }
             }
             if (minimumSaleDate != null) {
                 whereString += "dateOfSale >= ? AND "
-                DateConverter().fromDate(minimumSaleDate)?.let { args.add(it) }
+                minimumSaleDate.let { args.add(it) }
             }
             if (numberOfPhotos != null) {
                 whereString += "numberOfPhotos >= ? AND "
@@ -67,6 +67,8 @@ class RealEstateQuery {
             val queryString = selectString + whereString
             Log.d("SQL", queryString)
             return SimpleSQLiteQuery(queryString, args.toTypedArray())
+            //SELECT * FROM real_estate_db WHERE price >= 1 AND price <= 1 AND surface >= 1
+        // AND surface <= 1  AND entryDate >= 26/09/2022 AND dateOfSale >= 26/09/2022 AND numberOfPhotos >= 0
         }
     }
 }

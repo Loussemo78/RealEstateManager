@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+            android:text="1"
             android:hint="@string/minimum_price_in_dollar"
             android:inputType="numberDecimal" />
 
@@ -25,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+            android:text="1"
             android:hint="@string/maximum_price_in_dollar"
             android:inputType="numberDecimal" />
 
@@ -37,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
             android:hint="@string/minimum_surface_in_square_meters"
+            android:text="1"
             android:inputType="number" />
 
         <EditText
@@ -45,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
             android:hint="@string/maximum_surface_in_square_meters"
+            android:text="1"
             android:inputType="number" />
 
 
@@ -54,6 +58,7 @@
             android:id="@+id/activity_search_real_estate_first_location_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="a"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
             android:hint="@string/borough_or_neighborhood" />
 
@@ -63,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:text="1"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
             android:hint="@string/minimum_number_of_photos"/>
 
@@ -72,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+            android:text="a"
             android:hint="@string/points_of_interest" />
 
         <!-- Entry date -->
@@ -79,6 +86,7 @@
             android:id="@+id/activity_search_real_estate_entry_date_since_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="26/9/2022"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
             android:hint="@string/put_on_the_market_since_in_days" />
 
@@ -88,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+            android:text="26/9/2022"
             android:hint="@string/sale_since_in_days" />
 
         <!-- Button finish -->

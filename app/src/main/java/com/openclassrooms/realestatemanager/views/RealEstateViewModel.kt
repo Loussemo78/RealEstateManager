@@ -1,18 +1,11 @@
 package com.openclassrooms.realestatemanager.views
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import androidx.room.Query
-import androidx.room.RawQuery
-import androidx.room.RoomDatabase
 import androidx.sqlite.db.SimpleSQLiteQuery
-import androidx.sqlite.db.SupportSQLiteQuery
-import com.openclassrooms.realestatemanager.database.RealEstateDatabase
 import com.openclassrooms.realestatemanager.database.RealEstateQuery
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
@@ -40,13 +33,14 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
         return repository.getRealEstatesFiltered(query)
     }
 
-    fun getAllRealEstates(isFiltered: Boolean?,
-                          minimumPrice: Int?, maximumPrice: Int?,
-                          minimumSurface: Int?, maximumSurface: Int?,
-                          firstLocation: String, numberOfPhotos: Int?,
-                          description:String,
-                          pointOfInterest: String?, minimumEntryDate: String?,
-                          minimumSaleDate: String?
+    fun getAllRealEstates(
+        isFiltered: Boolean?,
+        minimumPrice: Int?, maximumPrice: Int?,
+        minimumSurface: Int?, maximumSurface: Int?,
+        firstLocation: String, numberOfPhotos: Int?,
+        description: String?,
+        pointOfInterest: String?, minimumEntryDate: String?,
+        minimumSaleDate: String?
     ):LiveData<List<RealEstate>>{
 
         if (isFiltered == true){

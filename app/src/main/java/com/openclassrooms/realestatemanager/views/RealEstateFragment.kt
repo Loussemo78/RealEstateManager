@@ -16,8 +16,6 @@ import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapte
 import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
-import com.openclassrooms.realestatemanager.utility.Utils
-import java.text.SimpleDateFormat
 
 
 class RealEstateFragment: Fragment() {
@@ -57,12 +55,12 @@ class RealEstateFragment: Fragment() {
         val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
 
-        if (description != null) {
+
             realEstateViewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),numberOfPhotos,description,pointOfInterest?.toString(),minimumEntryDate,minimumSaleDate).observe(viewLifecycleOwner, Observer {
 
                 recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it)
             })
-        }
+
         return  binding.root
     }
 

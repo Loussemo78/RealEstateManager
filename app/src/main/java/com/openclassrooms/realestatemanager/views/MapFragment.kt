@@ -19,7 +19,6 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FragmentMapBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.utility.TAG_DETAILS_FRAGMENT
-import com.openclassrooms.realestatemanager.utility.Utils
 
 
 class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListener {

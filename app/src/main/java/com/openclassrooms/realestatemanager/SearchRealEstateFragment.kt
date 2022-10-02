@@ -168,6 +168,7 @@ class SearchRealEstateFragment : Fragment() {
         var minimumSurface: Int? = 0,
          var maximumSurface: Int? = 0,
          var firstLocation: String? = "",
+         var description: String? = "",
          var numberOfPhotos: Int? = 0,
          var pointOfInterest: String? = "",
          var entryDateInDate: String? = "",

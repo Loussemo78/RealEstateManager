@@ -14,7 +14,7 @@ class RealEstateQuery {
             minimumPrice: Int?, maximumPrice: Int?,
             minimumSurface: Int?, maximumSurface: Int?,
             firstLocation: String, numberOfPhotos: Int?,
-            description:String,
+            description:String?,
             pointOfInterest: String, minimumEntryDate: String?,
             minimumSaleDate: String?
         ): SupportSQLiteQuery {

@@ -21,7 +21,10 @@ import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealE
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
+import com.openclassrooms.realestatemanager.utility.TAG_DETAILS_FRAGMENT
+import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
 import com.openclassrooms.realestatemanager.utility.Utils
+import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -125,7 +128,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
         if (p0?.id == R.id.activity_add_or_edit_real_estate_type_spinner)
-            type = p0.getItemAtPosition(i).toString();
+                type = p0.getItemAtPosition(i).toString()
 
         if (p0?.id == R.id.activity_add_or_edit_real_estate_status_spinner)
             status = p0.getItemAtPosition(i).toString();
@@ -373,8 +376,14 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 }
             } else {
                 setNewRealEstateValue()
-                val intent = Intent()
-                intent.putExtra(MainActivity.ADD_REAL_ESTATE, newRealEstate as Serializable)
+                (activity as MainActivity).setFragment(
+                    RealEstateFragment.newInstance(),
+                    true,
+                    TAG_REAL_ESTATE_FRAGMENT
+                )
+
+//                val intent = Intent()
+//                intent.putExtra(MainActivity.ADD_REAL_ESTATE, newRealEstate as Serializable)
               //  setResult(RESULT_OK, intent)
                 Toast.makeText(requireActivity(),"submit ok",Toast.LENGTH_SHORT).show()
               //  finish()

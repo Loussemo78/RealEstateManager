@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [RealEstate::class], version = 2, exportSchema = false)
+@Database(entities = [RealEstate::class], version = 3, exportSchema = false)
 @TypeConverters(RealEstateTypeConverter::class, DateConverter::class)
 
 abstract class RealEstateDatabase : RoomDatabase() {

@@ -27,17 +27,21 @@ class RealEstateRepository( val context: Context) {
             } else {
                 return@switchMap filter.firstLocation?.let {
                     filter.pointOfInterest?.let { it1 ->
-                        RealEstateQuery.generateQuery(
-                            filter.minimumPrice,
-                            filter.maximumPrice,
-                            filter.minimumSurface,
-                            filter.maximumSurface,
-                            it,
-                            filter.numberOfPhotos,
-                            it1,
-                            filter.entryDateInDate,
-                            filter.saleDateInDate
-                        )
+                        filter.description?.let { it2 ->
+                            RealEstateQuery.generateQuery(
+                                filter.minimumPrice,
+                                filter.maximumPrice,
+                                filter.minimumSurface,
+                                filter.maximumSurface,
+                                it,
+                                filter.numberOfPhotos,
+                                it2,
+
+                                it1,
+                                filter.entryDateInDate,
+                                filter.saleDateInDate
+                            )
+                        }
                     }
                 }?.let {
                     dao.getRealEstatesFiltered(
@@ -79,4 +83,11 @@ class RealEstateRepository( val context: Context) {
     fun getRealEstatesFiltered(query: SupportSQLiteQuery): LiveData<List<RealEstate>>{
        return dao.getRealEstatesFiltered(query)
     }
+
+//    fun gesEstatesBySearch(query: SimpleSQLiteQuery) : LiveData<List<RealEstate>>{
+//        return dao.getRealEstatesFiltered(query)
+//    }
+
+
+
 }

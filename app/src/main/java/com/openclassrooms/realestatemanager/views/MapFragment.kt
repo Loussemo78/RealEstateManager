@@ -53,16 +53,18 @@ class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         realEstateList = mutableListOf<RealEstate>()
         val isFiltered =  arguments?.getBoolean("isFiltered")
         val minimumPrice =   arguments?.getInt("minimumPrice")
-        val   maximumPrice = arguments?.getInt("maximumPrice")
-        val   minimumSurface = arguments?.getInt("minimumSurface")
+        val maximumPrice = arguments?.getInt("maximumPrice")
+        val minimumSurface = arguments?.getInt("minimumSurface")
         val maximumSurface =  arguments?.getInt("maximumSurface")
         val firstLocation =  arguments?.getString("firstLocation")
         val pointOfInterest =  arguments?.getString("pointOfInterest")
         val numberOfPhotos = arguments?.getInt("numberOfPhotos")
+        val description = arguments?.getString("description")
         val minimumEntryDate =  arguments?.getString("minimumEntryDate")
         val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
         viewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),pointOfInterest?.toInt(),numberOfPhotos.toString(),
+            description,
             minimumEntryDate,
             minimumSaleDate).observe(viewLifecycleOwner, Observer {
                 estates->

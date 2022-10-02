@@ -34,4 +34,5 @@ interface RealEstateDao {
     @RawQuery(observedEntities = [RealEstate::class])
      fun getRealEstatesFiltered(query: SupportSQLiteQuery): LiveData<List<RealEstate>>
 
+
 }

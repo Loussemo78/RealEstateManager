@@ -72,6 +72,15 @@
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
             android:hint="@string/minimum_number_of_photos"/>
 
+        <EditText
+            android:id="@+id/activity_search_real_estate_description_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="a"
+            android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+            android:hint="@string/description"/>
+
+
         <!-- Point of interest-->
         <EditText
             android:id="@+id/activity_search_real_estate_point_of_interest_edit_text"

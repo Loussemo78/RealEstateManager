@@ -52,14 +52,17 @@ class RealEstateFragment: Fragment() {
         val firstLocation =  arguments?.getString("firstLocation")
         val pointOfInterest =  arguments?.getString("pointOfInterest")
         val numberOfPhotos = arguments?.getInt("numberOfPhotos")
+        val description = arguments?.getString("description")
         val minimumEntryDate =  arguments?.getString("minimumEntryDate")
         val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
 
-        realEstateViewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),numberOfPhotos,pointOfInterest?.toString(),minimumEntryDate,minimumSaleDate).observe(viewLifecycleOwner, Observer {
+        if (description != null) {
+            realEstateViewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),numberOfPhotos,description,pointOfInterest?.toString(),minimumEntryDate,minimumSaleDate).observe(viewLifecycleOwner, Observer {
 
-            recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it)
-        })
+                recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it)
+            })
+        }
         return  binding.root
     }
 

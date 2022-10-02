@@ -14,6 +14,7 @@ class RealEstateQuery {
             minimumPrice: Int?, maximumPrice: Int?,
             minimumSurface: Int?, maximumSurface: Int?,
             firstLocation: String, numberOfPhotos: Int?,
+            description:String,
             pointOfInterest: String, minimumEntryDate: String?,
             minimumSaleDate: String?
         ): SupportSQLiteQuery {
@@ -60,6 +61,11 @@ class RealEstateQuery {
                 whereString += "numberOfPhotos >= ? AND "
                 args.add(numberOfPhotos)
             }
+            if (description != null) {
+                whereString += "description >= ? AND "
+                args.add(description)
+            }
+
 
             //We have an AND at the end, we delete it
             val lastIndexAnd = whereString.lastIndexOf(" AND ")
@@ -67,8 +73,8 @@ class RealEstateQuery {
             val queryString = selectString + whereString
             Log.d("SQL", queryString)
             return SimpleSQLiteQuery(queryString, args.toTypedArray())
-            //SELECT * FROM real_estate_db WHERE price >= 1 AND price <= 1 AND surface >= 1
-        // AND surface <= 1  AND entryDate >= 26/09/2022 AND dateOfSale >= 26/09/2022 AND numberOfPhotos >= 0
+//            SELECT * FROM real_estate_db WHERE price >= 1 AND price <= 1 AND surface >= 1
+//         AND surface <= 1  AND entryDate >= 26/09/2022 AND dateOfSale >= 26/09/2022 AND numberOfPhotos >= 0
         }
     }
 }

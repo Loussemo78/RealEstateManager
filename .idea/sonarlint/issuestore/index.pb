@@ -11,3 +11,11 @@ w
 Gapp/src/main/java/com/openclassrooms/realestatemanager/utility/Utils.kt,9/d/9de7f89240adb8d5db603a226fa593339349b4f3
 ˆ
 Xapp/src/main/java/com/openclassrooms/realestatemanager/views/RealEstateDetailFragment.kt,2/c/2cd934b49ab79514d8151bc90252d3e400fefada
+{
+Kapp/src/main/java/com/openclassrooms/realestatemanager/models/RealEstate.kt,c/b/cbad0cbacdeb7df829056969a4348b349e67e251
+Š
+Zapp/src/main/java/com/openclassrooms/realestatemanager/database/RealEstateHandlerThread.kt,e/2/e271992348ef302fe12539d166394dfc1e9a6552
+…
+Uapp/src/main/java/com/openclassrooms/realestatemanager/database/RealEstateDatabase.kt,a/c/ac5182903431ec8cae943ea28c47b61ac678400a
+{
+Kapp/src/main/java/com/openclassrooms/realestatemanager/views/MapFragment.kt,c/9/c9d3b271461767199ec7ea1309412e6ed0421498

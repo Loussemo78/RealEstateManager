@@ -124,7 +124,7 @@ class SearchRealEstateFragment : Fragment() {
 
 
             GlobalScope.launch(Dispatchers.Main) {
-                repository.setFilter(critaries)
+
                 Toast.makeText(requireActivity(),"filter submit ok", Toast.LENGTH_SHORT).show()
                 val bundle = Bundle()
                 bundle.putBoolean("isFiltered", true)

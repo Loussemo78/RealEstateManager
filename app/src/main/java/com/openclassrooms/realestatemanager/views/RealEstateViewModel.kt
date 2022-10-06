@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.openclassrooms.realestatemanager.database.RealEstateQuery
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import kotlinx.coroutines.Dispatchers
@@ -24,14 +23,7 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
         return repository.getRealEstate(id)
     }
 
-    fun getSearchRealEstate(queryToConvert:String, args:ArrayList<Any>):LiveData<List<RealEstate>>{
-        val query = SimpleSQLiteQuery(queryToConvert,args.toArray())
-        args.forEach {
-            if (it is Long) Log.e("GET_ESTATES_BY_SEARCH", "Args : ${SimpleDateFormat("dd/MM/yyyy").format(Date(it))}")
-            else Log.e("GET_ESTATES_BY_SEARCH", "Args : $it")
-        }
-        return repository.getRealEstatesFiltered(query)
-    }
+
 
     fun getAllRealEstates(
         isFiltered: Boolean?,
@@ -43,12 +35,12 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
         minimumSaleDate: String?
     ):LiveData<List<RealEstate>>{
 
-        if (isFiltered == true){
-            repository.getRealEstatesFiltered(RealEstateQuery.generateQuery(minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation,numberOfPhotos, description ,pointOfInterest.toString(),minimumEntryDate,minimumSaleDate))
+        return if (isFiltered == true){
+            repository.getRealEstatesFiltered(minimumPrice,maximumPrice,minimumSurface,maximumSurface,numberOfPhotos ,minimumEntryDate,minimumSaleDate)
         }else{
-            return readAll
+            readAll
         }
-        return readAll
+
     }
 
     fun addRealEstate(realEstate: RealEstate){

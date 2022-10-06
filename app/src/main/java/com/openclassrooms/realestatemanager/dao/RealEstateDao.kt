@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import androidx.sqlite.db.SupportSQLiteQuery
 import com.openclassrooms.realestatemanager.models.RealEstate
 
 @Dao
@@ -31,8 +30,11 @@ interface RealEstateDao {
 //    suspend fun getRealEstatesWithCursor(): Cursor?
 
     //Filter
-    @RawQuery(observedEntities = [RealEstate::class])
-     fun getRealEstatesFiltered(query: SupportSQLiteQuery): LiveData<List<RealEstate>>
+    @Query("SELECT * FROM real_estate_db WHERE price >= :minimumPrice AND price <= :maximumPrice AND surface >= :minimumSurface AND surface <= :maximumSurface  AND entryDate >= :minimumEntryDate AND dateOfSale >= :minimumSaleDate AND numberOfPhotos >= :numberOfPhotos")
+     fun getRealEstatesFiltered(
+        minimumPrice: Int?,
+        maximumPrice: Int?, minimumSurface: Int?, maximumSurface: Int?, numberOfPhotos: Int?, minimumEntryDate: String?, minimumSaleDate: String?
+    ): LiveData<List<RealEstate>>
 
 
 }

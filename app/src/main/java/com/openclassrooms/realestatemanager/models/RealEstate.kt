@@ -23,11 +23,13 @@ data class RealEstate(
     var description: String = "",
     val mainPhotoUrl: String = "",
     val numberOfPhotos: Int? = 0,
+    val firstLocation:String = "",
+    var secondLocation:String = "",
     val address: String = "",
     var mainPhotoString: String? = "",
     var pointsOfInterest: String = "",
-    val latitude: Double = 0.0,
-    val longitude: Double = 0.0,
+    var latitude: Double = 0.0,
+    var longitude: Double = 0.0,
     var status: String = "",
     var entryDate: String = "",
     var dateOfSale: String = "",
@@ -51,6 +53,8 @@ data class RealEstate(
             mainPhotoUrl,
             numberOfPhotos,
             address,
+            firstLocation,
+            secondLocation,
             mainPhotoString,
             pointsOfInterest,
             latitude,
@@ -75,6 +79,8 @@ data class RealEstate(
         values.put("mainPhotoUrl", realEstate.mainPhotoUrl)
         values.put("mainPhotoString", realEstate.mainPhotoString)
         values.put("numberOfPhotos", realEstate.numberOfPhotos)
+        values.put("firstLocation", realEstate.firstLocation)
+        values.put("secondLocation", realEstate.secondLocation)
         values.put("latitude", realEstate.latitude)
         values.put("longitude", realEstate.longitude)
         values.put("status", realEstate.status)

@@ -21,6 +21,7 @@ import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealE
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
+import com.openclassrooms.realestatemanager.utility.LocationUtil
 import com.openclassrooms.realestatemanager.utility.TAG_DETAILS_FRAGMENT
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
 import com.openclassrooms.realestatemanager.utility.Utils
@@ -282,7 +283,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(numberOfRooms)
         binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText(numberOfBathrooms)
         binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.setText(numberOfBedrooms)
-        //binding.activityAddOrEditRealEstateAddressEditText.text(newRealEstate.getSecondLocation())
+        binding.activityAddOrEditRealEstateAddressEditText.setText(newRealEstate.secondLocation)
         binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText(newRealEstate.pointsOfInterest)
         binding.activityAddOrEditRealEstateEntryDateEditText.setText(
             newRealEstate.entryDate
@@ -312,7 +313,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.text.toString().toInt()
         val numberOfBedrooms =
             binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.text.toString().toInt()
-        // val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
+         val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
         val pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.text
             .toString()
         val entryDate: String ?=  binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
@@ -327,9 +328,9 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         newRealEstate.numberOfRooms = numberOfRooms
         newRealEstate.numberOfBathRooms = numberOfBathrooms
         newRealEstate.numberOfBedRooms = numberOfBedrooms
-        //newRealEstate.setSecondLocation(secondLocation)
+        newRealEstate.secondLocation = secondLocation
         //Set latitude and longitude
-        //  LocationUtil.getLocationFromAddress(this, mNewRealEstate, secondLocation)
+        LocationUtil.getLocationFromAddress(requireContext(), newRealEstate, secondLocation)
         newRealEstate.pointsOfInterest = pointsOfInterest
         newRealEstate.entryDate = entryDate.toString()
         newRealEstate.dateOfSale = saleDate.toString()

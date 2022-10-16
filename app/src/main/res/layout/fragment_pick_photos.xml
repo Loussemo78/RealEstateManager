@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="2dp">
 
     <ImageView
-        android:id="@+id/fragment_real_estate_photos_image_view"
+        android:id="@+id/fragment_pick_photos_image_view"
         android:layout_width="@dimen/fragment_real_estate_photos_image_view_size"
         android:layout_height="@dimen/fragment_real_estate_photos_image_view_size"
         android:layout_alignParentStart="true"
@@ -17,22 +15,22 @@
         />
 
     <ImageView
-        android:id="@+id/fragment_real_estate_photos_view_filter"
+        android:id="@+id/fragment_pick_photos_view_filter"
         android:layout_width="@dimen/fragment_real_estate_photos_image_view_size"
         android:layout_height="@dimen/fragment_real_estate_photos_view_filter_height"
         android:background="@android:color/black"
         android:alpha="0.6"
-        android:layout_alignStart="@id/fragment_real_estate_photos_image_view"
-        android:layout_alignBottom="@id/fragment_real_estate_photos_image_view" />
+        android:layout_alignStart="@id/fragment_pick_photos_image_view"
+        android:layout_alignBottom="@id/fragment_pick_photos_image_view" />
 
-    <TextView
+    <EditText
         android:id="@+id/fragment_real_estate_photos_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/fragment_real_estate_photos_text_view_margin"
-        android:layout_marginBottom="@dimen/fragment_real_estate_photos_text_view_margin"
-        android:layout_alignStart="@id/fragment_real_estate_photos_view_filter"
-        android:layout_alignBottom="@id/fragment_real_estate_photos_view_filter"
+        android:layout_alignStart="@id/fragment_pick_photos_view_filter"
+        android:layout_alignBottom="@id/fragment_pick_photos_view_filter"
+        android:hint="@string/tape_description_here"
+        android:textColorHint="@android:color/white"
         android:textSize="@dimen/fragment_real_estate_photos_text_view_size"
         android:textColor="@android:color/white" />
 

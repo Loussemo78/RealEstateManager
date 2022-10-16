@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_pick_photos_recyclerview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/my_realestate_recyclerview_photos"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:context="com.openclassrooms.realestatemanager.fragment.RealEstatePhotosFragment"
-    tools:listitem="@layout/fragment_real_estate_photos">
+    tools:listitem="@layout/fragment_pick_photos"
+    tools:context="com.openclassrooms.realestatemanager.fragment.PickPhotosFragment">
 
 </androidx.recyclerview.widget.RecyclerView>

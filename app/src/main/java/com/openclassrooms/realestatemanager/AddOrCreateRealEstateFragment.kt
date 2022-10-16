@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager
 
+import FileUtils
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -15,24 +16,23 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.CreationExtras.Empty.map
 import com.bumptech.glide.Glide
+import com.openclassrooms.realestatemanager.adapter.PickPhotosRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealEstateBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
 import com.openclassrooms.realestatemanager.utility.LocationUtil
-import com.openclassrooms.realestatemanager.utility.TAG_DETAILS_FRAGMENT
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
-import com.openclassrooms.realestatemanager.utility.Utils
-import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.Serializable
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -267,12 +267,12 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         val numberOfRooms = newRealEstate.numberOfRooms.toString()
         val numberOfBathrooms = newRealEstate.numberOfBathRooms.toString()
         val numberOfBedrooms = newRealEstate.numberOfBedRooms.toString()
-        if (newRealEstate.mainPhotoUrl != null) {
+         if (newRealEstate.mainPhotoUrl != null) {
             Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
                 .load(newRealEstate.mainPhotoUrl)
                 .into(binding.activityAddOrEditRealEstateMainPhoto)
         } else {
-            val mainPhotoUri: Uri? = RealEstatePhotos.stringToUri(newRealEstate.mainPhotoString)
+            val mainPhotoUri: Uri? = RealEstatePhotos.stringToUri(newRealEstate.mainPhotoUrl)
             binding.activityAddOrEditRealEstateMainPhoto.setImageURI(mainPhotoUri)
         }
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
@@ -322,6 +322,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         newRealEstate.place = firstLocation
         newRealEstate.price = price
         newRealEstate.description = description
+
 //        newRealEstate.setMainPhoto is in onActivityResult or already assigned if editing without changes
         //mNewRealEstate.setOthersPhotos is in onActivityResult or already assigned if editing without changes
         newRealEstate.surface = surface
@@ -409,8 +410,11 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 val selectedImage = data!!.extras!!["data"] as Bitmap
                 binding.activityAddOrEditRealEstateMainPhoto.setImageBitmap(selectedImage)
                 val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(requireActivity(), selectedImage)
-                val imageUriToString = RealEstatePhotos.uriToString(imageUri)
-                newRealEstate.mainPhotoString = imageUriToString
+                // convert uri to URL
+                val fileUtils = context?.let { FileUtils(it) }
+                val path: String? = fileUtils?.getPath(imageUri)
+//                val imageUriToString = RealEstatePhotos.uriToString(imageUri)
+                newRealEstate.mainPhotoString = path
             }
         } else if (requestCode == PICK_PHOTO) {
             if (resultCode == RESULT_OK) {
@@ -431,12 +435,11 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 realEstatePhotos.photoUri = imageUriToString.toString()
                 othersPhotosList!!.add(realEstatePhotos)
                 //Set photo description
-//                if (othersPhotosList!!.size != 0) {
-//                    val photoDescription: String = MyPickPhotosRecyclerViewAdapter.map
-//                        .get(othersPhotosList!!.size - 1)
-//                    realEstatePhotos.setDescription(photoDescription)
-//                    mNewRealEstate.setPhotos(othersPhotosList)
-//                }
+                if (othersPhotosList!!.size != 0) {
+                    val photoDescription: String = PickPhotosRecyclerViewAdapter.map.get(othersPhotosList!!.size - 1)
+                    realEstatePhotos.description = photoDescription
+                    newRealEstate.listPhotos = othersPhotosList
+                }
             }
         } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
@@ -444,17 +447,16 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 val selectedImage = data!!.data
                 val realEstatePhotos = RealEstatePhotos()
                 val imageUriToString = RealEstatePhotos.uriToString(selectedImage!!)
-//                realEstatePhotos.setPhotoUri(imageUriToString)
+                realEstatePhotos.photoUri = imageUriToString
                 othersPhotosList!!.add(realEstatePhotos)
                 //Set photo description
-//                if (othersPhotosList!!.size != 0) {
-//                    val photoDescription: String = MyPickPhotosRecyclerViewAdapter.map.get(
-//                        othersPhotosList!!.size - 1
-//                    )
-//                    realEstatePhotos.setDescription(photoDescription)
-//                    newRealEstate.setP
-//                        .setPhotos(othersPhotosList)
-//                }
+                if (othersPhotosList!!.size != 0) {
+                    val photoDescription: String = PickPhotosRecyclerViewAdapter.map.get(
+                        othersPhotosList!!.size - 1
+                    )
+                    realEstatePhotos.description = photoDescription
+                    newRealEstate.listPhotos = othersPhotosList
+                }
             }
         }
     }

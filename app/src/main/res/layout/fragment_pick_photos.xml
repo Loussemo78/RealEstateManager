@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@id/fragment_pick_photos_view_filter"
         android:layout_alignBottom="@id/fragment_pick_photos_view_filter"
-        android:hint="@string/tape_description_here"
+        android:hint="@string/description"
         android:textColorHint="@android:color/white"
         android:textSize="@dimen/fragment_real_estate_photos_text_view_size"
         android:textColor="@android:color/white" />

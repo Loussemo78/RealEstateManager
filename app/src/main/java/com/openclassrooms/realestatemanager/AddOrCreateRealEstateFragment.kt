@@ -18,7 +18,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.CreationExtras.Empty.map
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.adapter.PickPhotosRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealEstateBinding
@@ -435,11 +434,11 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 realEstatePhotos.photoUri = imageUriToString.toString()
                 othersPhotosList!!.add(realEstatePhotos)
                 //Set photo description
-                if (othersPhotosList!!.size != 0) {
+               /* if (othersPhotosList!!.size != 0) {
                     val photoDescription: String = PickPhotosRecyclerViewAdapter.map.get(othersPhotosList!!.size - 1)
                     realEstatePhotos.description = photoDescription
                     newRealEstate.listPhotos = othersPhotosList
-                }
+                }*/
             }
         } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
@@ -450,13 +449,13 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 realEstatePhotos.photoUri = imageUriToString
                 othersPhotosList!!.add(realEstatePhotos)
                 //Set photo description
-                if (othersPhotosList!!.size != 0) {
+               /* if (othersPhotosList!!.size != 0) {
                     val photoDescription: String = PickPhotosRecyclerViewAdapter.map.get(
                         othersPhotosList!!.size - 1
                     )
                     realEstatePhotos.description = photoDescription
                     newRealEstate.listPhotos = othersPhotosList
-                }
+                }*/
             }
         }
     }

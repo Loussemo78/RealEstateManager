@@ -27,7 +27,9 @@ data class RealEstate(
     var secondLocation:String = "",
     val address: String = "",
     var mainPhotoString: String? = "",
+/*
     var listPhotos:List<RealEstatePhotos> = emptyList(),
+*/
     var pointsOfInterest: String = "",
     var latitude: Double = 0.0,
     var longitude: Double = 0.0,
@@ -57,7 +59,9 @@ data class RealEstate(
             firstLocation,
             secondLocation,
             mainPhotoString,
+/*
             listPhotos,
+*/
             pointsOfInterest,
             latitude,
             longitude,

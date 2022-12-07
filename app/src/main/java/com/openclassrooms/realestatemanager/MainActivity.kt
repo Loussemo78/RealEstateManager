@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
             val realEstateObject = RealEstate(1,"Type",12 ,"Place",
                     1500,2,3,1,"Description"
                     ,"https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg",3,"Address","mainPhoto",
-                    "points","", "" , 40.75691,-73.97619,"Agent"
-                    ,"photoUrl","video")
+                    "points","", null,"",-73.97619
+                    ,40.75691,"video")
 
             repository.insertRealEstate(realEstateObject)
         }

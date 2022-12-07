@@ -312,7 +312,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.text.toString().toInt()
         val numberOfBedrooms =
             binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.text.toString().toInt()
-         val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
+        val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
         val pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.text
             .toString()
         val entryDate: String =  binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()

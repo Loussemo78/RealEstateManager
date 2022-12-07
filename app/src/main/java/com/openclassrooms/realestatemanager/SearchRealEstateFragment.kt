@@ -28,6 +28,7 @@ class SearchRealEstateFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         repository = RealEstateRepository(requireActivity())
         viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
 

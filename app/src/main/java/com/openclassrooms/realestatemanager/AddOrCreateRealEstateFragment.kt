@@ -277,7 +277,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
         binding.activityAddOrEditRealEstatePriceEditText.setText(newRealEstate.price)
         binding.activityAddOrEditRealEstateDescriptionEditText.setText(newRealEstate.description)
-        // othersPhotosList?.addAll(newRealEstate.numberOfPhotos)
+        //othersPhotosList?.addAll(newRealEstate.numberOfPhotos)
         binding.activityAddOrEditRealEstateSurfaceEditText.setText(surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(numberOfRooms)
         binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText(numberOfBathrooms)
@@ -315,8 +315,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
          val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
         val pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.text
             .toString()
-        val entryDate: String ?=  binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
-        val saleDate: String ? =   binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
+        val entryDate: String =  binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
+        val saleDate: String =   binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
         val videoId = binding.activityAddOrEditRealEstateVideoIdEditText.text.toString()
         newRealEstate.place = firstLocation
         newRealEstate.price = price
@@ -432,13 +432,15 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(requireActivity(), selectedImage)
                 val imageUriToString = RealEstatePhotos.uriToString(imageUri)
                 realEstatePhotos.photoUri = imageUriToString.toString()
-                othersPhotosList!!.add(realEstatePhotos)
+                othersPhotosList.add(realEstatePhotos)
                 //Set photo description
-               /* if (othersPhotosList!!.size != 0) {
-                    val photoDescription: String = PickPhotosRecyclerViewAdapter.map.get(othersPhotosList!!.size - 1)
-                    realEstatePhotos.description = photoDescription
+                if (othersPhotosList.size != 0) {
+                    val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
+                    if (photoDescription != null) {
+                        realEstatePhotos.description = photoDescription
+                    }
                     newRealEstate.listPhotos = othersPhotosList
-                }*/
+                }
             }
         } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
@@ -447,15 +449,15 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 val realEstatePhotos = RealEstatePhotos()
                 val imageUriToString = RealEstatePhotos.uriToString(selectedImage!!)
                 realEstatePhotos.photoUri = imageUriToString
-                othersPhotosList!!.add(realEstatePhotos)
+                othersPhotosList.add(realEstatePhotos)
                 //Set photo description
-               /* if (othersPhotosList!!.size != 0) {
-                    val photoDescription: String = PickPhotosRecyclerViewAdapter.map.get(
-                        othersPhotosList!!.size - 1
-                    )
-                    realEstatePhotos.description = photoDescription
+                if (othersPhotosList.size != 0) {
+                    val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
+                    if (photoDescription != null) {
+                        realEstatePhotos.description = photoDescription
+                    }
                     newRealEstate.listPhotos = othersPhotosList
-                }*/
+                }
             }
         }
     }

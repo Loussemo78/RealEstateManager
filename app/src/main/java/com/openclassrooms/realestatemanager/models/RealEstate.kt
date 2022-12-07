@@ -4,6 +4,8 @@ import android.content.ContentValues
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.openclassrooms.realestatemanager.utility.RealEstateTypeConverter
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
@@ -11,34 +13,33 @@ import kotlin.collections.ArrayList
 
 @Entity(tableName = "real_estate_db")
 data class RealEstate(
-    @PrimaryKey(autoGenerate = true)
+        @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    var type: String = "",
-    var price: Int = 0,
-    var place: String = "",
-    var surface: Int = 0,
-    var numberOfRooms: Int = 0,
-    var numberOfBathRooms: Int = 0,
-    var numberOfBedRooms: Int = 0,
-    var description: String = "",
-    var mainPhotoUrl: String = "",
-    val numberOfPhotos: Int? = 0,
-    val firstLocation:String = "",
-    var secondLocation:String = "",
-    val address: String = "",
-    var mainPhotoString: String? = "",
-/*
-    var listPhotos:List<RealEstatePhotos> = emptyList(),
-*/
-    var pointsOfInterest: String = "",
-    var latitude: Double = 0.0,
-    var longitude: Double = 0.0,
-    var status: String = "",
-    var entryDate: String = "",
-    var dateOfSale: String = "",
-    var agent: String = "",
-    var agentPhotoUrl: String = "",
-    var video: String = ""
+        var type: String = "",
+        var price: Int = 0,
+        var place: String = "",
+        var surface: Int = 0,
+        var numberOfRooms: Int = 0,
+        var numberOfBathRooms: Int = 0,
+        var numberOfBedRooms: Int = 0,
+        var description: String = "",
+        var mainPhotoUrl: String = "",
+        val numberOfPhotos: Int? = 0,
+        val firstLocation:String = "",
+        var secondLocation:String = "",
+        val address: String = "",
+        var mainPhotoString: String? = "",
+        @TypeConverters
+        var listPhotos: MutableList<RealEstatePhotos>? = mutableListOf(),
+        var pointsOfInterest: String = "",
+        var latitude: Double = 0.0,
+        var longitude: Double = 0.0,
+        var status: String = "",
+        var entryDate: String = "",
+        var dateOfSale: String = "",
+        var agent: String = "",
+        var agentPhotoUrl: String = "",
+        var video: String = ""
 ) : Serializable {
 
 
@@ -59,9 +60,7 @@ data class RealEstate(
             firstLocation,
             secondLocation,
             mainPhotoString,
-/*
             listPhotos,
-*/
             pointsOfInterest,
             latitude,
             longitude,

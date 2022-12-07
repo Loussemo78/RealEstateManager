@@ -55,9 +55,7 @@ class PickPhotosFragment : Fragment() {
         }
         adapter = PickPhotosRecyclerViewAdapter()
         recyclerview.adapter = adapter
-/*
         if (newRealEstate.listPhotos != null) adapter.setRealEstatePhotosList(newRealEstate.listPhotos as ArrayList<RealEstatePhotos>)
-*/
     }
 
 

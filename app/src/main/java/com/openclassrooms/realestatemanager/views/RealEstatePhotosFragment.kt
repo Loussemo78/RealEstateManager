@@ -52,9 +52,9 @@ class RealEstatePhotosFragment : Fragment(){
                 MapFragment.MAPS_MARKER_CLICK_REAL_ESTATE
             ) as RealEstate?
         }
-       /* adapter = RealEstatePhotosRecyclerViewAdapter() //empty constructor adapter
+        adapter = RealEstatePhotosRecyclerViewAdapter() //empty constructor adapter
         recyclerView.setAdapter(adapter)
-        adapter.setRealEstatePhotosList(mRealEstate?.listPhotos)*/
+        adapter.setRealEstatePhotosList(mRealEstate?.listPhotos)
     }
 
 }

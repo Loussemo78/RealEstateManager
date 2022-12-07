@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [RealEstate::class], version = 4 , exportSchema = false)
+@Database(entities = [RealEstate::class], version = 5 , exportSchema = false)
 @TypeConverters(RealEstateTypeConverter::class, DateConverter::class)
 
 abstract class RealEstateDatabase : RoomDatabase() {
@@ -66,8 +66,8 @@ abstract class RealEstateDatabase : RoomDatabase() {
                                 0, "41 Great Jones Street Penthouse\n" +
                                         "Lafayette\n" +
                                         "NoHo\n" +
-                                        "New York", "", "école", "", "",
-                                40.7830603,-73.9712488 ,"" ,
+                                        "New York", "", "école", "", null,
+                                "",40.7830603 ,-73.9712488 ,
                                 "23/08/2022", "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg", ""
                             )
                         )

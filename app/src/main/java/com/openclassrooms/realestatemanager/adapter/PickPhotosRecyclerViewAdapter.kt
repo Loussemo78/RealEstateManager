@@ -15,7 +15,9 @@ class PickPhotosRecyclerViewAdapter(): RecyclerView.Adapter<PickPhotosRecyclerVi
 
 
     private val realEstatePhotosList: ArrayList<RealEstatePhotos> = ArrayList()
-    private val map: HashMap<Int, String> = HashMap()
+    companion object{
+        val map: HashMap<Int, String> = HashMap()
+    }
 
 
 

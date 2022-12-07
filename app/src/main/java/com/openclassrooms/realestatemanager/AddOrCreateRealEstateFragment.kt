@@ -421,7 +421,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 val selectedImage = data!!.data
                 binding.activityAddOrEditRealEstateMainPhoto.setImageURI(selectedImage)
                 val selectedImageToString = RealEstatePhotos.uriToString(selectedImage!!)
-                newRealEstate.mainPhotoString = selectedImageToString
+                newRealEstate.mainPhotoUrl = selectedImageToString
             }
         } else if (requestCode == TAKE_PICTURE_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {

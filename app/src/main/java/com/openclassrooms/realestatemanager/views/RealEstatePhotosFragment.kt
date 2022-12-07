@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.views
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.adapter.RealEstatePhotosRecyclerViewAdapter
-import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstatePhotosListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 
@@ -53,7 +51,7 @@ class RealEstatePhotosFragment : Fragment(){
             ) as RealEstate?
         }
         adapter = RealEstatePhotosRecyclerViewAdapter() //empty constructor adapter
-        recyclerView.setAdapter(adapter)
+        recyclerView.adapter = adapter
         adapter.setRealEstatePhotosList(mRealEstate?.listPhotos)
     }
 

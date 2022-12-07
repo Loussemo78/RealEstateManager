@@ -30,7 +30,7 @@ data class RealEstate(
         val address: String = "",
         var mainPhotoString: String? = "",
         @TypeConverters
-        var listPhotos: MutableList<RealEstatePhotos>? = mutableListOf(),
+        var listPhotos: ArrayList<RealEstatePhotos>? = ArrayList(),
         var pointsOfInterest: String = "",
         var latitude: Double = 0.0,
         var longitude: Double = 0.0,

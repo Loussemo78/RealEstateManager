@@ -19,16 +19,16 @@ class PickPhotosFragment : Fragment() {
     private lateinit var recyclerview: RecyclerView
     private lateinit var binding : FragmentPickPhotosListBinding
     private lateinit var adapter: PickPhotosRecyclerViewAdapter
-    private lateinit var newRealEstate: RealEstate
+    private  lateinit var newRealEstate: RealEstate
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentPickPhotosListBinding.inflate(inflater,container,false)
-        recyclerview.layoutManager = LinearLayoutManager(activity)
+       // recyclerview.layoutManager = LinearLayoutManager(activity)
         return binding.root
     }
 
@@ -39,16 +39,15 @@ class PickPhotosFragment : Fragment() {
             requireContext(),
             LinearLayoutManager.HORIZONTAL, false
         )
+        newRealEstate = RealEstate()
+
 
         //If realEstate come from MainActivity to add a real estate
         if (requireActivity().intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
             newRealEstate = (requireActivity().intent
                 .getSerializableExtra(MainActivity.ADD_REAL_ESTATE) as RealEstate?)!!
         } //Else if realEstate come from an existing real estate to edit
-        else if (requireActivity().intent.getSerializableExtra(
-                RealEstateFragment.EDIT_REAL_ESTATE
-            ) != null
-        ) {
+        else if (requireActivity().intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
             newRealEstate = requireActivity().intent.getSerializableExtra(
                 RealEstateFragment.EDIT_REAL_ESTATE
             ) as RealEstate
@@ -58,5 +57,11 @@ class PickPhotosFragment : Fragment() {
         if (newRealEstate.listPhotos != null) adapter.setRealEstatePhotosList(newRealEstate.listPhotos as ArrayList<RealEstatePhotos>)
     }
 
+   /* override fun onResume() {
+        super.onResume()
+        if (newRealEstate.listPhotos != null) {
+            adapter.setRealEstatePhotosList(newRealEstate.listPhotos!!)
+        }
+    }*/
 
 }

@@ -10,6 +10,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,9 +80,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
-        val view: View = binding.root
 
         othersPhotosList = ArrayList<RealEstatePhotos>()
         initializeSpinners()
@@ -99,7 +99,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         }
         initializeFinishButton();
 
-        return view
+        return binding.root
+
     }
 
     private fun initializeSpinners() {
@@ -266,18 +267,14 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         val numberOfRooms = newRealEstate.numberOfRooms.toString()
         val numberOfBathrooms = newRealEstate.numberOfBathRooms.toString()
         val numberOfBedrooms = newRealEstate.numberOfBedRooms.toString()
-         if (newRealEstate.mainPhotoUrl != null) {
-            Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
-                .load(newRealEstate.mainPhotoUrl)
-                .into(binding.activityAddOrEditRealEstateMainPhoto)
-        } else {
-            val mainPhotoUri: Uri? = RealEstatePhotos.stringToUri(newRealEstate.mainPhotoUrl)
-            binding.activityAddOrEditRealEstateMainPhoto.setImageURI(mainPhotoUri)
-        }
+        Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
+            .load(newRealEstate.mainPhotoUrl)
+            .into(binding.activityAddOrEditRealEstateMainPhoto)
+        binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
         binding.activityAddOrEditRealEstatePriceEditText.setText(newRealEstate.price)
         binding.activityAddOrEditRealEstateDescriptionEditText.setText(newRealEstate.description)
-        //othersPhotosList?.addAll(newRealEstate.numberOfPhotos)
+        newRealEstate.listPhotos?.let { othersPhotosList.addAll(it) }
         binding.activityAddOrEditRealEstateSurfaceEditText.setText(surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(numberOfRooms)
         binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText(numberOfBathrooms)

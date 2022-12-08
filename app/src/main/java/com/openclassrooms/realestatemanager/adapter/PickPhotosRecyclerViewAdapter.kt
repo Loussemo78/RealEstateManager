@@ -39,18 +39,9 @@ class PickPhotosRecyclerViewAdapter(): RecyclerView.Adapter<PickPhotosRecyclerVi
      override fun onBindViewHolder(holder: PickPhotosViewHolder, @SuppressLint("RecyclerView") position:Int) {
          val (photoUri, photoUrl, description) = realEstatePhotosList[position]
 
-         if (photoUri != null) {
-             holder.fragmentPickPhotosBinding!!.fragmentPickPhotosImageView.setImageURI(
-                 RealEstatePhotos.stringToUri(photoUri)
-             )
-         } else if (photoUrl != null) {
-             Glide.with(holder.fragmentPickPhotosBinding!!.fragmentPickPhotosImageView.context)
-                 .load(photoUrl)
-                 .into(holder.fragmentPickPhotosBinding!!.fragmentPickPhotosImageView)
-             holder.fragmentPickPhotosBinding!!.fragmentRealEstatePhotosDescription.setText(
-                 description
-             )
-         }
+         holder.fragmentPickPhotosBinding!!.fragmentPickPhotosImageView.setImageURI(
+             RealEstatePhotos.stringToUri(photoUri)
+         )
 
          holder.fragmentPickPhotosBinding!!.fragmentRealEstatePhotosDescription.addTextChangedListener(
              object : TextWatcher {
@@ -67,7 +58,7 @@ class PickPhotosRecyclerViewAdapter(): RecyclerView.Adapter<PickPhotosRecyclerVi
                      val value = map[position]
                      if (value == null) {
                          map[position] =
-                             holder.fragmentPickPhotosBinding!!.fragmentRealEstatePhotosDescription.text.toString()
+                             holder.fragmentPickPhotosBinding.fragmentRealEstatePhotosDescription.text.toString()
                      }
                  }
              }
@@ -75,7 +66,7 @@ class PickPhotosRecyclerViewAdapter(): RecyclerView.Adapter<PickPhotosRecyclerVi
      }
 
      override fun getItemCount(): Int {
-         TODO("Not yet implemented")
+         return realEstatePhotosList.size
      }
 
 

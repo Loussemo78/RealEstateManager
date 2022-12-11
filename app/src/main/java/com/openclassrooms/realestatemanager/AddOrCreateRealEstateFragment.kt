@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager
 
 import FileUtils
+import android.R.attr
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -10,14 +11,12 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.adapter.PickPhotosRecyclerViewAdapter
@@ -185,6 +184,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                         Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                     )
+                    pickPhoto.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     startActivityForResult(pickPhoto, PICK_PHOTO_FOR_OTHER_PHOTOS)
                 } else if (options[i] == "Cancel") {
                     dialogInterface.dismiss()
@@ -442,18 +442,31 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
                 //set image in othersPhotosList from gallery
-                val selectedImage = data!!.data
-                val realEstatePhotos = RealEstatePhotos()
-                val imageUriToString = RealEstatePhotos.uriToString(selectedImage!!)
-                realEstatePhotos.photoUri = imageUriToString
-                othersPhotosList.add(realEstatePhotos)
-                //Set photo description
-                if (othersPhotosList.size != 0) {
-                    val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
-                    if (photoDescription != null) {
-                        realEstatePhotos.description = photoDescription
+
+
+                if (data?.clipData != null) {
+                    val count: Int = data.clipData!!.itemCount
+                    //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+                    for (i in 0 until count) {
+                        val realEstatePhotos = RealEstatePhotos()
+                        val imageUri: Uri = data.clipData!!.getItemAt(i).getUri()
+                        //do something with the image (save it to some directory or whatever you need to do with it here)
+
+                        val imageUriToString = RealEstatePhotos.uriToString(imageUri!!)
+                        realEstatePhotos.photoUri = imageUriToString
+
+
+                        //Set photo description
+                        if (othersPhotosList.size != 0) {
+                            val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
+                            if (photoDescription != null) {
+                                realEstatePhotos.description = photoDescription
+                            }
+                        }
+                        othersPhotosList.add(realEstatePhotos)
                     }
                     newRealEstate.listPhotos = othersPhotosList
+                        // ici la liste des photos séléctionnées
                 }
             }
         }

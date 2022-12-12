@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager
 
 import FileUtils
-import android.R.attr
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -270,6 +269,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
             .load(newRealEstate.mainPhotoUrl)
             .into(binding.activityAddOrEditRealEstateMainPhoto)
+
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
         binding.activityAddOrEditRealEstatePriceEditText.setText(newRealEstate.price)
@@ -449,24 +449,32 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
                     for (i in 0 until count) {
                         val realEstatePhotos = RealEstatePhotos()
-                        val imageUri: Uri = data.clipData!!.getItemAt(i).getUri()
+                        val imageUri: Uri = data.clipData!!.getItemAt(i).uri
                         //do something with the image (save it to some directory or whatever you need to do with it here)
 
-                        val imageUriToString = RealEstatePhotos.uriToString(imageUri!!)
+                        val imageUriToString = RealEstatePhotos.uriToString(imageUri)
                         realEstatePhotos.photoUri = imageUriToString
 
 
                         //Set photo description
                         if (othersPhotosList.size != 0) {
-                            val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
-                            if (photoDescription != null) {
+                            val adapter: ArrayAdapter<RealEstatePhotos> = ArrayAdapter<RealEstatePhotos>(requireContext(), android.R.layout.simple_list_item_1, android.R.id.text1, othersPhotosList)
+                            binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
+
+
+                            //val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
+                            /*if (photoDescription != null) {
                                 realEstatePhotos.description = photoDescription
-                            }
+                            }*/
                         }
                         othersPhotosList.add(realEstatePhotos)
                     }
                     newRealEstate.listPhotos = othersPhotosList
-                        // ici la liste des photos séléctionnées
+                    //implémenter GridView
+
+
+
+                    // ici la liste des photos séléctionnées
                 }
             }
         }

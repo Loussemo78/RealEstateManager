@@ -10,7 +10,7 @@ import java.io.Serializable
 
 data class RealEstatePhotos (
     var photoUri : String = "",
-    val photoUrl : String = "",
+    var photoUrl : String = "",
     var description :String = "",
         ):Serializable{
                 companion object{

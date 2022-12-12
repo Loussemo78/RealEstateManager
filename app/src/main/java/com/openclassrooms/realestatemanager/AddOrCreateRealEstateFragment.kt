@@ -455,21 +455,21 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                         val imageUriToString = RealEstatePhotos.uriToString(imageUri)
                         realEstatePhotos.photoUri = imageUriToString
 
+                        othersPhotosList.add(realEstatePhotos)
 
                         //Set photo description
                         if (othersPhotosList.size != 0) {
                             val adapter: ArrayAdapter<RealEstatePhotos> = ArrayAdapter<RealEstatePhotos>(requireContext(), android.R.layout.simple_list_item_1, android.R.id.text1, othersPhotosList)
                             binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
 
+                            newRealEstate.listPhotos = othersPhotosList
 
                             //val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
                             /*if (photoDescription != null) {
                                 realEstatePhotos.description = photoDescription
                             }*/
                         }
-                        othersPhotosList.add(realEstatePhotos)
                     }
-                    newRealEstate.listPhotos = othersPhotosList
                     //implémenter GridView
 
 

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.adapter.PickPhotosRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealEstateBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
@@ -32,6 +33,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.Serializable
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -441,6 +443,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             }
         } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
+
+                val selectedPhotos = ArrayList<Uri>()
                 //set image in othersPhotosList from gallery
 
 
@@ -452,6 +456,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                         val imageUri: Uri = data.clipData!!.getItemAt(i).uri
                         //do something with the image (save it to some directory or whatever you need to do with it here)
 
+                        selectedPhotos.add(imageUri)
+
                         val imageUriToString = RealEstatePhotos.uriToString(imageUri)
                         realEstatePhotos.photoUri = imageUriToString
 
@@ -459,8 +465,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
                         //Set photo description
                         if (othersPhotosList.size != 0) {
-                            val adapter: ArrayAdapter<RealEstatePhotos> = ArrayAdapter<RealEstatePhotos>(requireContext(), android.R.layout.simple_list_item_1, android.R.id.text1, othersPhotosList)
-                            binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
+
 
                             newRealEstate.listPhotos = othersPhotosList
 
@@ -472,7 +477,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     }
                     //implémenter GridView
 
-
+                    val adapter = ImagesAdapter(selectedPhotos, activity)
+                    binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
 
                     // ici la liste des photos séléctionnées
                 }

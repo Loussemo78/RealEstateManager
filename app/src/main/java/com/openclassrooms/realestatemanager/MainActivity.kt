@@ -202,7 +202,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == ADD_REAL_ESTATE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 val newRealEstate = data?.getSerializableExtra(ADD_REAL_ESTATE) as RealEstate?
-                realEstateHandlerThread?.startCreateRealEstateHandler(newRealEstate, viewModel)
+                realEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel)
                 showNotificationOnAddRealEstate()
             }
         }

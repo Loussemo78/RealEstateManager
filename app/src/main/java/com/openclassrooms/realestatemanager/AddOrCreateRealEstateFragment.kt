@@ -467,13 +467,14 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                         if (othersPhotosList.size != 0) {
 
 
-                            newRealEstate.listPhotos = othersPhotosList
 
                             //val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
                             /*if (photoDescription != null) {
                                 realEstatePhotos.description = photoDescription
                             }*/
                         }
+                        newRealEstate.listPhotos = othersPhotosList
+
                     }
                     //implémenter GridView
 
@@ -485,6 +486,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             }
         }
     }
-
-
 }
+
+

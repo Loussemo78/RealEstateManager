@@ -37,7 +37,7 @@ private var realEstateId:Int = 0
             realEstateId = arguments?.getInt(MapFragment.MAPS_MARKER_CLICK_REAL_ESTATE)!!
         }
 
-        var realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
+        val realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
         realEstateViewModel.getRealEstate(realEstateId.toLong()).observe(viewLifecycleOwner
         ) {
             displayData(it)// it = realEstate;
@@ -71,7 +71,7 @@ private var realEstateId:Int = 0
         }
 
 
-        val dateOfSale: String? = realEstate.dateOfSale
+        val dateOfSale: String = realEstate.dateOfSale
 
 
         val surface: String = realEstate.surface.toString() + " sq" + " m"
@@ -84,11 +84,11 @@ private var realEstateId:Int = 0
         binding.fragmentOnClickRealEstateRoomsValue.text = numberOfRooms
         binding.fragmentOnClickRealEstateBathroomsValue.text = numberOfBathrooms
         binding.fragmentOnClickRealEstateBedroomsValue.text = numberOfBedrooms
-     //   binding.fragmentOnClickRealEstateLocationValue.setText(mRealEstate.getSecondLocation())
+        binding.fragmentOnClickRealEstateLocationValue.text = realEstate.secondLocation
         binding.fragmentOnClickRealEstatePointsOfInterestValue.text = realEstate.pointsOfInterest
         binding.fragmentOnClickRealEstatePriceValue.text = "$" + realEstate.price
         binding.fragmentOnClickRealEstateEntryDateValue.text = realEstate.entryDate
-        if (dateOfSale != null) binding.fragmentOnClickRealEstateSaleDateValue.text = dateOfSale
+          binding.fragmentOnClickRealEstateSaleDateValue.text = dateOfSale
 
 
         val supportMapFragment = this.childFragmentManager

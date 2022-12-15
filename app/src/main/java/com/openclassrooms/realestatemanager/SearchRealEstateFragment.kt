@@ -140,14 +140,14 @@ class SearchRealEstateFragment : Fragment() {
                 bundle.putString("minimumSaleDate", saleDateInDate.toString())
 
 
-                val fragmentDetail = RealEstateFragment()
-                fragmentDetail.arguments = bundle
+                val fragment = RealEstateFragment()
+                fragment.arguments = bundle
 
 
                     // if (fragmentContainerViewList?.isVisible == true){
                      requireActivity().supportFragmentManager
                          .beginTransaction()
-                         .replace(R.id.activity_main_fragment_container_view_list, fragmentDetail)
+                         .replace(R.id.activity_main_fragment_container_view_list, fragment)
                           .addToBackStack(RealEstateFragment::class.java.simpleName)
                          .commit()
                //  }else{

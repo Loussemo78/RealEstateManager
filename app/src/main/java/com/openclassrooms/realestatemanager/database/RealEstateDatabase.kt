@@ -63,12 +63,12 @@ abstract class RealEstateDatabase : RoomDatabase() {
                                 0, "Loft", 120000, "Manhattan",
                                 8, 4, 4, 4, Utils.description(),
                                 "https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg",
-                                0, "41 Great Jones Street Penthouse\n" +
-                                        "Lafayette\n" +
-                                        "NoHo\n" +
-                                        "New York", "", "école", "", null,
-                                "",40.7830603 ,-73.9712488 ,
-                                "23/08/2022", "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg", ""
+                                0, "", "", "41 Great Jones Street Penthouse\\n\" +\n" +
+                                    "                                        \"Lafayette\\n\" +\n" +
+                                    "                                        \"NoHo\\n\" +\n" +
+                                    "                                        \"New York", "", null,
+                                "",40.72896 ,-73.99279 ,
+                                "23/08/2022", "", ""
                             )
                         )
                     }

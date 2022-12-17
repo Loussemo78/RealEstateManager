@@ -164,9 +164,9 @@ class SearchRealEstateFragment : Fragment() {
     }
 
     data class SearchCritaries(
-        var minimumPrice: Int? = 0,
-        var maximumPrice: Int? = 0,
-        var minimumSurface: Int? = 0,
+         var minimumPrice: Int? = 0,
+         var maximumPrice: Int? = 0,
+         var minimumSurface: Int? = 0,
          var maximumSurface: Int? = 0,
          var firstLocation: String? = "",
          var description: String? = "",

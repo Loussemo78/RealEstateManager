@@ -58,6 +58,12 @@ private var realEstateId:Int = 0
                 .load(realEstate.mainPhotoUrl)
                 .into(binding.fragmentOnClickRealEstateAgentPhoto)
 
+          //gridView  uri
+          // implémenter GridView
+          //exemple :
+          //val adapter = ImagesAdapter(selectedPhotos, activity)
+          //binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
+
         binding.fragmentOnClickRealEstateAgentName.text = realEstate.agent
 
         if (realEstate.status == "For sale") {
@@ -89,7 +95,7 @@ private var realEstateId:Int = 0
         binding.fragmentOnClickRealEstatePriceValue.text = "$" + realEstate.price
         binding.fragmentOnClickRealEstateEntryDateValue.text = realEstate.entryDate
           binding.fragmentOnClickRealEstateSaleDateValue.text = dateOfSale
-
+   //Enregistrer gridView dans le detail fragment
 
         val supportMapFragment = this.childFragmentManager
                 .findFragmentById(R.id.fragment_on_click_real_estate_map_fragment) as SupportMapFragment?

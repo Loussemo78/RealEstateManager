@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
-
+  // gestion connexion internet
         checkPermissionsGranted()
 
         repository =  DI.getRepository(application)

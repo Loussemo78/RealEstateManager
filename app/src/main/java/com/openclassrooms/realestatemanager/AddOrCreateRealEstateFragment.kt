@@ -181,12 +181,17 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     startActivityForResult(takePicture, TAKE_PICTURE_FOR_OTHER_PHOTOS)
                 } else if (options[i] == "Choose from Gallery") {
-                    val pickPhoto = Intent(
+                    val filesIntent : Intent = Intent(Intent.ACTION_GET_CONTENT)
+                    filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                    filesIntent.type = "*/*";  //use image/* for photos, etc.
+                    startActivityForResult(filesIntent, PICK_PHOTO_FOR_OTHER_PHOTOS)
+                    /*val pickPhoto = Intent(
                         Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    )
-                    pickPhoto.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                    startActivityForResult(pickPhoto, PICK_PHOTO_FOR_OTHER_PHOTOS)
+                    )*/
+                    /*pickPhoto.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    startActivityForResult(pickPhoto, PICK_PHOTO_FOR_OTHER_PHOTOS)*/
                 } else if (options[i] == "Cancel") {
                     dialogInterface.dismiss()
                 }

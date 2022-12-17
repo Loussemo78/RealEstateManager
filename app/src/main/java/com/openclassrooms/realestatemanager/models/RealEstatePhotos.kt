@@ -26,7 +26,7 @@ data class RealEstatePhotos (
                                 val bytes = ByteArrayOutputStream()
                                 inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
                                 val path = MediaStore.Images.Media.insertImage(
-                                        inContext.getContentResolver(), inImage,
+                                        inContext.contentResolver, inImage,
                                         "Title", null
                                 )
                                 return Uri.parse(path)

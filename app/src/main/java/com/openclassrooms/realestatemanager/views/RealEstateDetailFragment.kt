@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.views
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +15,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateDetailBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
+import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 import com.openclassrooms.realestatemanager.utility.Utils
 import java.util.*
 
@@ -23,6 +26,8 @@ import java.util.*
 class RealEstateDetailFragment:Fragment() {
 
 private lateinit var binding:FragmentRealEstateDetailBinding
+private lateinit var othersPhotosList: ArrayList<RealEstatePhotos>
+
 private lateinit var realEstate:RealEstate
 private var realEstateId:Int = 0
     private lateinit var  map: GoogleMap
@@ -31,6 +36,8 @@ private var realEstateId:Int = 0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         binding = FragmentRealEstateDetailBinding.inflate(inflater,container,false)
+        othersPhotosList = ArrayList<RealEstatePhotos>()
+
         if (arguments?.getSerializable(RealEstateFragment.KEY) != null) {
             realEstateId = requireArguments().getInt(RealEstateFragment.KEY)
         } else if (arguments?.getSerializable(MapFragment.MAPS_MARKER_CLICK_REAL_ESTATE) != null) {
@@ -60,11 +67,17 @@ private var realEstateId:Int = 0
 
           //gridView  uri
           // implémenter GridView
-          //exemple :
-          //val adapter = ImagesAdapter(selectedPhotos, activity)
-          //binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
 
-        binding.fragmentOnClickRealEstateAgentName.text = realEstate.agent
+          val selectedPhotos = ArrayList<Uri>()
+
+
+          realEstate.listPhotos = othersPhotosList
+          //exemple :
+          val adapter = ImagesAdapter(selectedPhotos, activity)
+          binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
+
+
+          binding.fragmentOnClickRealEstateAgentName.text = realEstate.agent
 
         if (realEstate.status == "For sale") {
             binding.fragmentOnClickRealEstateStatus.text = realEstate.status

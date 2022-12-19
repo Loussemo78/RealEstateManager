@@ -9,13 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.openclassrooms.realestatemanager.databinding.ActivitySearchRealEstateBinding
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
-import com.openclassrooms.realestatemanager.utility.Utils
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 class SearchRealEstateFragment : Fragment() {
@@ -149,7 +147,7 @@ class SearchRealEstateFragment : Fragment() {
                          .beginTransaction()
                          .replace(R.id.activity_main_fragment_container_view_list, fragment)
                           .addToBackStack(RealEstateFragment::class.java.simpleName)
-                         .commit()
+                         .commit();
                //  }else{
 
               //   }

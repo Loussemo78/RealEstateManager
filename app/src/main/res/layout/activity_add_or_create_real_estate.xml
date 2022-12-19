@@ -135,16 +135,16 @@
             android:textColor="@android:color/white" />
 
         <!-- Photos -->
-        <GridView
-            android:id="@+id/activity_add_or_edit_real_estate_pick_photos_grid"
-            android:numColumns="auto_fit"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            />
 
         <!-- Surface -->
+        <GridView
+            android:id="@+id/activity_add_or_edit_real_estate_pick_photos_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:numColumns="auto_fit" />
+
         <EditText
             android:id="@+id/activity_add_or_edit_real_estate_surface_edit_text"
             android:layout_width="match_parent"

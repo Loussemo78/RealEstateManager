@@ -52,13 +52,12 @@ class RealEstateFragment: Fragment() {
         val numberOfPhotos = arguments?.getInt("numberOfPhotos")
         val description = arguments?.getString("description")
         val minimumEntryDate =  arguments?.getString("minimumEntryDate")
-        val minimumSaleDate = arguments?.getString("minimumSaleDate");
+        val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
 
 
             realEstateViewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,
-                    firstLocation.toString(),numberOfPhotos,description,pointOfInterest?.toString(),
-                    minimumEntryDate,minimumSaleDate).observe(viewLifecycleOwner, Observer {
+                    firstLocation.toString(),numberOfPhotos,description,pointOfInterest?.toString(),minimumEntryDate,minimumSaleDate).observe(viewLifecycleOwner, Observer {
             //SELECT * FROM real_estate_db WHERE price >= 1 AND price <= 1 AND surface >= 1 AND surface <= 1  AND entryDate >= 06/10/2022 AND dateOfSale >= 06/10/2022 AND numberOfPhotos >= 1
                 recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it)
             })

@@ -7,8 +7,6 @@ Kapp/src/main/java/com/openclassrooms/realestatemanager/utility/Constants.kt,c/
 Oapp/src/main/java/com/openclassrooms/realestatemanager/utility/DateConverter.kt,1/6/165097eea841445361741a037c1cb8d31ea46ef3
 w
 Gapp/src/main/java/com/openclassrooms/realestatemanager/utility/Utils.kt,9/d/9de7f89240adb8d5db603a226fa593339349b4f3
-ˆ
-Xapp/src/main/java/com/openclassrooms/realestatemanager/views/RealEstateDetailFragment.kt,2/c/2cd934b49ab79514d8151bc90252d3e400fefada
 {
 Kapp/src/main/java/com/openclassrooms/realestatemanager/models/RealEstate.kt,c/b/cbad0cbacdeb7df829056969a4348b349e67e251
 Š

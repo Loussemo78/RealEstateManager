@@ -405,12 +405,12 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     private fun takePhotoOrGalleryOnActivityResult(
         requestCode: Int,
         resultCode: Int,
-        data: Intent?
+        data1: Intent?
     ) {
         if (requestCode == TAKE_PICTURE) {
             if (resultCode == RESULT_OK) {
                 //set image in ImageView from camera
-                val selectedImage = data!!.extras!!["data"] as Bitmap
+                val selectedImage = data1!!.extras!!["data"] as Bitmap
                 binding.activityAddOrEditRealEstateMainPhoto.setImageBitmap(selectedImage)
                 val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(requireActivity(), selectedImage)
                 // convert uri to URL
@@ -422,7 +422,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         } else if (requestCode == PICK_PHOTO) {
             if (resultCode == RESULT_OK) {
                 //set image in ImageView from gallery
-                val selectedImage = data!!.data
+                val selectedImage = data1!!.data
                 binding.activityAddOrEditRealEstateMainPhoto.setImageURI(selectedImage)
                 val selectedImageToString = RealEstatePhotos.uriToString(selectedImage!!)
                 newRealEstate.mainPhotoUrl = selectedImageToString
@@ -430,7 +430,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         } else if (requestCode == TAKE_PICTURE_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
                 //set image in othersPhotosList from camera
-                val selectedImage = data!!.extras!!["data"] as Bitmap
+                val selectedImage = data1!!.extras!!["data"] as Bitmap
                 val realEstatePhotos = RealEstatePhotos()
                 //Set photo uri
                 val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(requireActivity(), selectedImage)
@@ -453,12 +453,11 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 //set image in othersPhotosList from gallery
 
 
-                if (data?.clipData != null) {
-                    val count: Int = data.clipData!!.itemCount
-                    //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
-                    for (i in 0 until count) {
+                if (data1?.data != null) {
+
+
                         val realEstatePhotos = RealEstatePhotos()
-                        val imageUri: Uri = data.clipData!!.getItemAt(i).uri
+                        val imageUri: Uri = data1.data!!
                         //do something with the image (save it to some directory or whatever you need to do with it here)
 
                         selectedPhotos.add(imageUri)
@@ -468,26 +467,38 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
                         othersPhotosList.add(realEstatePhotos)
 
-                        //Set photo description
-                        if (othersPhotosList.size != 0) {
+                        newRealEstate.listPhotos = othersPhotosList
 
 
 
-                            //val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
-                            /*if (photoDescription != null) {
-                                realEstatePhotos.description = photoDescription
-                            }*/
-                        }
+                }
+                if (data1?.clipData != null) {
+                    val count: Int = data1.clipData!!.itemCount
+                    //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+                    for (i in 0 until count) {
+                        val realEstatePhotos = RealEstatePhotos()
+                        val imageUri: Uri = data1.clipData!!.getItemAt(i).uri
+                        //do something with the image (save it to some directory or whatever you need to do with it here)
+
+                        selectedPhotos.add(imageUri)
+
+                        val imageUriToString = RealEstatePhotos.uriToString(imageUri)
+                        realEstatePhotos.photoUri = imageUriToString
+
+                        othersPhotosList.add(realEstatePhotos)
+
                         newRealEstate.listPhotos = othersPhotosList
 
                     }
-                    //implémenter GridView
 
-                    val adapter = ImagesAdapter(selectedPhotos, activity)
-                    binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
-
-                    // ici la liste des photos séléctionnées
                 }
+
+                //implémenter GridView
+
+                val adapter = ImagesAdapter(selectedPhotos, activity)
+                binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
+
+                // ici la liste des photos séléctionnées
             }
         }
     }

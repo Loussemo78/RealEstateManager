@@ -1,0 +1,15 @@
+
+@kotlin:S1481#")Remove this unused "type" local variable.(ôÑî
+Bkotlin:S1481»")Remove this unused "size" local variable.(š¥
+Bkotlin:S1481ó")Remove this unused "size" local variable.(š¥
+Ekotlin:S1125´"'Remove the unnecessary Boolean literal.(›åÓ’úÿÿÿÿ
+Ekotlin:S1125¸"'Remove the unnecessary Boolean literal.(Íœ†–ıÿÿÿÿ
+?kotlin:S1125¼"'Remove the unnecessary Boolean literal.(º¨Ğ
+@kotlin:S1125À"'Remove the unnecessary Boolean literal.(œ¤ƒğ
+@kotlin:S1125Ä"'Remove the unnecessary Boolean literal.(Åç ë
+Ekotlin:S1125È"'Remove the unnecessary Boolean literal.(Ï€ó¹úÿÿÿÿ
+kkotlin:S3776"SRefactor this method to reduce its Cognitive Complexity from 102 to the 15 allowed.(¹»Ñÿ
+pkotlin:S117"SRename this local variable to match the regular expression ^`?[_a-z][a-zA-Z0-9]*`?$(ô¿È¬ıÿÿÿÿ
+Gkotlin:S1066‚".Merge this "if" statement with the nested one.(íÒÖŒ
+Gkotlin:S1066ƒ".Merge this "if" statement with the nested one.(Î¨Á²
+ykotlin:S3923«"[Remove this conditional structure or edit its code blocks so that they're not all the same.(¼Û‰Ïÿÿÿÿÿ

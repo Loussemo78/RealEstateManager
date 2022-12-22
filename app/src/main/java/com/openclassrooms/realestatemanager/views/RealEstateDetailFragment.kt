@@ -64,24 +64,29 @@ private var realEstateId:Int = 0
         Glide.with(binding.fragmentOnClickRealEstateAgentPhoto.context)
                 .load(realEstate.mainPhotoUrl)
                 .into(binding.fragmentOnClickRealEstateAgentPhoto)
-
+          val selectedPhotos = ArrayList<Uri>()
           //gridView  uri
           // implémenter GridView
               if (realEstate.listPhotos != null){
-                  val imageUri = RealEstatePhotos.stringToUri(realEstate.listPhotos.toString())
-                  val selectedPhotos = ArrayList<Uri>()
-                  if (imageUri != null) {
-                      selectedPhotos.add(imageUri)
-                      Log.d("TAG"," display image uri   : $imageUri")
 
+                     for (item in realEstate.listPhotos!!){
+
+                      val imageUri = RealEstatePhotos.stringToUri(item.photoUri)
+
+                      if (imageUri != null) {
+                          selectedPhotos.add(imageUri)
+                          Log.d("TAG"," display image uri   : $imageUri")
+
+                      }
                   }
+              }
                   //realEstate.listPhotos = othersPhotosList
 
                   val adapter = ImagesAdapter(selectedPhotos, activity)
 
                   binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
 
-              }
+
 
               //exemple :
 

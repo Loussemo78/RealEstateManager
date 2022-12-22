@@ -21,7 +21,6 @@ import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateDetail
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class RealEstateDetailFragment:Fragment() {
@@ -65,51 +64,29 @@ private var realEstateId:Int = 0
         Glide.with(binding.fragmentOnClickRealEstateAgentPhoto.context)
                 .load(realEstate.mainPhotoUrl)
                 .into(binding.fragmentOnClickRealEstateAgentPhoto)
-
+          val selectedPhotos = ArrayList<Uri>()
           //gridView  uri
           // implémenter GridView
+              if (realEstate.listPhotos != null){
 
-          /*if (realEstate.listPhotos != null) {
-              Log.d("TAG"," display list    : ${realEstate.listPhotos!!.size}")
-              val selectedPhotos = ArrayList<Uri>()
-              for (photo in realEstate.listPhotos!!) {
-                  val imageUri = RealEstatePhotos.stringToUri(realEstate.listPhotos.toString())
-                  if (imageUri != null) {
-                      selectedPhotos.add(imageUri)
-                      Log.d("TAG"," display image uri and photos list  : ${selectedPhotos.size}" )
-                      val adapter = ImagesAdapter(selectedPhotos, activity)
-                      binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
+                     for (item in realEstate.listPhotos!!){
+
+                      val imageUri = RealEstatePhotos.stringToUri(item.photoUri)
+
+                      if (imageUri != null) {
+                          selectedPhotos.add(imageUri)
+                          Log.d("TAG"," display image uri   : $imageUri")
+
+                      }
                   }
               }
+                  //realEstate.listPhotos = othersPhotosList
 
-          }*/
+                  val adapter = ImagesAdapter(selectedPhotos, activity)
 
-          if (realEstate.listPhotos != null){
-              val realEstatePhotos = RealEstatePhotos()
-
-              val imageUri = RealEstatePhotos.stringToUri(realEstate.listPhotos.toString())
-              Log.d("TAG"," display list    : ${realEstate.listPhotos!!.size}")
-              val selectedPhotos = ArrayList<Uri>()
-              if (imageUri != null) {
-                  selectedPhotos.add(imageUri)
-                  Log.d("TAG"," display image uri   : $imageUri + ${selectedPhotos.size}" )
-
-                  val imageUriToString = RealEstatePhotos.uriToString(imageUri)
-                  realEstatePhotos.photoUri = imageUriToString
-                  othersPhotosList.add(realEstatePhotos)
-                  Log.d("TAG"," display othersPhotosList :  ${othersPhotosList.size}" )
+                  binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
 
 
-
-              }
-              realEstate.listPhotos = othersPhotosList
-              Log.d("TAG"," display  realEstate.listPhotos   :  ${realEstate.listPhotos!!.size}" )
-
-              val adapter = ImagesAdapter(selectedPhotos as ArrayList<Uri>, activity)
-              binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
-
-
-          }
 
               //exemple :
 

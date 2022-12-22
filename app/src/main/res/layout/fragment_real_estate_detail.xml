@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".OnClickRealEstateFragment">
+        tools:context=".RealEstateDetailFragment">
 
         <ImageView
             android:id="@+id/fragment_on_click_real_estate_image_view"
@@ -115,22 +115,22 @@
         <!-- Agent -->
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/fragment_real_estate_detail_linear_layout_grid"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
             android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintTop_toBottomOf="@+id/fragment_on_click_real_estate_linear_layout_agent"
-            map:layout_constraintBottom_toTopOf="@+id/fragment_on_click_real_estate_linear_layout_surface"
             >
             <GridView
                 android:id="@+id/fragment_real_estate_other_photos_grid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numColumns="auto_fit" />
-
+                android:alignmentMode="alignMargins"
+                android:numColumns="2" />
         </LinearLayout>
 
         <!-- Surface -->
@@ -141,7 +141,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
-            map:layout_constraintTop_toBottomOf="@+id/fragment_on_click_real_estate_linear_layout_agent"
+            map:layout_constraintTop_toBottomOf="@+id/fragment_real_estate_detail_linear_layout_grid"
             map:layout_constraintStart_toStartOf="parent">
 
             <ImageView

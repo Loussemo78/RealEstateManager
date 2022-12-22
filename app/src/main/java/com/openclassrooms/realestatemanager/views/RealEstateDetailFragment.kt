@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.views
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,6 @@ import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateDetailBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
-import com.openclassrooms.realestatemanager.utility.Utils
 import java.util.*
 
 
@@ -67,14 +67,26 @@ private var realEstateId:Int = 0
 
           //gridView  uri
           // implémenter GridView
+              if (realEstate.listPhotos != null){
+                  val imageUri = RealEstatePhotos.stringToUri(realEstate.listPhotos.toString())
+                  val selectedPhotos = ArrayList<Uri>()
+                  if (imageUri != null) {
+                      selectedPhotos.add(imageUri)
+                      Log.d("TAG"," display image uri   : $imageUri")
 
-          val selectedPhotos = ArrayList<Uri>()
+                  }
+                  //realEstate.listPhotos = othersPhotosList
+
+                  val adapter = ImagesAdapter(selectedPhotos, activity)
+
+                  binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
+
+              }
+
+              //exemple :
 
 
-          realEstate.listPhotos = othersPhotosList
-          //exemple :
-          val adapter = ImagesAdapter(selectedPhotos, activity)
-          binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
+
 
 
           binding.fragmentOnClickRealEstateAgentName.text = realEstate.agent

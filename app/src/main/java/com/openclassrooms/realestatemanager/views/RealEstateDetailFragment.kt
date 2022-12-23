@@ -64,10 +64,11 @@ private var realEstateId:Int = 0
         Glide.with(binding.fragmentOnClickRealEstateAgentPhoto.context)
                 .load(realEstate.mainPhotoUrl)
                 .into(binding.fragmentOnClickRealEstateAgentPhoto)
-          val selectedPhotos = ArrayList<Uri>()
           //gridView  uri
           // implémenter GridView
-              if (realEstate.listPhotos != null){
+          val selectedPhotos = ArrayList<Uri>()
+
+          if (realEstate.listPhotos != null){
 
                      for (item in realEstate.listPhotos!!){
 
@@ -75,7 +76,7 @@ private var realEstateId:Int = 0
 
                       if (imageUri != null) {
                           selectedPhotos.add(imageUri)
-                          Log.d("TAG"," display image uri   : $imageUri")
+                          Log.d("TAG"," display image uri   : $imageUri + ${selectedPhotos.size}")
 
                       }
                   }

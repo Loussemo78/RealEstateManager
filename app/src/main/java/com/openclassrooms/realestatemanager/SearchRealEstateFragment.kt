@@ -154,7 +154,7 @@ class SearchRealEstateFragment : Fragment() {
 
 
             }
-           activity?.supportFragmentManager?.popBackStack()
+           //activity?.supportFragmentManager?.popBackStack()
 
         }
 

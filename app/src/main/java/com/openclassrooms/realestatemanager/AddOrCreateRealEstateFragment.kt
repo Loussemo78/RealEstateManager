@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -182,6 +183,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     startActivityForResult(takePicture, TAKE_PICTURE_FOR_OTHER_PHOTOS)
                 } else if (options[i] == "Choose from Gallery") {
                     val filesIntent : Intent = Intent(Intent.ACTION_GET_CONTENT)
+                    filesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
                     filesIntent.type = "*/*";  //use image/* for photos, etc.

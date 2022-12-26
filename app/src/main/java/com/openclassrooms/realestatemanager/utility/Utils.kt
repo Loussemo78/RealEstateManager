@@ -1,12 +1,14 @@
 package com.openclassrooms.realestatemanager.utility
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
+
 
 /**
  * Created by Philippe on 21/02/2018.
@@ -26,6 +28,11 @@ import kotlin.math.roundToInt
             return (dollars * 0.812).roundToInt().toInt()
         }
 
+        fun convertEuroToDollar(euros: Int): Int {
+            return (euros * 1.12).roundToInt().toInt()
+        }
+
+
         /**
          * Conversion de la date d'aujourd'hui en un format plus approprié
          * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
@@ -37,6 +44,12 @@ import kotlin.math.roundToInt
                 return dateFormat.format(Date())
             }
 
+        fun getTodayDateRefactor(): String?{
+            val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+            return dateFormat.format(Date())
+        }
+
+
         /**
          * Vérification de la connexion réseau
          * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
@@ -47,6 +60,14 @@ import kotlin.math.roundToInt
         fun isInternetAvailable(context: Context): Boolean {
             val wifi = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
             return wifi.isWifiEnabled
+        }
+
+        fun isInternetAvailableSecond(context: Context): Boolean {
+            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+            val activeNetwork = cm.activeNetworkInfo
+            return activeNetwork != null &&
+                    activeNetwork.isConnectedOrConnecting
         }
 
         fun description(): String{

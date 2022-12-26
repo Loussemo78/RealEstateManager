@@ -354,7 +354,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         //Set mNewRealEstate all value selected previously
         // If intent comes from Main Activity to add a real estate so pass data back
         // Else if intent comes from Real Estate Fragment to edit a real estate so pass data back
-        binding.activityAddOrEditRealEstateOkButton.setOnClickListener { view ->
+        binding.activityAddOrEditRealEstateOkButton.setOnClickListener {
 //                if (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
 
 //                } //

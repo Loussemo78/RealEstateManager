@@ -59,7 +59,7 @@ class RealEstateDaoTest {
     //getRealEstate
 
     @Test
-    @Throws(InterruptedException::class)
+   @Throws(InterruptedException::class)
     fun getRealEstatesWhenNoRealEstateInserted() {
         val realEstates: List<RealEstate> = getValue(database.realEstateDao
                 .getRealEstates())

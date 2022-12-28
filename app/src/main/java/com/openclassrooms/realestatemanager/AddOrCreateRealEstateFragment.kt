@@ -6,7 +6,6 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -34,7 +33,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.Serializable
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -64,16 +62,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
         realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
 
-        //If intent coming from AddRealEstate
-//        if (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
-//            newRealEstate = (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) as RealEstate)
-//        } //Else if intent coming from EditRealEstate
-//        else if (intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-//            newRealEstate = intent.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) as RealEstate
-//        }
-
-
-
 
     }
 
@@ -84,21 +72,33 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     ): View {
         binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
 
-        othersPhotosList = ArrayList<RealEstatePhotos>()
-        initializeSpinners()
 
-        selectMainPhotoIntent()
-        selectOtherPhotosIntent()
+       val id = arguments?.getLong("id")
+        if (id != null){
+            val realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
+            realEstateViewModel.getRealEstate(id.toLong()).observe(viewLifecycleOwner
+            ) {
+                displayDataToUpdate(it)// it = realEstate; affichage du AddOrCreate
+                setNewRealEstateValue(it)
+                // au cas ou appeler update dans le setNewRealEstateValue
+            }
+        }else{
+            othersPhotosList = ArrayList<RealEstatePhotos>()
+            initializeSpinners()
+
+            selectMainPhotoIntent()
+            selectOtherPhotosIntent()
 
 
-        initializeButtonSelectEntryDate();
-        initializeButtonSelectSaleDate();
+            initializeButtonSelectEntryDate();
+            initializeButtonSelectSaleDate();
 
-        //if editing, set all value in spinners, editTexts and ImageViews
-        if (newRealEstate == activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE)) {
-            initializeRealEstateToEdit();
+            if (newRealEstate == activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE)) {
+                initializeRealEstateToEdit();
+            }
+            initializeFinishButton()
+
         }
-        initializeFinishButton();
 
         return binding.root
 
@@ -184,16 +184,11 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 } else if (options[i] == "Choose from Gallery") {
                     val filesIntent : Intent = Intent(Intent.ACTION_GET_CONTENT)
                     filesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
                     filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
                     filesIntent.type = "*/*";  //use image/* for photos, etc.
                     startActivityForResult(filesIntent, PICK_PHOTO_FOR_OTHER_PHOTOS)
-                    /*val pickPhoto = Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    )*/
-                    /*pickPhoto.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                    startActivityForResult(pickPhoto, PICK_PHOTO_FOR_OTHER_PHOTOS)*/
                 } else if (options[i] == "Cancel") {
                     dialogInterface.dismiss()
                 }
@@ -299,7 +294,50 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.activityAddOrEditRealEstateVideoIdEditText.setText(newRealEstate.video)
     }
 
-    private fun setNewRealEstateValue() {
+    private fun displayDataToUpdate(realEstate: RealEstate){
+        type = realEstate.type
+        status = realEstate.status
+        agent = realEstate.agent
+        if (agent == "Michael  Mfoundou") {
+            realEstate.agentPhotoUrl = "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg"
+        } else {
+            realEstate.agentPhotoUrl = "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg"
+        }
+        val firstLocation = binding.activityAddOrEditRealEstateFirstLocationEditText.text.toString()
+        val price = binding.activityAddOrEditRealEstatePriceEditText.text.toString().toInt()
+        val description = binding.activityAddOrEditRealEstateDescriptionEditText.text.toString()
+        val surface = binding.activityAddOrEditRealEstateSurfaceEditText.text.toString().toInt()
+        val numberOfRooms =
+                binding.activityAddOrEditRealEstateNumberOfRoomsEditText.text.toString().toInt()
+        val numberOfBathrooms =
+                binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.text.toString().toInt()
+        val numberOfBedrooms =
+                binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.text.toString().toInt()
+        val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
+        val pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.text
+                .toString()
+        val entryDate: String =  binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
+        val saleDate: String =   binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
+        val videoId = binding.activityAddOrEditRealEstateVideoIdEditText.text.toString()
+        realEstate.place = firstLocation
+        realEstate.price = price
+        realEstate.description = description
+
+
+        realEstate.surface = surface
+        realEstate.numberOfRooms = numberOfRooms
+        realEstate.numberOfBathRooms = numberOfBathrooms
+        realEstate.numberOfBedRooms = numberOfBedrooms
+        realEstate.secondLocation = secondLocation
+        //Set latitude and longitude
+        LocationUtil.getLocationFromAddress(requireContext(), realEstate, secondLocation)
+        realEstate.pointsOfInterest = pointsOfInterest
+        realEstate.entryDate = entryDate.toString()
+        realEstate.dateOfSale = saleDate.toString()
+        realEstate.video = videoId
+    }
+
+    private fun setNewRealEstateValue(newRealEstate: RealEstate) {
         newRealEstate.type = type
         newRealEstate.status = status
         newRealEstate.agent = agent
@@ -328,8 +366,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         newRealEstate.price = price
         newRealEstate.description = description
 
-//        newRealEstate.setMainPhoto is in onActivityResult or already assigned if editing without changes
-        //mNewRealEstate.setOthersPhotos is in onActivityResult or already assigned if editing without changes
+
         newRealEstate.surface = surface
         newRealEstate.numberOfRooms = numberOfRooms
         newRealEstate.numberOfBathRooms = numberOfBathrooms
@@ -355,9 +392,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         // If intent comes from Main Activity to add a real estate so pass data back
         // Else if intent comes from Real Estate Fragment to edit a real estate so pass data back
         binding.activityAddOrEditRealEstateOkButton.setOnClickListener {
-//                if (intent.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
 
-//                } //
             //Verify if when "Sold" status is selected that Sale date has a value
             // else
             if (activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
@@ -365,7 +400,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                         .selectedItem.toString() == "Sold" &&
                     binding.activityAddOrEditRealEstateSaleDateEditText.text.toString().isNotEmpty()
                 ) {
-                    setNewRealEstateValue()
+                    setNewRealEstateValue(newRealEstate)
                     val intent = Intent()
                     intent.putExtra(
                         RealEstateFragment.EDIT_REAL_ESTATE,
@@ -382,18 +417,15 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     ).show()
                 }
             } else {
-                setNewRealEstateValue()
+                setNewRealEstateValue(newRealEstate)
                 (activity as MainActivity).setFragment(
                     RealEstateFragment.newInstance(),
                     true,
                     TAG_REAL_ESTATE_FRAGMENT
                 )
 
-//                val intent = Intent()
-//                intent.putExtra(MainActivity.ADD_REAL_ESTATE, newRealEstate as Serializable)
-              //  setResult(RESULT_OK, intent)
+
                 Toast.makeText(requireActivity(),"submit ok",Toast.LENGTH_SHORT).show()
-              //  finish()
             }
 
         }
@@ -418,7 +450,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 // convert uri to URL
                 val fileUtils = context?.let { FileUtils(it) }
                 val path: String? = fileUtils?.getPath(imageUri)
-//                val imageUriToString = RealEstatePhotos.uriToString(imageUri)
                 newRealEstate.mainPhotoString = path
             }
         } else if (requestCode == PICK_PHOTO) {

@@ -107,8 +107,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.menu_search -> {
-//                if (realEstateFilteredList.size != 0)
-//                    realEstateFilteredList.clear()
+
 
                 supportFragmentManager
                     .beginTransaction()
@@ -147,9 +146,7 @@ class MainActivity : AppCompatActivity() {
                 TAG_REAL_ESTATE_FRAGMENT -> transaction.replace(R.id.activity_main_fragment_container_view_list, fragment, tag)
                 else -> transaction.replace(R.id.activity_main_fragment_container_view_list, fragment, tag)
             }
-//         else {
-//            transaction.replace(R.id.main_frame, fragment, tag)
-//        }
+
         if (addBackStack) transaction.addToBackStack(null)
         transaction.commit()
     }

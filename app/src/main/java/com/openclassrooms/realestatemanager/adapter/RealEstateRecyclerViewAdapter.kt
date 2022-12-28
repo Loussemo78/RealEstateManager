@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.openclassrooms.realestatemanager.AddOrCreateRealEstateFragment
 import com.openclassrooms.realestatemanager.MainActivity
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateItemsBinding
@@ -43,10 +44,10 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
             binding.fragmentRealEstateItemType.text = realEstate.type
             binding.fragmentRealEstateItemPlace.text = realEstate.place
             binding.fragmentRealEstateItemPrice.text = realEstate.price.toString()
+            val activity = context as MainActivity
 
             binding.fragmentRealEstateImageView.setOnClickListener {
 
-                val activity = context as MainActivity
                 val fragmentDetail = RealEstateDetailFragment()
                 val bundle = Bundle()
                 bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
@@ -70,11 +71,20 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
                                 fragmentDetail)
                             .commit()
                 }
-
-
-
-
             }
+             binding.fragmentRealEstateEditButton.setOnClickListener {
+                 val bundle = Bundle()
+                 bundle.putLong("id",realEstate.id)
+
+                 val fragmentEdit = AddOrCreateRealEstateFragment()
+                 fragmentEdit.arguments = bundle
+                 activity.supportFragmentManager
+                         .beginTransaction()
+                         .replace(R.id.activity_main_fragment_container_view_list,
+                                 fragmentEdit)
+                         .addToBackStack(AddOrCreateRealEstateFragment::class.java.simpleName)
+                         .commit()
+             }
 
 
         }

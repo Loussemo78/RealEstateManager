@@ -33,15 +33,7 @@ class RealEstateFragment: Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
-//        bundle.putBoolean("isFiltered", true)
-//        bundle.putInt("minimumPrice", minimumPrice.toInt())
-//        bundle.putInt("maximumPrice", maximumPrice.toInt())
-//        bundle.putInt("maximumSurface", maximumSurface.toInt())
-//        bundle.putString("firstLocation", firstLocation)
-//        bundle.putString("pointOfInterest", pointOfInterest)
-//        bundle.putInt("numberOfPhotos", numberOfPhotos.toInt())
-//        bundle.putString("minimumEntryDate", entryDateInDate.toString())
-//        bundle.putString("minimumSaleDate", saleDateInDate.toString())
+
         val isFiltered =  arguments?.getBoolean("isFiltered")
         val minimumPrice =   arguments?.getInt("minimumPrice")
         val maximumPrice = arguments?.getInt("maximumPrice")
@@ -82,30 +74,6 @@ class RealEstateFragment: Fragment() {
             }
         }
     }
-//    fun handleRealEstate(realEstate: RealEstate) {
-//        val RealEstateDetailFragment = RealEstateDetailFragment()
-//        val args = Bundle()
-//        args.putSerializable(KEY, realEstate)
-//        RealEstateDetailFragment.arguments = args
-//        val fragmentContainerViewDetail = parentFragmentManager.findFragmentById(
-//                R.id.activity_main_fragment_container_view_detail)
-//
-//
-//        if (fragmentContainerViewDetail == null) {
-//            parentFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.activity_main_fragment_container_view_list,
-//                            RealEstateDetailFragment)
-//                    .addToBackStack(RealEstateDetailFragment::class.java.simpleName)
-//                    .commit()
-//        } else if (fragmentContainerViewDetail.isVisible) { //on tablet
-//            parentFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.activity_main_fragment_container_view_detail,
-//                            RealEstateDetailFragment)
-//                    .commit()
-//        }
-//    }
 
 
     companion object {

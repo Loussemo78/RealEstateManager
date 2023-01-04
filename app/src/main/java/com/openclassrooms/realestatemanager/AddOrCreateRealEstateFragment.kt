@@ -78,7 +78,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             val realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
             realEstateViewModel.getRealEstate(id.toLong()).observe(viewLifecycleOwner
             ) {
-                displayDataToUpdate(it)// it = realEstate; affichage du AddOrCreate
+                displayDataToUpdate(it)// it = realEstate; affichage du AddOrCreate  setter
                 setNewRealEstateValue(it)
                 // au cas ou appeler update dans le setNewRealEstateValue
             }
@@ -303,23 +303,34 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         } else {
             realEstate.agentPhotoUrl = "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg"
         }
-        val firstLocation = binding.activityAddOrEditRealEstateFirstLocationEditText.text.toString()
-        val price = binding.activityAddOrEditRealEstatePriceEditText.text.toString().toInt()
-        val description = binding.activityAddOrEditRealEstateDescriptionEditText.text.toString()
-        val surface = binding.activityAddOrEditRealEstateSurfaceEditText.text.toString().toInt()
-        val numberOfRooms =
-                binding.activityAddOrEditRealEstateNumberOfRoomsEditText.text.toString().toInt()
-        val numberOfBathrooms =
-                binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.text.toString().toInt()
-        val numberOfBedrooms =
-                binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.text.toString().toInt()
-        val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
-        val pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.text
+         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(realEstate.firstLocation)
+
+        /*val price = 0
+                if(binding.activityAddOrEditRealEstatePriceEditText.text.toString() != ""){
+                price = binding.activityAddOrEditRealEstatePriceEditText.text.toString().toInt()
+               }*/
+
+        /*val price = binding.activityAddOrEditRealEstatePriceEditText
+                .text
                 .toString()
-        val entryDate: String =  binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
-        val saleDate: String =   binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
-        val videoId = binding.activityAddOrEditRealEstateVideoIdEditText.text.toString()
-        realEstate.place = firstLocation
+                .trim()
+                .toIntOrNull()
+                ?: 0*/
+
+          binding.activityAddOrEditRealEstatePriceEditText.setText(""+realEstate.price)
+
+        binding.activityAddOrEditRealEstateDescriptionEditText.setText(realEstate.description)
+        binding.activityAddOrEditRealEstateSurfaceEditText.setText(""+realEstate.surface)
+        binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(""+realEstate.numberOfRooms)
+        binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText(""+realEstate.numberOfBathRooms)
+        binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.setText(""+realEstate.numberOfBedRooms)
+         binding.activityAddOrEditRealEstateAddressEditText.setText(""+realEstate.secondLocation)
+         binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText(""+realEstate.pointsOfInterest)
+         binding.activityAddOrEditRealEstateEntryDateEditText.setText(""+realEstate.entryDate).toString()
+        binding.activityAddOrEditRealEstateSaleDateEditText.setText(""+realEstate.dateOfSale).toString()
+        binding.activityAddOrEditRealEstateVideoIdEditText.setText(""+realEstate.video)
+
+        /*realEstate.place = firstLocation
         realEstate.price = price
         realEstate.description = description
 
@@ -334,7 +345,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         realEstate.pointsOfInterest = pointsOfInterest
         realEstate.entryDate = entryDate.toString()
         realEstate.dateOfSale = saleDate.toString()
-        realEstate.video = videoId
+        realEstate.video = videoId*/
     }
 
     private fun setNewRealEstateValue(newRealEstate: RealEstate) {

@@ -139,7 +139,7 @@ class SearchRealEstateFragment : Fragment() {
 
 
                 val fragment = RealEstateFragment()
-                fragment.arguments = bundle;
+                fragment.arguments = bundle
 
 
                     // if (fragmentContainerViewList?.isVisible == true){

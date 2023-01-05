@@ -42,7 +42,7 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
                     .into(imageView)
 
             binding.fragmentRealEstateItemType.text = realEstate.type
-            binding.fragmentRealEstateItemPlace.text = realEstate.place
+            binding.fragmentRealEstateItemPlace.text = realEstate.address
             binding.fragmentRealEstateItemPrice.text = realEstate.price.toString()
             val activity = context as MainActivity
 

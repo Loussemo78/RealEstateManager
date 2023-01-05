@@ -319,7 +319,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
           binding.activityAddOrEditRealEstatePriceEditText.setText(""+realEstate.price)
 
-        binding.activityAddOrEditRealEstateDescriptionEditText.setText(realEstate.description)
+        binding.activityAddOrEditRealEstateDescriptionEditText.setText(""+realEstate.description)
         binding.activityAddOrEditRealEstateSurfaceEditText.setText(""+realEstate.surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(""+realEstate.numberOfRooms)
         binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText(""+realEstate.numberOfBathRooms)

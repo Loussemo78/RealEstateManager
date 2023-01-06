@@ -9,6 +9,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
@@ -20,9 +22,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.adapter.PickPhotosRecyclerViewAdapter
+import com.openclassrooms.realestatemanager.dao.RealEstateDao
+import com.openclassrooms.realestatemanager.database.RealEstateDatabase
 import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealEstateBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
+import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
 import com.openclassrooms.realestatemanager.utility.LocationUtil
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
@@ -72,18 +77,10 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     ): View {
         binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
 
+        Handler(Looper.getMainLooper()).post {
 
-       val id = arguments?.getLong("id")
-        if (id != null){
-            val realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
-            realEstateViewModel.getRealEstate(id.toLong()).observe(viewLifecycleOwner
-            ) {
-                displayDataToUpdate(it)// it = realEstate; affichage du AddOrCreate  setter
-                setNewRealEstateValue(it)
-                // au cas ou appeler update dans le setNewRealEstateValue
-            }
-        }else{
             othersPhotosList = ArrayList<RealEstatePhotos>()
+
             initializeSpinners()
 
             selectMainPhotoIntent()
@@ -97,8 +94,29 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 initializeRealEstateToEdit();
             }
             initializeFinishButton()
+        }
+
+
+        val id = arguments?.getLong("id")
+        if (id != null){
+
+            val dao : RealEstateDao = context?.let { RealEstateDatabase.getInstance(it)?.realEstateDao }!!
+
+            GlobalScope.launch(Dispatchers.IO) {
+
+                val data =  dao.getRealEstateFromID(id)
+                displayDataToUpdate(data)// it = realEstate; affichage du AddOrCreate  setter
+                setNewRealEstateValue(data)
+
+            }
+
+
 
         }
+
+
+
+
 
         return binding.root
 
@@ -130,7 +148,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
         if (p0?.id == R.id.activity_add_or_edit_real_estate_type_spinner)
-                type = p0.getItemAtPosition(i).toString()
+            type = p0.getItemAtPosition(i).toString()
 
         if (p0?.id == R.id.activity_add_or_edit_real_estate_status_spinner)
             status = p0.getItemAtPosition(i).toString();
@@ -303,49 +321,24 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         } else {
             realEstate.agentPhotoUrl = "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg"
         }
-         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(realEstate.firstLocation)
+        Looper.prepare() // to be able to make toast
+        binding.activityAddOrEditRealEstateFirstLocationEditText.setText(realEstate.firstLocation)
 
-        /*val price = 0
-                if(binding.activityAddOrEditRealEstatePriceEditText.text.toString() != ""){
-                price = binding.activityAddOrEditRealEstatePriceEditText.text.toString().toInt()
-               }*/
 
-        /*val price = binding.activityAddOrEditRealEstatePriceEditText
-                .text
-                .toString()
-                .trim()
-                .toIntOrNull()
-                ?: 0*/
-
-          binding.activityAddOrEditRealEstatePriceEditText.setText(""+realEstate.price)
+        binding.activityAddOrEditRealEstatePriceEditText.setText(""+realEstate.price)
 
         binding.activityAddOrEditRealEstateDescriptionEditText.setText(""+realEstate.description)
         binding.activityAddOrEditRealEstateSurfaceEditText.setText(""+realEstate.surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(""+realEstate.numberOfRooms)
         binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText(""+realEstate.numberOfBathRooms)
         binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.setText(""+realEstate.numberOfBedRooms)
-         binding.activityAddOrEditRealEstateAddressEditText.setText(""+realEstate.secondLocation)
-         binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText(""+realEstate.pointsOfInterest)
-         binding.activityAddOrEditRealEstateEntryDateEditText.setText(""+realEstate.entryDate).toString()
+        binding.activityAddOrEditRealEstateAddressEditText.setText(""+realEstate.secondLocation)
+        binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText(""+realEstate.pointsOfInterest)
+        binding.activityAddOrEditRealEstateEntryDateEditText.setText(""+realEstate.entryDate).toString()
         binding.activityAddOrEditRealEstateSaleDateEditText.setText(""+realEstate.dateOfSale).toString()
         binding.activityAddOrEditRealEstateVideoIdEditText.setText(""+realEstate.video)
+        Looper.loop()
 
-        /*realEstate.place = firstLocation
-        realEstate.price = price
-        realEstate.description = description
-
-
-        realEstate.surface = surface
-        realEstate.numberOfRooms = numberOfRooms
-        realEstate.numberOfBathRooms = numberOfBathrooms
-        realEstate.numberOfBedRooms = numberOfBedrooms
-        realEstate.secondLocation = secondLocation
-        //Set latitude and longitude
-        LocationUtil.getLocationFromAddress(requireContext(), realEstate, secondLocation)
-        realEstate.pointsOfInterest = pointsOfInterest
-        realEstate.entryDate = entryDate.toString()
-        realEstate.dateOfSale = saleDate.toString()
-        realEstate.video = videoId*/
     }
 
     private fun setNewRealEstateValue(newRealEstate: RealEstate) {
@@ -357,6 +350,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         } else {
             newRealEstate.agentPhotoUrl = "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg"
         }
+
         val firstLocation = binding.activityAddOrEditRealEstateFirstLocationEditText.text.toString()
         val price = binding.activityAddOrEditRealEstatePriceEditText.text.toString().toInt()
         val description = binding.activityAddOrEditRealEstateDescriptionEditText.text.toString()
@@ -393,7 +387,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         GlobalScope.launch(Dispatchers.Main) {
 
             realEstateViewModel.addRealEstate(newRealEstate)
-            requireActivity().supportFragmentManager.popBackStack()
+            // requireActivity().supportFragmentManager.popBackStack()
 
         }
     }
@@ -417,8 +411,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                         RealEstateFragment.EDIT_REAL_ESTATE,
                         newRealEstate as Serializable
                     )
-                   // setResult(RESULT_OK, intent)
-                 //   finish()
+                    // setResult(RESULT_OK, intent)
+                    //   finish()
                 } // Toast to inform user that he put "Sold" status without sale date value
                 else {
                     Toast.makeText(
@@ -500,18 +494,18 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 if (data1?.data != null) {
 
 
-                        val realEstatePhotos = RealEstatePhotos()
-                        val imageUri: Uri = data1.data!!
-                        //do something with the image (save it to some directory or whatever you need to do with it here)
+                    val realEstatePhotos = RealEstatePhotos()
+                    val imageUri: Uri = data1.data!!
+                    //do something with the image (save it to some directory or whatever you need to do with it here)
 
-                        selectedPhotos.add(imageUri)
+                    selectedPhotos.add(imageUri)
 
-                        val imageUriToString = RealEstatePhotos.uriToString(imageUri)
-                        realEstatePhotos.photoUri = imageUriToString
+                    val imageUriToString = RealEstatePhotos.uriToString(imageUri)
+                    realEstatePhotos.photoUri = imageUriToString
 
-                        othersPhotosList.add(realEstatePhotos)
+                    othersPhotosList.add(realEstatePhotos)
 
-                        newRealEstate.listPhotos = othersPhotosList
+                    newRealEstate.listPhotos = othersPhotosList
 
 
 

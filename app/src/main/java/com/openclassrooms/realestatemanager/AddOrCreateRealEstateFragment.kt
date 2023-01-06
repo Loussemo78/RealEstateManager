@@ -305,20 +305,14 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         }
          binding.activityAddOrEditRealEstateFirstLocationEditText.setText(realEstate.firstLocation)
 
-        /*val price = 0
-                if(binding.activityAddOrEditRealEstatePriceEditText.text.toString() != ""){
-                price = binding.activityAddOrEditRealEstatePriceEditText.text.toString().toInt()
-               }*/
 
-        /*val price = binding.activityAddOrEditRealEstatePriceEditText
-                .text
-                .toString()
-                .trim()
-                .toIntOrNull()
-                ?: 0*/
 
           binding.activityAddOrEditRealEstatePriceEditText.setText(""+realEstate.price)
-
+        Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
+                .load(""+realEstate.mainPhotoUrl)
+                .into(binding.activityAddOrEditRealEstateMainPhoto)
+        //binding.activityAddOrEditRealEstatePickPhotosGrid.adapter
+        //realEstate.listPhotos?.let { othersPhotosList.addAll(it) }
         binding.activityAddOrEditRealEstateDescriptionEditText.setText(""+realEstate.description)
         binding.activityAddOrEditRealEstateSurfaceEditText.setText(""+realEstate.surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(""+realEstate.numberOfRooms)
@@ -393,7 +387,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         GlobalScope.launch(Dispatchers.Main) {
 
             realEstateViewModel.addRealEstate(newRealEstate)
-            requireActivity().supportFragmentManager.popBackStack()
+            //requireActivity().supportFragmentManager.popBackStack()
 
         }
     }

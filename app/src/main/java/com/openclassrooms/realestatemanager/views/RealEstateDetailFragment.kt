@@ -89,7 +89,6 @@ private var realEstateId:Int = 0
 
 
 
-              //exemple :
 
 
 

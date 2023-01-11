@@ -16,6 +16,7 @@ import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateItemsB
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
+import com.openclassrooms.realestatemanager.views.RealEstateFragment.Companion.EDIT_REAL_ESTATE
 
 
 class RealEstateRecyclerViewAdapter(private val context: Context ,private val itemsList: List<RealEstate>) : RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>() {

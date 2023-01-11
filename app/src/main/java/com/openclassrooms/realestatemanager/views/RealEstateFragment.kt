@@ -11,11 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.openclassrooms.realestatemanager.AddOrCreateRealEstateFragment
 import com.openclassrooms.realestatemanager.MainActivity
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
+import java.io.Serializable
 
 
 class RealEstateFragment: Fragment() {
@@ -63,6 +65,8 @@ class RealEstateFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

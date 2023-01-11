@@ -6,8 +6,8 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -20,9 +20,8 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
+ import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target
 import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.adapter.PickPhotosRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.dao.RealEstateDao
@@ -34,12 +33,10 @@ import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simp
 import com.openclassrooms.realestatemanager.utility.LocationUtil
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
-import com.openclassrooms.realestatemanager.views.RealEstateFragment.Companion.EDIT_REAL_ESTATE
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.Serializable
 import java.util.*
 
 
@@ -114,9 +111,9 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
             GlobalScope.launch(Dispatchers.IO) {
 
-                val data = dao.getRealEstateFromID(id)
-                displayDataToUpdate(data)// it = realEstate; affichage du AddOrCreate  setter
-                setNewRealEstateValue(data)
+                 newRealEstate = dao.getRealEstateFromID(id)
+                displayDataToUpdate(newRealEstate)// it = realEstate; affichage du AddOrCreate  setter
+                //setNewRealEstateValue(editRealEstate)
 
             }
         }
@@ -324,10 +321,16 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         }
         Looper.prepare() // to be able to make toast
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(realEstate.firstLocation)
-        Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
-                .load(""+realEstate.mainPhotoUrl)
-                .into(binding.activityAddOrEditRealEstateMainPhoto)
 
+
+
+      activity?.runOnUiThread(Runnable {
+          Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
+              .load(""+realEstate.mainPhotoUrl)
+              .into(binding.activityAddOrEditRealEstateMainPhoto)
+
+
+        })
 
         binding.activityAddOrEditRealEstatePriceEditText.setText("" + realEstate.price)
 
@@ -346,6 +349,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     }
 
     private fun setNewRealEstateValue(newRealEstate: RealEstate) {
+
         newRealEstate.type = type
         newRealEstate.status = status
         newRealEstate.agent = agent
@@ -390,7 +394,15 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
 
         GlobalScope.launch(Dispatchers.Main) {
-            realEstateViewModel.addRealEstate(newRealEstate)
+
+            if(newRealEstate != null && newRealEstate.id != null)
+            {
+                var temp = newRealEstate
+                realEstateViewModel.deleteRealEstate(temp)
+                realEstateViewModel.addRealEstate(newRealEstate)
+            }
+            else
+             realEstateViewModel.addRealEstate(newRealEstate)
         }
     }
 
@@ -435,32 +447,9 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         // Else if intent comes from Real Estate Fragment to edit a real estate so pass data back
         binding.activityAddOrEditRealEstateOkButton.setOnClickListener {
 
-            //Verify if when "Sold" status is selected that Sale date has a value
-            // else
-            if (activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-                if (binding.activityAddOrEditRealEstateStatusSpinner.selectedItem.toString() == "For sale" || binding.activityAddOrEditRealEstateStatusSpinner
-                                .selectedItem.toString() == "Sold" &&
-                        binding.activityAddOrEditRealEstateSaleDateEditText.text.toString().isNotEmpty()
-                ) {
-                    setNewRealEstateValue(newRealEstate)
-                 /*   val intent = Intent()
-                    intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE, newRealEstate.type as Serializable)
-                    intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE, newRealEstate.secondLocation as Serializable)
-                    intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE, newRealEstate.price as Serializable)
-                    requireActivity().setResult(RESULT_OK,intent)
-                    requireActivity().finish()*/
 
-
-                } // Toast to inform user that he put "Sold" status without sale date value
-                else {
-                    Toast.makeText(
-                            requireActivity(),
-                            "Oops ...You specified Sold status without value to sale date",
-                            Toast.LENGTH_LONG
-                    ).show()
-                }
-            } else {
                 setNewRealEstateValue(newRealEstate)
+
                 (activity as MainActivity).setFragment(
                         RealEstateFragment.newInstance(),
                         true,
@@ -468,7 +457,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 )
 
                 Toast.makeText(requireActivity(), "submit ok", Toast.LENGTH_SHORT).show()
-            }
+
 
         }
     }
@@ -556,8 +545,13 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
                         selectedPhotos.add(imageUri)
 
+                        // uriToString = ne retourne pas un string fonctionnel.
                         val imageUriToString = RealEstatePhotos.uriToString(imageUri)
                         realEstatePhotos.photoUri = imageUriToString
+
+                        // le problème c'est que tu prends URI des images et tu l'affiches
+                        // ce que tu dois faire convert URI to String et stocker ce dernier, ensuite
+                        // tu l'affiches.
 
                         othersPhotosList.add(realEstatePhotos)
 
@@ -568,6 +562,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 }
 
                 //implémenter GridView
+                // Ajouter des Strings au lieu des URI
 
                 val adapter = ImagesAdapter(selectedPhotos, activity)
                 binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter

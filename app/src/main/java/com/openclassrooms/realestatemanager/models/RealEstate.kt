@@ -1,10 +1,7 @@
 package com.openclassrooms.realestatemanager.models
 
 import android.content.ContentValues
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.openclassrooms.realestatemanager.utility.RealEstateTypeConverter
 import java.io.Serializable
 import java.text.SimpleDateFormat
@@ -13,7 +10,9 @@ import kotlin.collections.ArrayList
 
 @Entity(tableName = "real_estate_db")
 data class RealEstate(
-        @PrimaryKey(autoGenerate = true)
+
+        @PrimaryKey(autoGenerate = true )
+
     val id: Long = 0,
         var type: String = "",
         var price: Int = 0,

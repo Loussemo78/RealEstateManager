@@ -21,6 +21,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.adapter.PickPhotosRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.dao.RealEstateDao
@@ -322,9 +324,10 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         }
         Looper.prepare() // to be able to make toast
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(realEstate.firstLocation)
-        /*Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
+        Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
                 .load(""+realEstate.mainPhotoUrl)
-                .into(binding.activityAddOrEditRealEstateMainPhoto)*/
+                .into(binding.activityAddOrEditRealEstateMainPhoto)
+
 
         binding.activityAddOrEditRealEstatePriceEditText.setText("" + realEstate.price)
 

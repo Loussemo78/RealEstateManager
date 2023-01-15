@@ -3,11 +3,14 @@ package com.openclassrooms.realestatemanager.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.openclassrooms.realestatemanager.models.RealEstate
+import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 
 @Dao
 interface RealEstateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRealEstate(realEstate: RealEstate?): Long
+
+
 
 
     @Query("SELECT * FROM real_estate_db WHERE id = :realEstateId")

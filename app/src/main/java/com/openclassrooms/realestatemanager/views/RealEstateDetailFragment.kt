@@ -68,24 +68,35 @@ private var realEstateId:Int = 0
           // implémenter GridView
           val selectedPhotos = ArrayList<Uri>()
 
+         /* val filteredList = realEstate.listPhotos!!.filter { it.photoUri >= 1.toString() }
+          for (item in filteredList) {
+              val imageUri = RealEstatePhotos.stringToUri(item.photoUri)
+              if (imageUri != null) {
+                  selectedPhotos.add(imageUri)
+                  Log.d("TAG"," display image uri   : $imageUri + ${selectedPhotos.size}")
+              }
+          }*/
+
+
           if (realEstate.listPhotos != null){
 
-                     for (item in realEstate.listPhotos!!){
+                      for (item in realEstate.listPhotos!!){
 
-                      val imageUri = RealEstatePhotos.stringToUri(item.photoUri)
+                       val imageUri = RealEstatePhotos.stringToUri(item.photoUri)
 
-                      if (imageUri != null) {
-                          selectedPhotos.add(imageUri)
-                          Log.d("TAG"," display image uri   : $imageUri + ${selectedPhotos.size}")
+                       if (imageUri != null) {
+                           selectedPhotos.add(imageUri)
+                           Log.d("TAG"," display image uri   : $imageUri + ${selectedPhotos.size}")
 
-                      }
-                  }
-              }
+                       }
+                   }
+
+
+           }
+          val adapter = ImagesAdapter(selectedPhotos, activity)
+          binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
                   //realEstate.listPhotos = othersPhotosList
 
-                  val adapter = ImagesAdapter(selectedPhotos, activity)
-
-                  binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
 
 
 

@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.adapter
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +9,16 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import com.openclassrooms.realestatemanager.R
+import java.lang.reflect.Type
 
-class ImagesAdapter(private val itemsList: ArrayList<Uri>, private var context: FragmentActivity?) : BaseAdapter() {
+class ImagesAdapter<T>(private val itemsList: ArrayList<T>, private var context: FragmentActivity?) : BaseAdapter() {
 
 
     override fun getCount(): Int {
       return  itemsList.size
     }
 
-    override fun getItem(p0: Int): Any {
+    override fun getItem(p0: Int): T {
       return  itemsList[p0]
     }
 
@@ -35,7 +37,12 @@ class ImagesAdapter(private val itemsList: ArrayList<Uri>, private var context: 
 
         val layout = convertView?.findViewById<ImageView>(R.id.img_item)
 
-        layout?.setImageURI(itemsList[position])
+        when(itemsList[position]){
+            is Uri -> layout?.setImageURI(itemsList[position] as Uri)
+            is Bitmap -> layout?.setImageBitmap(itemsList[position] as Bitmap)
+            else -> throw IllegalArgumentException("Type T must be Uri or Bitmap")
+        }
+        //layout?.setImageURI(itemsList[position])
 
         return convertView
     }

@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.Intent.EXTRA_ALLOW_MULTIPLE
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -51,6 +52,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     private lateinit var newRealEstate: RealEstate
     private lateinit var realEstateViewModel: RealEstateViewModel
     private lateinit var othersPhotosList: ArrayList<RealEstatePhotos>
+    private lateinit var listRealEstate: ArrayList<RealEstate>
 
     var lastSelectedDayOfMonth = 0
     var lastSelectedMonth = 0
@@ -196,11 +198,15 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             ) { dialogInterface, i ->
                 if (options[i] == "Take Photo") {
                     val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(takePicture, TAKE_PICTURE_FOR_OTHER_PHOTOS)
+                        takePicture.resolveActivity(requireContext().packageManager)?.also {
+                            startActivityForResult(takePicture, TAKE_PICTURE_FOR_OTHER_PHOTOS)
+                        }
+
+
+
                 } else if (options[i] == "Choose from Gallery") {
                     val filesIntent: Intent = Intent(Intent.ACTION_GET_CONTENT)
                     filesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-
                     filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
                     filesIntent.type = "*/*";  //use image/* for photos, etc.
@@ -210,6 +216,19 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 }
             }
             builder.show()
+        }
+    }
+    private fun takeMultiplePhotos() {
+        var photoCount = 0
+        while (photoCount < TAKE_PICTURE_FOR_OTHER_PHOTOS) {
+            dispatchTakePictureIntent()
+            photoCount++
+        }
+    }
+    private fun dispatchTakePictureIntent() {
+        val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        takePicture.resolveActivity(requireContext().packageManager)?.also {
+            startActivityForResult(takePicture, TAKE_PICTURE_FOR_OTHER_PHOTOS)
         }
     }
 
@@ -462,6 +481,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         }
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         takePhotoOrGalleryOnActivityResult(requestCode, resultCode, data)
@@ -481,7 +502,9 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 // convert uri to URL
                 val fileUtils = context?.let { FileUtils(it) }
                 val path: String? = fileUtils?.getPath(imageUri)
-                newRealEstate.mainPhotoString = path
+                if (path != null) {
+                    newRealEstate.mainPhotoUrl = path
+                }
             }
         } else if (requestCode == PICK_PHOTO) {
             if (resultCode == RESULT_OK) {
@@ -494,21 +517,28 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         } else if (requestCode == TAKE_PICTURE_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
                 //set image in othersPhotosList from camera
-                val selectedImage = data1!!.extras!!["data"] as Bitmap
-                val realEstatePhotos = RealEstatePhotos()
-                //Set photo uri
-                val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(requireActivity(), selectedImage)
-                val imageUriToString = RealEstatePhotos.uriToString(imageUri)
-                realEstatePhotos.photoUri = imageUriToString.toString()
-                othersPhotosList.add(realEstatePhotos)
-                //Set photo description
-                if (othersPhotosList.size != 0) {
-                    val photoDescription: String? = PickPhotosRecyclerViewAdapter.map[othersPhotosList.size - 1]
-                    if (photoDescription != null) {
-                        realEstatePhotos.description = photoDescription
-                    }
-                    newRealEstate.listPhotos = othersPhotosList
+                //val selectedImage = data1!!.extras!!["data"] as Bitmap
+                val selectedImage = ArrayList<Bitmap>().apply {
+                    add(data1!!.extras!!["data"] as Bitmap)
                 }
+
+                val count: Int ?= data1?.extras?.size()
+                for (i in 0 until count!!) {
+                    val realEstatePhotos = RealEstatePhotos()
+                    //Set photo uri
+                    val imageUri: ArrayList<Uri> = RealEstatePhotos.bitmapToListUri(requireActivity(), selectedImage)
+                    val imageUriToString = RealEstatePhotos.listUriToString(imageUri)
+                    realEstatePhotos.photoUri = imageUriToString.toString()
+                    othersPhotosList.add(realEstatePhotos)
+
+                    newRealEstate.listPhotos = othersPhotosList
+
+
+                }
+
+               val adapter = ImagesAdapter(selectedImage, activity)
+                binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
+
             }
         } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
@@ -539,21 +569,30 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     val count: Int = data1.clipData!!.itemCount
                     //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
                     for (i in 0 until count) {
-                        val realEstatePhotos = RealEstatePhotos()
+                        //val realEstatePhotos = RealEstatePhotos()
                         val imageUri: Uri = data1.clipData!!.getItemAt(i).uri
                         //do something with the image (save it to some directory or whatever you need to do with it here)
 
                         selectedPhotos.add(imageUri)
 
                         // uriToString = ne retourne pas un string fonctionnel.
+                        val realEstatePhotos = RealEstatePhotos()
                         val imageUriToString = RealEstatePhotos.uriToString(imageUri)
+                       // val imageUriToString = uriToString(imageUri)
+                        //newRealEstate.mainPhotoUrl = imageUriToString
                         realEstatePhotos.photoUri = imageUriToString
-
                         // le problème c'est que tu prends URI des images et tu l'affiches
                         // ce que tu dois faire convert URI to String et stocker ce dernier, ensuite
-                        // tu l'affiches.
+                        //                        // tu l'affiches.
+
+                      /* GlobalScope.launch(Dispatchers.IO) {
+                            RealEstateDatabase.getInstance(requireContext())?.realEstateDao?.insertRealEstate(newRealEstate)
+
+                        }*/
 
                         othersPhotosList.add(realEstatePhotos)
+
+
 
                         newRealEstate.listPhotos = othersPhotosList
 

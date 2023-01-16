@@ -13,9 +13,4 @@
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/menu_clear_filter"
-        android:title="clear_filter"
-        android:icon="@drawable/ic_baseline_clear_24"
-        app:showAsAction="ifRoom" />
 </menu>

@@ -6,9 +6,7 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.Intent.EXTRA_ALLOW_MULTIPLE
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -22,9 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
  import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target
 import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
-import com.openclassrooms.realestatemanager.adapter.PickPhotosRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.dao.RealEstateDao
 import com.openclassrooms.realestatemanager.database.RealEstateDatabase
 import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealEstateBinding

@@ -11,13 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.openclassrooms.realestatemanager.AddOrCreateRealEstateFragment
 import com.openclassrooms.realestatemanager.MainActivity
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
-import java.io.Serializable
 
 
 class RealEstateFragment: Fragment() {
@@ -41,9 +39,7 @@ class RealEstateFragment: Fragment() {
         val maximumPrice = arguments?.getInt("maximumPrice")
         val minimumSurface = arguments?.getInt("minimumSurface")
         val maximumSurface =  arguments?.getInt("maximumSurface")
-        //val firstLocation =  arguments?.getString("firstLocation")
         val numberOfPhotos = arguments?.getInt("numberOfPhotos")
-        //val description = arguments?.getString("description")
         val minimumEntryDate =  arguments?.getString("minimumEntryDate")
         val minimumSaleDate = arguments?.getString("minimumSaleDate")
 

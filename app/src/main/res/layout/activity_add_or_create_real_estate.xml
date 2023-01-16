@@ -155,7 +155,7 @@
 
         <EditText
             android:id="@+id/activity_add_or_edit_real_estate_number_of_rooms_edit_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="@string/number_of_rooms"
@@ -188,7 +188,7 @@
 
             <EditText
                 android:id="@+id/activity_add_or_edit_real_estate_entry_date_edit_text"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:hint="@string/entry_date"
@@ -199,6 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
                 android:background="@drawable/rounded_corners"
                 android:text="@string/choose_date"
                 android:textColor="@android:color/white"
@@ -215,7 +216,7 @@
 
             <EditText
                 android:id="@+id/activity_add_or_edit_real_estate_sale_date_edit_text"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:hint="@string/sale_date"
@@ -225,6 +226,7 @@
                 android:id="@+id/activity_add_or_edit_real_estate_sale_date_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
                 android:background="@drawable/rounded_corners"
                 android:text="@string/choose_date"
                 android:textColor="@android:color/white"

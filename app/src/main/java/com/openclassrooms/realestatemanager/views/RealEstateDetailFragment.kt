@@ -20,6 +20,8 @@ import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateDetailBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import java.util.*
 
 
@@ -69,14 +71,6 @@ private var realEstateId:Int = 0
           // implémenter GridView
           val selectedPhotos = ArrayList<Uri>()
 
-         /* val filteredList = realEstate.listPhotos!!.filter { it.photoUri >= 1.toString() }
-          for (item in filteredList) {
-              val imageUri = RealEstatePhotos.stringToUri(item.photoUri)
-              if (imageUri != null) {
-                  selectedPhotos.add(imageUri)
-                  Log.d("TAG"," display image uri   : $imageUri + ${selectedPhotos.size}")
-              }
-          }*/
 
 
           if (realEstate.listPhotos != null){
@@ -96,7 +90,6 @@ private var realEstateId:Int = 0
            }
           val adapter = ImagesAdapter(selectedPhotos, activity)
           binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
-                  //realEstate.listPhotos = othersPhotosList
 
 
 
@@ -144,6 +137,15 @@ private var realEstateId:Int = 0
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18f))
             }
         })
+
+          if (realEstate.video.isNotEmpty()) {
+              lifecycle.addObserver(binding.fragmentOnClickRealEstateVideo)
+              binding.fragmentOnClickRealEstateVideo.initialize(object : AbstractYouTubePlayerListener() {
+                  override fun onReady(youTubePlayer: YouTubePlayer) {
+                      youTubePlayer.cueVideo(realEstate.video, 0f)
+                  }
+              })
+          }
 
     }
 

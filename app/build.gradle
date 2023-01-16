@@ -99,7 +99,7 @@ dependencies {
 
 
     //Youtube videos
-    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 
 
 

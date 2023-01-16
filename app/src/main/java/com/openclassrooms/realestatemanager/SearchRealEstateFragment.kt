@@ -134,15 +134,11 @@ class SearchRealEstateFragment : Fragment() {
                 fragment.arguments = bundle
 
 
-                    // if (fragmentContainerViewList?.isVisible == true){
                      requireActivity().supportFragmentManager
                          .beginTransaction()
                          .replace(R.id.activity_main_fragment_container_view_list, fragment)
                           .addToBackStack(RealEstateFragment::class.java.simpleName)
                          .commit();
-               //  }else{
-
-              //   }
 
 
             }

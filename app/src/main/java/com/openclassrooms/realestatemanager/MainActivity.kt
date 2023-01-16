@@ -197,8 +197,8 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_REAL_ESTATE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                val newRealEstate = data?.getSerializableExtra(ADD_REAL_ESTATE) as RealEstate?
-                realEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel)
+                /*val newRealEstate = data?.getSerializableExtra(ADD_REAL_ESTATE) as RealEstate?
+                realEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel)*/
                 showNotificationOnAddRealEstate()
             }
         }

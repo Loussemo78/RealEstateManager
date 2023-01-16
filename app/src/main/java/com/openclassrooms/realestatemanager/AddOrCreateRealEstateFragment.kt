@@ -212,19 +212,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             builder.show()
         }
     }
-    private fun takeMultiplePhotos() {
-        var photoCount = 0
-        while (photoCount < TAKE_PICTURE_FOR_OTHER_PHOTOS) {
-            dispatchTakePictureIntent()
-            photoCount++
-        }
-    }
-    private fun dispatchTakePictureIntent() {
-        val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        takePicture.resolveActivity(requireContext().packageManager)?.also {
-            startActivityForResult(takePicture, TAKE_PICTURE_FOR_OTHER_PHOTOS)
-        }
-    }
+
 
     private fun initializeButtonSelectEntryDate() {
         binding.activityAddOrEditRealEstateEntryDateButton.setOnClickListener { view ->
@@ -302,7 +290,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 .into(binding.activityAddOrEditRealEstateMainPhoto)
 
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
-        binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
         binding.activityAddOrEditRealEstatePriceEditText.setText(newRealEstate.price)
         binding.activityAddOrEditRealEstateDescriptionEditText.setText(newRealEstate.description)
         newRealEstate.listPhotos?.let { othersPhotosList.addAll(it) }
@@ -341,7 +328,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         })
 
         binding.activityAddOrEditRealEstatePriceEditText.setText("" + realEstate.price)
-
+        binding.activityAddOrEditRealEstateFirstLocationEditText.setText(""+ realEstate.place)
         binding.activityAddOrEditRealEstateDescriptionEditText.setText("" + realEstate.description)
         binding.activityAddOrEditRealEstateSurfaceEditText.setText("" + realEstate.surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText("" + realEstate.numberOfRooms)

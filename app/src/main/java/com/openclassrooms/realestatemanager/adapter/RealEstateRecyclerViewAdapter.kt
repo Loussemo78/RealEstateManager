@@ -44,7 +44,7 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
 
             binding.fragmentRealEstateItemType.text = realEstate.type
             binding.fragmentRealEstateItemPlace.text = realEstate.place
-            binding.fragmentRealEstateItemPrice.text = realEstate.price.toString()
+            binding.fragmentRealEstateItemPrice.text = "$" +realEstate.price.toString()
             val activity = context as MainActivity
 
             binding.fragmentRealEstateImageView.setOnClickListener {

@@ -96,11 +96,6 @@ class SearchRealEstateFragment : Fragment() {
                 t.printStackTrace() //if it's not an integer
             }
 
-            try {
-             //   critaries.pointOfInterest = pointOfInterest
-            } catch (t: Throwable) {
-                t.printStackTrace() //if it's not an integer
-            }
 
             val entryDateInDate: String? = entryDate
             try {
@@ -116,7 +111,6 @@ class SearchRealEstateFragment : Fragment() {
                 t.printStackTrace() //if it's not an integer
             }
 
-           // critaries.pointOfInterest = pointOfInterest
             critaries.entryDateInDate = entryDateInDate
             critaries.saleDateInDate = saleDateInDate
 
@@ -131,7 +125,6 @@ class SearchRealEstateFragment : Fragment() {
                 bundle.putInt("minimumSurface", minimumSurface.toInt())
                 bundle.putInt("maximumSurface", maximumSurface.toInt())
                 bundle.putString("firstLocation", firstLocation)
-               // bundle.putString("pointOfInterest", pointOfInterest)
                 bundle.putInt("numberOfPhotos", numberOfPhotos.toInt())
                 bundle.putString("minimumEntryDate", entryDateInDate.toString())
                 bundle.putString("minimumSaleDate", saleDateInDate.toString())

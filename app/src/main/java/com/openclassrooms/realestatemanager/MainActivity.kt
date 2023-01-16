@@ -115,7 +115,6 @@ class MainActivity : AppCompatActivity() {
                     .addToBackStack(RealEstateFragment::class.java.simpleName)
                     .commit()
             }
-            //R.id.menu_clear_filter -> repository.getAllRealEstates()
 
             else -> return super.onOptionsItemSelected(item)
         }

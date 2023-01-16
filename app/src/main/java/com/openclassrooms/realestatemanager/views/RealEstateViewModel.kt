@@ -28,9 +28,7 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
     fun getAllRealEstates(
         isFiltered: Boolean?,
         minimumPrice: Int?, maximumPrice: Int?,
-        minimumSurface: Int?, maximumSurface: Int?,
-        firstLocation: String, numberOfPhotos: Int?,
-        description: String?,
+        minimumSurface: Int?, maximumSurface: Int?, numberOfPhotos: Int?,
         minimumEntryDate: String?,
         minimumSaleDate: String?
     ):LiveData<List<RealEstate>>{

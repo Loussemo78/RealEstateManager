@@ -55,14 +55,13 @@ class MapFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         val maximumPrice = arguments?.getInt("maximumPrice")
         val minimumSurface = arguments?.getInt("minimumSurface")
         val maximumSurface =  arguments?.getInt("maximumSurface")
-        val firstLocation =  arguments?.getString("firstLocation")
+       // val firstLocation =  arguments?.getString("firstLocation")
         val numberOfPhotos = arguments?.getInt("numberOfPhotos")
-        val description = arguments?.getString("description")
+        //val description = arguments?.getString("description")
         val minimumEntryDate =  arguments?.getString("minimumEntryDate")
         val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
-        viewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation.toString(),numberOfPhotos,
-            description,
+        viewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,numberOfPhotos,
             minimumEntryDate,
             minimumSaleDate).observe(viewLifecycleOwner, Observer {
                 estates->

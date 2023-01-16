@@ -81,12 +81,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
        Handler(Looper.getMainLooper()).post {
 
-           /* if (activity?.intent?.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
-                newRealEstate = (activity?.intent?.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) as RealEstate)
-            } //Else if intent coming from EditRealEstate
-            else if (activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-                newRealEstate = (activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) as RealEstate)
-            }*/
 
             othersPhotosList = ArrayList<RealEstatePhotos>()
 
@@ -303,8 +297,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         val price = newRealEstate.price.toString()
         val surface = newRealEstate.surface.toString()
         val numberOfRooms = newRealEstate.numberOfRooms.toString()
-        val numberOfBathrooms = newRealEstate.numberOfBathRooms.toString()
-        val numberOfBedrooms = newRealEstate.numberOfBedRooms.toString()
         Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
                 .load(newRealEstate.mainPhotoUrl)
                 .into(binding.activityAddOrEditRealEstateMainPhoto)
@@ -316,10 +308,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         newRealEstate.listPhotos?.let { othersPhotosList.addAll(it) }
         binding.activityAddOrEditRealEstateSurfaceEditText.setText(surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(numberOfRooms)
-        binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText(numberOfBathrooms)
-        binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.setText(numberOfBedrooms)
         binding.activityAddOrEditRealEstateAddressEditText.setText(newRealEstate.secondLocation)
-        binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText(newRealEstate.pointsOfInterest)
         binding.activityAddOrEditRealEstateEntryDateEditText.setText(
                 newRealEstate.entryDate
         )
@@ -356,10 +345,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.activityAddOrEditRealEstateDescriptionEditText.setText("" + realEstate.description)
         binding.activityAddOrEditRealEstateSurfaceEditText.setText("" + realEstate.surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText("" + realEstate.numberOfRooms)
-        binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText("" + realEstate.numberOfBathRooms)
-        binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.setText("" + realEstate.numberOfBedRooms)
         binding.activityAddOrEditRealEstateAddressEditText.setText("" + realEstate.secondLocation)
-        binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText("" + realEstate.pointsOfInterest)
         binding.activityAddOrEditRealEstateEntryDateEditText.setText("" + realEstate.entryDate).toString()
         binding.activityAddOrEditRealEstateSaleDateEditText.setText("" + realEstate.dateOfSale).toString()
         binding.activityAddOrEditRealEstateVideoIdEditText.setText("" + realEstate.video)
@@ -384,13 +370,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         val surface = binding.activityAddOrEditRealEstateSurfaceEditText.text.toString().toInt()
         val numberOfRooms =
                 binding.activityAddOrEditRealEstateNumberOfRoomsEditText.text.toString().toInt()
-        val numberOfBathrooms =
-                binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.text.toString().toInt()
-        val numberOfBedrooms =
-                binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.text.toString().toInt()
         val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
-        val pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.text
-                .toString()
         val entryDate: String = binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
         val saleDate: String = binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
         val videoId = binding.activityAddOrEditRealEstateVideoIdEditText.text.toString()
@@ -401,12 +381,9 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
         newRealEstate.surface = surface
         newRealEstate.numberOfRooms = numberOfRooms
-        newRealEstate.numberOfBathRooms = numberOfBathrooms
-        newRealEstate.numberOfBedRooms = numberOfBedrooms
         newRealEstate.secondLocation = secondLocation
         //Set latitude and longitude
         LocationUtil.getLocationFromAddress(requireContext(), newRealEstate, secondLocation)
-        newRealEstate.pointsOfInterest = pointsOfInterest
         newRealEstate.entryDate = entryDate.toString()
         newRealEstate.dateOfSale = saleDate.toString()
         newRealEstate.video = videoId
@@ -425,39 +402,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         }
     }
 
-    /*private fun initializeFinishButton() {
-        //Set mNewRealEstate all value selected previously
-        // If intent comes from Main Activity to add a real estate so pass data back
-        if (activity?.intent?.getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
-            binding.activityAddOrEditRealEstateOkButton.setOnClickListener {
-                setNewRealEstateValue(newRealEstate)
-                val intent = Intent()
-                intent.putExtra(MainActivity.ADD_REAL_ESTATE, newRealEstate as Serializable)
-                requireActivity().setResult(RESULT_OK,intent)
-                requireActivity().finish()
-            }
-        } // Else if intent comes from Real Estate Fragment to edit a real estate so pass data back
-        else if (activity?.intent?.getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-            binding.activityAddOrEditRealEstateOkButton.setOnClickListener {
-
-                //Verify if when "Sold" status is selected that Sale date has a value
-                if (binding.activityAddOrEditRealEstateStatusSpinner.selectedItem.toString() == "For sale" || binding.activityAddOrEditRealEstateStatusSpinner
-                                .selectedItem.toString() == "Sold" &&
-                        binding.activityAddOrEditRealEstateSaleDateEditText.text.toString().isNotEmpty()) {
-                    setNewRealEstateValue(newRealEstate)
-                    val intent = Intent()
-                    intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE, newRealEstate as Serializable)
-                    requireActivity().setResult(RESULT_OK,intent)
-                    requireActivity().finish()
-                } // Toast to inform user that he put "Sold" status without sale date value
-                else {
-                    Toast.makeText(requireContext(),
-                            "Oops ...You specified Sold status without value to sale date",
-                            Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-    }*/
 
 
     private fun initializeFinishButton() {

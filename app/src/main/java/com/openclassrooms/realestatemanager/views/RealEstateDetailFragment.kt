@@ -64,6 +64,7 @@ private var realEstateId:Int = 0
         Glide.with(binding.fragmentOnClickRealEstateAgentPhoto.context)
                 .load(realEstate.mainPhotoUrl)
                 .into(binding.fragmentOnClickRealEstateAgentPhoto)
+
           //gridView  uri
           // implémenter GridView
           val selectedPhotos = ArrayList<Uri>()
@@ -123,16 +124,16 @@ private var realEstateId:Int = 0
 
         val surface: String = realEstate.surface.toString() + " sq" + " m"
         val numberOfRooms = realEstate.numberOfRooms.toString()
-        val numberOfBathrooms = realEstate.numberOfBathRooms.toString()
-        val numberOfBedrooms = realEstate.numberOfBedRooms.toString()
+       /* val numberOfBathrooms = realEstate.numberOfBathRooms.toString()
+        val numberOfBedrooms = realEstate.numberOfBedRooms.toString()*/
 
 
         binding.fragmentOnClickRealEstateSurfaceValue.text = surface
         binding.fragmentOnClickRealEstateRoomsValue.text = numberOfRooms
-        binding.fragmentOnClickRealEstateBathroomsValue.text = numberOfBathrooms
-        binding.fragmentOnClickRealEstateBedroomsValue.text = numberOfBedrooms
+       /* binding.fragmentOnClickRealEstateBathroomsValue.text = numberOfBathrooms
+        binding.fragmentOnClickRealEstateBedroomsValue.text = numberOfBedrooms*/
         binding.fragmentOnClickRealEstateLocationValue.text = realEstate.secondLocation
-        binding.fragmentOnClickRealEstatePointsOfInterestValue.text = realEstate.pointsOfInterest
+      //  binding.fragmentOnClickRealEstatePointsOfInterestValue.text = realEstate.pointsOfInterest
         binding.fragmentOnClickRealEstatePriceValue.text = "$" + realEstate.price
         binding.fragmentOnClickRealEstateEntryDateValue.text = realEstate.entryDate
           binding.fragmentOnClickRealEstateSaleDateValue.text = dateOfSale

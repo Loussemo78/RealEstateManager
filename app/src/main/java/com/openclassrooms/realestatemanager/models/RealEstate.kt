@@ -19,8 +19,8 @@ data class RealEstate(
         var place: String = "",
         var surface: Int = 0,
         var numberOfRooms: Int = 0,
-        var numberOfBathRooms: Int = 0,
-        var numberOfBedRooms: Int = 0,
+        //var numberOfBathRooms: Int = 0,
+        //var numberOfBedRooms: Int = 0,
         var description: String = "",
         var mainPhotoUrl: String = "",
         val numberOfPhotos: Int? = 0,
@@ -30,7 +30,7 @@ data class RealEstate(
         var mainPhotoString: String? = "",
         @TypeConverters
         var listPhotos: ArrayList<RealEstatePhotos>? = ArrayList(),
-        var pointsOfInterest: String = "",
+        //var pointsOfInterest: String = "",
         var latitude: Double = 0.0,
         var longitude: Double = 0.0,
         var status: String = "",
@@ -50,8 +50,8 @@ data class RealEstate(
             place,
             surface,
             numberOfRooms,
-            numberOfBathRooms,
-            numberOfBedRooms,
+           // numberOfBathRooms,
+           // numberOfBedRooms,
             description,
             mainPhotoUrl,
             numberOfPhotos,
@@ -60,7 +60,7 @@ data class RealEstate(
             secondLocation,
             mainPhotoString,
             listPhotos,
-            pointsOfInterest,
+           // pointsOfInterest,
             latitude,
             longitude,
             status,
@@ -77,8 +77,8 @@ data class RealEstate(
         values.put("place", realEstate.place)
         values.put("surface", realEstate.surface)
         values.put("numberOfRooms", realEstate.numberOfRooms)
-        values.put("numberOfBathrooms", realEstate.numberOfBathRooms)
-        values.put("numberOfBedrooms", realEstate.numberOfBedRooms)
+       // values.put("numberOfBathrooms", realEstate.numberOfBathRooms)
+        //values.put("numberOfBedrooms", realEstate.numberOfBedRooms)
         values.put("description", realEstate.description)
         values.put("mainPhotoUrl", realEstate.mainPhotoUrl)
         values.put("mainPhotoString", realEstate.mainPhotoString)

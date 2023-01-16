@@ -31,7 +31,7 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
         minimumSurface: Int?, maximumSurface: Int?,
         firstLocation: String, numberOfPhotos: Int?,
         description: String?,
-        pointOfInterest: String?, minimumEntryDate: String?,
+        minimumEntryDate: String?,
         minimumSaleDate: String?
     ):LiveData<List<RealEstate>>{
 

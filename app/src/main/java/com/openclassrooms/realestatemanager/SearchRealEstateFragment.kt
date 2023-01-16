@@ -57,8 +57,7 @@ class SearchRealEstateFragment : Fragment() {
                 binding.activitySearchRealEstateFirstLocationEditText.text.toString()
             val numberOfPhotos =
                 binding.activitySearchRealEstateNumberPhotosEditText.text.toString()
-            val pointOfInterest =
-                binding.activitySearchRealEstatePointOfInterestEditText.text.toString()
+
             val entryDate = binding.activitySearchRealEstateEntryDateSinceEditText.text.toString()
             val saleDate = binding.activitySearchRealEstateSaleDateSinceEditText.text.toString()
 
@@ -98,7 +97,7 @@ class SearchRealEstateFragment : Fragment() {
             }
 
             try {
-                critaries.pointOfInterest = pointOfInterest
+             //   critaries.pointOfInterest = pointOfInterest
             } catch (t: Throwable) {
                 t.printStackTrace() //if it's not an integer
             }
@@ -117,7 +116,7 @@ class SearchRealEstateFragment : Fragment() {
                 t.printStackTrace() //if it's not an integer
             }
 
-            critaries.pointOfInterest = pointOfInterest
+           // critaries.pointOfInterest = pointOfInterest
             critaries.entryDateInDate = entryDateInDate
             critaries.saleDateInDate = saleDateInDate
 
@@ -132,7 +131,7 @@ class SearchRealEstateFragment : Fragment() {
                 bundle.putInt("minimumSurface", minimumSurface.toInt())
                 bundle.putInt("maximumSurface", maximumSurface.toInt())
                 bundle.putString("firstLocation", firstLocation)
-                bundle.putString("pointOfInterest", pointOfInterest)
+               // bundle.putString("pointOfInterest", pointOfInterest)
                 bundle.putInt("numberOfPhotos", numberOfPhotos.toInt())
                 bundle.putString("minimumEntryDate", entryDateInDate.toString())
                 bundle.putString("minimumSaleDate", saleDateInDate.toString())
@@ -168,7 +167,7 @@ class SearchRealEstateFragment : Fragment() {
          var firstLocation: String? = "",
          var description: String? = "",
          var numberOfPhotos: Int? = 0,
-         var pointOfInterest: String? = "",
+       //  var pointOfInterest: String? = "",
          var entryDateInDate: String? = "",
          var saleDateInDate: String? = "",
     ) {

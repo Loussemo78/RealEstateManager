@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [RealEstate::class], version = 5 , exportSchema = false)
+@Database(entities = [RealEstate::class], version = 6 , exportSchema = false)
 @TypeConverters(RealEstateTypeConverter::class, DateConverter::class)
 
 abstract class RealEstateDatabase : RoomDatabase() {
@@ -28,9 +28,7 @@ abstract class RealEstateDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: RealEstateDatabase? = null
 
-//        // Executors
-//        private val NUMBER_OF_THREAD = 4
-//        val databaseWriteExecutor: ExecutorService = Executors.newFixedThreadPool(NUMBER_OF_THREAD)
+
 
         // --- INSTANCE --
 
@@ -61,13 +59,12 @@ abstract class RealEstateDatabase : RoomDatabase() {
                         INSTANCE?.realEstateDao?.insertRealEstate(
                             RealEstate(
                                 0, "Loft", 120000, "Manhattan",
-                                8, 4, 4, 4, Utils.description(),
+                                8, 4, Utils.description(),
                                 "https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg",
                                 0, "", "", "41 Great Jones Street Penthouse\\n\" +\n" +
                                     "                                        \"Lafayette\\n\" +\n" +
                                     "                                        \"NoHo\\n\" +\n" +
-                                    "                                        \"New York", "", null,
-                                "",40.72896 ,-73.99279 ,
+                                    "                                        \"New York", "", null,40.72896 ,-73.99279 ,
                                 "23/08/2022", "", ""
                             )
                         )

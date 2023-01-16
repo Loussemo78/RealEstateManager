@@ -69,9 +69,9 @@ class MainActivity : AppCompatActivity() {
 
             val repository = RealEstateRepository(this@MainActivity)
             val realEstateObject = RealEstate(1,"Type",12 ,"Place",
-                    1500,2,3,1,"Description"
+                    1500,2,"Description"
                     ,"https://www.notreloft.com/images/2016/10/loft-Manhattan-New-York-00500-800x533.jpg",3,"Address","mainPhoto",
-                    "points","", null,"",-73.97619
+                    "points","", null,-73.97619
                     ,40.75691,"video")
 
             repository.insertRealEstate(realEstateObject)

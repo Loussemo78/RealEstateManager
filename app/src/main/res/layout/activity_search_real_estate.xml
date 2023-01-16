@@ -81,15 +81,6 @@
             android:hint="@string/description"/>
 
 
-        <!-- Point of interest-->
-        <EditText
-            android:id="@+id/activity_search_real_estate_point_of_interest_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
-          
-            android:hint="@string/points_of_interest" />
-
         <!-- Entry date -->
         <EditText
             android:id="@+id/activity_search_real_estate_entry_date_since_edit_text"

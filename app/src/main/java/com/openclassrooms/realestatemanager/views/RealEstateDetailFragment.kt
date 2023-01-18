@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -20,8 +23,6 @@ import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateDetailBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import java.util.*
 
 
@@ -137,15 +138,35 @@ private var realEstateId:Int = 0
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18f))
             }
         })
+          val youtubeWebView: WebView? = binding.youtubeWebView
 
-          if (realEstate.video.isNotEmpty()) {
-              lifecycle.addObserver(binding.fragmentOnClickRealEstateVideo)
-              binding.fragmentOnClickRealEstateVideo.initialize(object : AbstractYouTubePlayerListener() {
-                  override fun onReady(youTubePlayer: YouTubePlayer) {
-                      youTubePlayer.cueVideo(realEstate.video, 0f)
+          val myVideoYoutubeId = "-bvXmLR3Ozc"
+
+          if (youtubeWebView != null) {
+              youtubeWebView.webViewClient = object : WebViewClient() {
+                  override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                      return false
                   }
-              })
+              }
+              val webSettings: WebSettings = youtubeWebView.settings
+              webSettings.javaScriptEnabled = true
+              webSettings.loadWithOverviewMode = true
+              webSettings.useWideViewPort = true
+
+              youtubeWebView.loadUrl("https://www.youtube.com/embed/$myVideoYoutubeId")
           }
+
+
+              /*lifecycle.addObserver(binding.fragmentOnClickRealEstateVideo)
+              binding.fragmentOnClickRealEstateVideo.initialize(object : AbstractYouTubePlayerListener() {
+
+                  override fun onReady(youTubePlayer: YouTubePlayer) {
+                      if (realEstate.video.isNotEmpty()) {
+                          youTubePlayer.cueVideo(realEstate.video, 0f)
+                      }
+                  }
+              })*/
+
 
     }
 

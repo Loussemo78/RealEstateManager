@@ -397,16 +397,14 @@
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_maps_card_view" />
 
-        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-            android:id="@+id/fragment_on_click_real_estate_video"
+        <WebView
+            android:id="@+id/youtube_web_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            map:videoId="idJthveed1M"
-            map:autoPlay="true"
-            map:enableAutomaticInitialization="false"
+            android:layout_height="200dp"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_video_text_view" />
+            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_video_text_view"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

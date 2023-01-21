@@ -52,6 +52,8 @@ private var realEstateId:Int = 0
         ) {
             displayData(it)// it = realEstate;
         }
+
+
         return binding.root
     }
 

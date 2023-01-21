@@ -9,7 +9,6 @@ import kotlin.collections.ArrayList
 data class RealEstate(
 
         @PrimaryKey(autoGenerate = true )
-
         val id: Long = 0,
         var type: String = "",
         var price: Int = 0,

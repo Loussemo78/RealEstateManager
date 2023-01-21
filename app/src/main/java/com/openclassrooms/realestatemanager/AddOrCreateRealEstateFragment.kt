@@ -29,6 +29,7 @@ import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
 import com.openclassrooms.realestatemanager.utility.LocationUtil
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
+import com.openclassrooms.realestatemanager.utility.Utils
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -284,7 +285,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
                 .load(newRealEstate.mainPhotoUrl)
                 .into(binding.activityAddOrEditRealEstateMainPhoto)
-
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
         binding.activityAddOrEditRealEstatePriceEditText.setText(newRealEstate.price)
         binding.activityAddOrEditRealEstateDescriptionEditText.setText(newRealEstate.description)

@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
 
+
         supportFragmentManager.beginTransaction()
                 .replace(R.id.activity_main_fragment_container_view_list,
                         RealEstateFragment()).commit()

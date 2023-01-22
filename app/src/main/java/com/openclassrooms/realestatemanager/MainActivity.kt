@@ -26,6 +26,7 @@ import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
 import com.openclassrooms.realestatemanager.views.MapFragment
+import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -34,11 +35,13 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , RealEstateFragment.OnButtonClickedListener  {
     private lateinit var binding: ActivityMainBinding
     private lateinit var  realEstateHandlerThread: RealEstateHandlerThread
     private lateinit var viewModel: RealEstateViewModel
     private lateinit var  repository: RealEstateRepository
+    private lateinit var  detailFragment: RealEstateDetailFragment
+
 
     private lateinit var realEstateFilteredList: ArrayList<RealEstate>
 
@@ -83,12 +86,22 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.activity_main_fragment_container_view_list,
                         RealEstateFragment()).commit()
+
+
         realEstateHandlerThread = RealEstateHandlerThread("insertRealEstate")
 
         realEstateFilteredList = ArrayList()
 
 
     }
+
+   override fun onButtonClicked(view: View) {
+        // 3 - Check if detail fragment is not created or if not visible
+        if (detailFragment == null || !detailFragment.isVisible) {
+            startActivity(Intent(this, RealEstateDetailFragment::class.java))
+        }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu,menu)
@@ -229,6 +242,8 @@ class MainActivity : AppCompatActivity() {
         }
         notificationManager.notify(NOTIFICATION_REQUEST_CODE, notificationBuilder.build())
     }
+
+
 
 
 }

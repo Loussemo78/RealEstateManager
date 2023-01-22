@@ -18,11 +18,13 @@ import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBi
 import com.openclassrooms.realestatemanager.models.RealEstate
 
 
-class RealEstateFragment: Fragment() {
+class RealEstateFragment: Fragment() ,  View.OnClickListener  {
 
     private lateinit var binding : FragmentRealEstateListBinding
     private lateinit var realEstateViewModel: RealEstateViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var mCallback: OnButtonClickedListener
+
 
     private val EDIT_REQUEST_CODE = 25
 
@@ -72,6 +74,11 @@ class RealEstateFragment: Fragment() {
             }
         }
     }
+    // Declare our interface that will be implemented by any container activity
+
+     interface OnButtonClickedListener {
+        fun onButtonClicked( view : View)
+    }
 
 
     companion object {
@@ -79,6 +86,11 @@ class RealEstateFragment: Fragment() {
         const val KEY = "RealEstateClicked"
         const val EDIT_REAL_ESTATE = "RealEstateToEdit"
 
+    }
+
+    // Spread the click to the parent activity
+    override fun onClick(v: View) {
+        mCallback.onButtonClicked(v)
     }
 
 

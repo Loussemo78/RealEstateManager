@@ -47,7 +47,7 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
             binding.fragmentRealEstateItemPrice.text = "$" +realEstate.price.toString()
             val activity = context as MainActivity
 
-            binding.fragmentRealEstateImageView.setOnClickListener {
+            /*binding.fragmentRealEstateImageView.setOnClickListener {
 
                 val fragmentDetail = RealEstateDetailFragment()
                 val bundle = Bundle()
@@ -72,10 +72,10 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
                                     fragmentDetail)
                             .commit()
                 }
-            }
+            }*/
 
 
-            /*binding.fragmentRealEstateImageView.setOnClickListener {
+            binding.fragmentRealEstateImageView.setOnClickListener {
 
                 val fragmentDetail = RealEstateDetailFragment()
                 val bundle = Bundle()
@@ -93,14 +93,14 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
                                 fragmentDetail)
                             .addToBackStack(RealEstateDetailFragment::class.java.simpleName)
                             .commit()
-                } else if (fragmentContainerViewDetail.isVisible) { //on tablet
+                }
+                else if (!fragmentContainerViewDetail.isVisible) { //on tablet
                     activity.supportFragmentManager
                             .beginTransaction()
-                            .replace(R.id.activity_main_fragment_container_view_detail,
-                                fragmentDetail)
+                            .add(R.id.activity_main_fragment_container_view_detail, fragmentDetail)
                             .commit()
                 }
-            }*/
+            }
              binding.fragmentRealEstateEditButton.setOnClickListener {
                  val bundle = Bundle()
                  bundle.putLong("id",realEstate.id)

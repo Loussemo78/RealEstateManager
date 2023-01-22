@@ -1,9 +1,9 @@
 package com.openclassrooms.realestatemanager.dao
 
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.openclassrooms.realestatemanager.models.RealEstate
-import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 
 @Dao
 interface RealEstateDao {
@@ -30,6 +30,10 @@ interface RealEstateDao {
 
     @Query("DELETE FROM real_estate_db")
     suspend fun deleteAll(): Int
+
+    //Content Provider
+    @Query("SELECT * FROM real_estate_db")
+    fun getRealEstatesWithCursor(): Cursor
 
     //Content Provider
 //    @Query("SELECT * FROM real_estate_db")

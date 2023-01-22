@@ -92,7 +92,10 @@ private var realEstateId:Int = 0
 
            }
           val adapter = ImagesAdapter(selectedPhotos, activity)
-          binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
+
+          if(binding.fragmentRealEstateOtherPhotosGrid != null){
+              binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
+          }
 
 
 

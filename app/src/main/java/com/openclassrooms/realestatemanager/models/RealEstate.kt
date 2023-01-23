@@ -18,8 +18,8 @@ data class RealEstate(
         var numberOfRooms: Int = 0,
         var description: String = "",
         var mainPhotoUrl: String = "",
-        val numberOfPhotos: Int? = 0,
-        val firstLocation:String = "",
+        var numberOfPhotos: Int? = 0,
+        var firstLocation:String = "",
         var secondLocation:String = "",
         val address: String = "",
         var mainPhotoString: String? = "",
@@ -89,13 +89,28 @@ data class RealEstate(
     companion object {
         fun abstractLayer(): Int = 1
 
-        fun fromContentValues(values: ContentValues): RealEstate? {
+        fun fromContentValues(values: ContentValues): RealEstate {
             val item: RealEstate = RealEstate()
-            if (values.containsKey("id")) item.id = (values.getAsInteger("text").toLong())
+            if (values.containsKey("id")) item.id = (values.getAsInteger("id").toLong())
             if (values.containsKey("price")) item.price = values.getAsInteger("price")
             if (values.containsKey("type")) item.type = values.getAsString("type")
             if (values.containsKey("place")) item.place = values.getAsString("place")
             if (values.containsKey("surface")) item.surface = values.getAsInteger("surface")
+            if (values.containsKey("numberOfRooms")) item.numberOfRooms = values.getAsInteger("numberOfRooms")
+            if (values.containsKey("description")) item.description = values.getAsString("description")
+            if (values.containsKey("mainPhotoUrl")) item.mainPhotoUrl = values.getAsString("numberOfRooms")
+            if (values.containsKey("mainPhotoString")) item.mainPhotoString = values.getAsString("mainPhotoString")
+            if (values.containsKey("numberOfPhotos")) item.numberOfPhotos = values.getAsInteger("numberOfPhotos")
+            if (values.containsKey("firstLocation")) item.firstLocation = values.getAsString("firstLocation")
+            if (values.containsKey("secondLocation")) item.secondLocation = values.getAsString("secondLocation")
+            if (values.containsKey("latitude")) item.latitude = values.getAsDouble("latitude")
+            if (values.containsKey("longitude")) item.longitude = values.getAsDouble("longitude")
+            if (values.containsKey("status")) item.status = values.getAsString("status")
+            if (values.containsKey("entryDate")) item.entryDate = values.getAsString("entryDate")
+            if (values.containsKey("dateOfSale")) item.dateOfSale = values.getAsString("dateOfSale")
+            if (values.containsKey("agent")) item.agent = values.getAsString("agent")
+            if (values.containsKey("agentPhotoUrl")) item.agentPhotoUrl = values.getAsString("agentPhotoUrl")
+            if (values.containsKey("videoId")) item.video = values.getAsString("videoId")
 
             // continuer les attributs de la calsse RealEstate ici
 

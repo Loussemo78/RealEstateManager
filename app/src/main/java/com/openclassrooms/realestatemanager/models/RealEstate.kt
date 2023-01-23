@@ -1,15 +1,16 @@
 package com.openclassrooms.realestatemanager.models
 
+import android.content.ClipData.Item
 import android.content.ContentValues
 import androidx.room.*
 import java.io.Serializable
-import kotlin.collections.ArrayList
+
 
 @Entity(tableName = "real_estate_db")
 data class RealEstate(
 
         @PrimaryKey(autoGenerate = true )
-        val id: Long = 0,
+        var id: Long = 0,
         var type: String = "",
         var price: Int = 0,
         var place: String = "",
@@ -87,7 +88,25 @@ data class RealEstate(
 
     companion object {
         fun abstractLayer(): Int = 1
+
+        fun fromContentValues(values: ContentValues): RealEstate? {
+            val item: RealEstate = RealEstate()
+            if (values.containsKey("id")) item.id = (values.getAsInteger("text").toLong())
+            if (values.containsKey("price")) item.price = values.getAsInteger("price")
+            if (values.containsKey("type")) item.type = values.getAsString("type")
+            if (values.containsKey("place")) item.place = values.getAsString("place")
+            if (values.containsKey("surface")) item.surface = values.getAsInteger("surface")
+
+            // continuer les attributs de la calsse RealEstate ici
+
+            return item
+        }
     }
+
+
+
+    // --- UTILS ---
+
 }
 
 

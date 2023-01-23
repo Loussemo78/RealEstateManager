@@ -34,8 +34,8 @@ class RealEstateContentProvider : ContentProvider() {
             if (context != null) {
                 val id: Long = RealEstateDatabase
                         .getInstance(context!!)
-                        ?.realEstateDao
-                        .insertRealEstate(RealEstate.abstractLayer(contentValues))
+                        ?.realEstateDao!!
+                        .insertRealEstate(RealEstate.fromContentValues(contentValues!!))
 
                 if (id != 0L) {
                     context!!.contentResolver.notifyChange(uri, null)
@@ -49,7 +49,7 @@ class RealEstateContentProvider : ContentProvider() {
     override fun delete(uri: Uri,  s: String?,  strings: Array<String>?): Int {
         if (context != null) {
             val count: Int = RealEstateDatabase.getInstance(context!!)?.realEstateDao!!
-                    .deleteAll()
+                    .deleteRealEstateWitID(ContentUris.parseId(uri))
             context!!.contentResolver.notifyChange(uri, null)
             return count
         }
@@ -60,7 +60,7 @@ class RealEstateContentProvider : ContentProvider() {
                          strings: Array<String>?): Int {
         if (context != null) {
             val count: Int = RealEstateDatabase.getInstance(context!!)?.realEstateDao!!
-                    .updateRealEstate(RealEstate.abstractLayer(contentValues))
+                    .updateRealEstate( RealEstate.fromContentValues(contentValues!!))
             context!!.contentResolver.notifyChange(uri, null)
             return count
         }

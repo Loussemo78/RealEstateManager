@@ -8,7 +8,7 @@ import com.openclassrooms.realestatemanager.models.RealEstate
 @Dao
 interface RealEstateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRealEstate(realEstate: RealEstate?): Long
+     fun insertRealEstate(realEstate: RealEstate?): Long
 
 
 
@@ -23,13 +23,17 @@ interface RealEstateDao {
      fun getRealEstates(): LiveData<List<RealEstate>>
 
     @Update
-    suspend fun updateRealEstate(realEstate: RealEstate?): Int
+      fun updateRealEstate(realEstate: RealEstate?): Int
 
     @Delete
-    suspend fun deleteRealEstate(realEstate: RealEstate?): Int
+      fun deleteRealEstate(realEstate: RealEstate?): Int
+
+
+    @Query("DELETE FROM real_estate_db WHERE id = :realEstateId ")
+    fun deleteRealEstateWitID(realEstateId: Long): Int
 
     @Query("DELETE FROM real_estate_db")
-    suspend fun deleteAll(): Int
+      fun deleteAll(): Int
 
     //Content Provider
     @Query("SELECT * FROM real_estate_db")

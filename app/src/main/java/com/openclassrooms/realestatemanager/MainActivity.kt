@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() , RealEstateFragment.OnButtonClickedLis
         checkPermissionsGranted()
 
         repository =  DI.getRepository(application)
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.Default) {
 
             val repository = RealEstateRepository(this@MainActivity)
             val realEstateObject = RealEstate(1,"Type",12 ,"Place",

@@ -59,4 +59,9 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
             repository.deleteRealEstate(realEstate)
         }
     }
+    fun deleteRealEstateWithID(id: Long){
+        viewModelScope.launch (Dispatchers.IO) {
+            repository.deleteRealEstateWithID(id)
+        }
+    }
 }

@@ -23,6 +23,9 @@ class RealEstateRepository( val context: Context) {
     suspend fun deleteRealEstate(realEstate: RealEstate) =
             dao.deleteRealEstate(realEstate)
 
+    suspend fun deleteRealEstateWithID(id: Long) =
+        dao.deleteRealEstateWitID(id)
+
     suspend fun deleteAll() =
             dao.deleteAll()
 

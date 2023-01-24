@@ -1,7 +1,9 @@
 package com.openclassrooms.realestatemanager.views
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -87,30 +89,9 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
 
     override fun onRealEstateClicked(realEstate: RealEstate) {
 
-        val fragmentDetail = RealEstateDetailFragment()
-        val bundle = Bundle()
-        bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
-        fragmentDetail.arguments = bundle
-
-        val fragmentContainerViewDetail = activity?.supportFragmentManager?.findFragmentById(
-                R.id.activity_main_fragment_container_view_detail)
-
-
-        if (fragmentContainerViewDetail == null || !fragmentContainerViewDetail.isVisible) {
-            activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.activity_main_fragment_container_view_list,
-                            fragmentDetail)
-                    ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
-                    ?.commit()
-        } else { //on tablet
-            activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.activity_main_fragment_container_view_detail,
-                            fragmentDetail)
-                    ?.commit()
-        }
-        /*val fragmentDetail = RealEstateDetailFragment()
+       // val isTabletMode = context?.let { isTablet(it) }
+            //...
+                val fragmentDetail = RealEstateDetailFragment()
                 val bundle = Bundle()
                 bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
                 fragmentDetail.arguments = bundle
@@ -118,22 +99,63 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
                 val fragmentContainerViewDetail = activity?.supportFragmentManager?.findFragmentById(
                         R.id.activity_main_fragment_container_view_detail)
 
-
-
-
-                if (fragmentContainerViewDetail == null) {
+                if(isTablet(context)){
+                    if (fragmentContainerViewDetail == null) {
+                        activity?.supportFragmentManager
+                                ?.beginTransaction()
+                                ?.replace(R.id.activity_main_fragment_container_view_list, fragmentDetail)
+                                ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
+                                ?.commit()
+                    } else if (!fragmentContainerViewDetail.isVisible) {
+                        activity?.supportFragmentManager
+                                ?.beginTransaction()
+                                ?.add(R.id.activity_main_fragment_container_view_detail, fragmentDetail)
+                                ?.commit()
+                    }
+                }else{
                     activity?.supportFragmentManager
                             ?.beginTransaction()
-                            ?.replace(R.id.activity_main_fragment_container_view_list,
-                                    fragmentDetail)
+                            ?.replace(R.id.activity_main_fragment_container_view_list, fragmentDetail)
                             ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
                             ?.commit()
-                } else if (!fragmentContainerViewDetail.isVisible  ) { //on tablet
-                    activity?.supportFragmentManager
-                            ?.beginTransaction()
-                            ?.add(R.id.activity_main_fragment_container_view_detail, fragmentDetail)
-                            ?.commit()
-                }*/
+                }
+
+
+
+        /* val fragmentDetail = RealEstateDetailFragment()
+         val bundle = Bundle()
+         bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
+         fragmentDetail.arguments = bundle
+
+         val fragmentContainerViewDetail = activity?.supportFragmentManager?.findFragmentById(
+                 R.id.activity_main_fragment_container_view_detail)
+
+
+         if (fragmentContainerViewDetail == null || !fragmentContainerViewDetail.isVisible) {
+             activity?.supportFragmentManager
+                     ?.beginTransaction()
+                     ?.replace(R.id.activity_main_fragment_container_view_list,
+                             fragmentDetail)
+                     ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
+                     ?.commit()
+         } else { //on tablet
+             activity?.supportFragmentManager
+                     ?.beginTransaction()
+                     ?.replace(R.id.activity_main_fragment_container_view_detail,
+                             fragmentDetail)
+                     ?.commit()
+         }*/
+
+
+
+
+
+    }
+
+   private fun isTablet(context: Context): Boolean {
+        val xlarge = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_XLARGE
+        val large = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_LARGE
+        return xlarge || large
     }
 
 

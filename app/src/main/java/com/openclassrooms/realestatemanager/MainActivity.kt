@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() , RealEstateFragment.OnButtonClickedListener  {
+class MainActivity : AppCompatActivity()   {
     private lateinit var binding: ActivityMainBinding
     private lateinit var  realEstateHandlerThread: RealEstateHandlerThread
     private lateinit var viewModel: RealEstateViewModel
@@ -95,12 +95,7 @@ class MainActivity : AppCompatActivity() , RealEstateFragment.OnButtonClickedLis
 
     }
 
-   override fun onButtonClicked(view: View) {
-        // 3 - Check if detail fragment is not created or if not visible
-        if (detailFragment == null || !detailFragment.isVisible) {
-            startActivity(Intent(this, RealEstateDetailFragment::class.java))
-        }
-    }
+
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

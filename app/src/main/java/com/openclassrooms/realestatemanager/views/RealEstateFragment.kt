@@ -12,18 +12,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.MainActivity
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 
 
-class RealEstateFragment: Fragment() ,  View.OnClickListener  {
+class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstateClickListener {
 
     private lateinit var binding : FragmentRealEstateListBinding
     private lateinit var realEstateViewModel: RealEstateViewModel
     private lateinit var recyclerView: RecyclerView
-    private lateinit var mCallback: OnButtonClickedListener
 
 
     private val EDIT_REQUEST_CODE = 25
@@ -49,7 +49,7 @@ class RealEstateFragment: Fragment() ,  View.OnClickListener  {
 
             realEstateViewModel.getAllRealEstates(isFiltered,minimumPrice,maximumPrice,minimumSurface,maximumSurface,numberOfPhotos,minimumEntryDate,minimumSaleDate).observe(viewLifecycleOwner, Observer {
             //SELECT * FROM real_estate_db WHERE price >= 1 AND price <= 1 AND surface >= 1 AND surface <= 1  AND entryDate >= 06/10/2022 AND dateOfSale >= 06/10/2022 AND numberOfPhotos >= 1
-                recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it)
+                recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity , it , this )
             })
 
         return  binding.root
@@ -76,9 +76,6 @@ class RealEstateFragment: Fragment() ,  View.OnClickListener  {
     }
     // Declare our interface that will be implemented by any container activity
 
-     interface OnButtonClickedListener {
-        fun onButtonClicked( view : View)
-    }
 
 
     companion object {
@@ -88,9 +85,55 @@ class RealEstateFragment: Fragment() ,  View.OnClickListener  {
 
     }
 
-    // Spread the click to the parent activity
-    override fun onClick(v: View) {
-        mCallback.onButtonClicked(v)
+    override fun onRealEstateClicked(realEstate: RealEstate) {
+
+        val fragmentDetail = RealEstateDetailFragment()
+        val bundle = Bundle()
+        bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
+        fragmentDetail.arguments = bundle
+
+        val fragmentContainerViewDetail = activity?.supportFragmentManager?.findFragmentById(
+                R.id.activity_main_fragment_container_view_detail)
+
+
+        if (fragmentContainerViewDetail == null || !fragmentContainerViewDetail.isVisible) {
+            activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.activity_main_fragment_container_view_list,
+                            fragmentDetail)
+                    ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
+                    ?.commit()
+        } else { //on tablet
+            activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.activity_main_fragment_container_view_detail,
+                            fragmentDetail)
+                    ?.commit()
+        }
+        /*val fragmentDetail = RealEstateDetailFragment()
+                val bundle = Bundle()
+                bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
+                fragmentDetail.arguments = bundle
+
+                val fragmentContainerViewDetail = activity?.supportFragmentManager?.findFragmentById(
+                        R.id.activity_main_fragment_container_view_detail)
+
+
+
+
+                if (fragmentContainerViewDetail == null) {
+                    activity?.supportFragmentManager
+                            ?.beginTransaction()
+                            ?.replace(R.id.activity_main_fragment_container_view_list,
+                                    fragmentDetail)
+                            ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
+                            ?.commit()
+                } else if (!fragmentContainerViewDetail.isVisible  ) { //on tablet
+                    activity?.supportFragmentManager
+                            ?.beginTransaction()
+                            ?.add(R.id.activity_main_fragment_container_view_detail, fragmentDetail)
+                            ?.commit()
+                }*/
     }
 
 

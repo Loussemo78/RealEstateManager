@@ -19,7 +19,7 @@ import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment.Companion.EDIT_REAL_ESTATE
 
 
-class RealEstateRecyclerViewAdapter(private val context: Context ,private val itemsList: List<RealEstate>) : RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>() {
+class RealEstateRecyclerViewAdapter(private val context: Context ,private val itemsList: List<RealEstate>,private val onRealEstateClickListener: OnRealEstateClickListener?) : RecyclerView.Adapter<RealEstateRecyclerViewAdapter.RealEstateViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RealEstateRecyclerViewAdapter.RealEstateViewHolder {
@@ -76,14 +76,17 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
 
 
             binding.fragmentRealEstateImageView.setOnClickListener {
+                onRealEstateClickListener?.onRealEstateClicked(realEstate)
 
-                val fragmentDetail = RealEstateDetailFragment()
+                /*val fragmentDetail = RealEstateDetailFragment()
                 val bundle = Bundle()
                 bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
                 fragmentDetail.arguments = bundle
 
                 val fragmentContainerViewDetail =  activity.supportFragmentManager.findFragmentById(
                         R.id.activity_main_fragment_container_view_detail)
+
+
 
 
                 if (fragmentContainerViewDetail == null) {
@@ -93,13 +96,12 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
                                 fragmentDetail)
                             .addToBackStack(RealEstateDetailFragment::class.java.simpleName)
                             .commit()
-                }
-                else if (!fragmentContainerViewDetail.isVisible) { //on tablet
+                } else if (!fragmentContainerViewDetail.isVisible  ) { //on tablet
                     activity.supportFragmentManager
                             .beginTransaction()
                             .add(R.id.activity_main_fragment_container_view_detail, fragmentDetail)
                             .commit()
-                }
+                }*/
             }
              binding.fragmentRealEstateEditButton.setOnClickListener {
                  val bundle = Bundle()
@@ -118,5 +120,9 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
 
         }
     }
+    interface OnRealEstateClickListener {
+        fun onRealEstateClicked(realEstate: RealEstate)
+    }
+
 
 }

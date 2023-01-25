@@ -76,7 +76,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     ): View {
         binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
 
-       Handler(Looper.getMainLooper()).post {
+        Handler(Looper.getMainLooper()).post {
 
 
             othersPhotosList = ArrayList<RealEstatePhotos>()
@@ -104,7 +104,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
             GlobalScope.launch(Dispatchers.IO) {
 
-                 newRealEstate = dao.getRealEstateFromID(id)
+                newRealEstate = dao.getRealEstateFromID(id)
                 displayDataToUpdate(newRealEstate)// it = realEstate; affichage du AddOrCreate  setter
                 //setNewRealEstateValue(editRealEstate)
 
@@ -189,10 +189,9 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             ) { dialogInterface, i ->
                 if (options[i] == "Take Photo") {
                     val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                        takePicture.resolveActivity(requireContext().packageManager)?.also {
-                            startActivityForResult(takePicture, TAKE_PICTURE_FOR_OTHER_PHOTOS)
-                        }
-
+                    takePicture.resolveActivity(requireContext().packageManager)?.also {
+                        startActivityForResult(takePicture, TAKE_PICTURE_FOR_OTHER_PHOTOS)
+                    }
 
 
                 } else if (options[i] == "Choose from Gallery") {
@@ -315,16 +314,16 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
 
 
-      activity?.runOnUiThread(Runnable {
-          Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
-              .load(""+realEstate.mainPhotoUrl)
-              .into(binding.activityAddOrEditRealEstateMainPhoto)
+        activity?.runOnUiThread(Runnable {
+            Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
+                    .load("" + realEstate.mainPhotoUrl)
+                    .into(binding.activityAddOrEditRealEstateMainPhoto)
 
 
         })
 
         binding.activityAddOrEditRealEstatePriceEditText.setText("" + realEstate.price)
-        binding.activityAddOrEditRealEstateFirstLocationEditText.setText(""+ realEstate.place)
+        binding.activityAddOrEditRealEstateFirstLocationEditText.setText("" + realEstate.place)
         binding.activityAddOrEditRealEstateDescriptionEditText.setText("" + realEstate.description)
         binding.activityAddOrEditRealEstateSurfaceEditText.setText("" + realEstate.surface)
         binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText("" + realEstate.numberOfRooms)
@@ -374,17 +373,14 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
         GlobalScope.launch(Dispatchers.Main) {
 
-            if(newRealEstate != null && newRealEstate.id != null)
-            {
+            if (newRealEstate != null && newRealEstate.id != null) {
                 var temp = newRealEstate
                 realEstateViewModel.deleteRealEstate(temp)
                 realEstateViewModel.addRealEstate(newRealEstate)
-            }
-            else
-             realEstateViewModel.addRealEstate(newRealEstate)
+            } else
+                realEstateViewModel.addRealEstate(newRealEstate)
         }
     }
-
 
 
     private fun initializeFinishButton() {
@@ -394,20 +390,19 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.activityAddOrEditRealEstateOkButton.setOnClickListener {
 
 
-                setNewRealEstateValue(newRealEstate)
+            setNewRealEstateValue(newRealEstate)
 
-                (activity as MainActivity).setFragment(
-                        RealEstateFragment.newInstance(),
-                        true,
-                        TAG_REAL_ESTATE_FRAGMENT
-                )
+            (activity as MainActivity).setFragment(
+                    RealEstateFragment.newInstance(),
+                    true,
+                    TAG_REAL_ESTATE_FRAGMENT
+            )
 
-                Toast.makeText(requireActivity(), "submit ok", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), "submit ok", Toast.LENGTH_SHORT).show()
 
 
         }
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -449,7 +444,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     add(data1!!.extras!!["data"] as Bitmap)
                 }
 
-                val count: Int ?= data1?.extras?.size()
+                val count: Int? = data1?.extras?.size()
                 for (i in 0 until count!!) {
                     val realEstatePhotos = RealEstatePhotos()
                     //Set photo uri
@@ -463,7 +458,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
                 }
 
-               val adapter = ImagesAdapter(selectedImage, activity)
+                val adapter = ImagesAdapter(selectedImage, activity)
                 binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
 
             }
@@ -505,14 +500,14 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                         // uriToString = ne retourne pas un string fonctionnel.
                         val realEstatePhotos = RealEstatePhotos()
                         val imageUriToString = RealEstatePhotos.uriToString(imageUri)
-                       // val imageUriToString = uriToString(imageUri)
+                        // val imageUriToString = uriToString(imageUri)
                         //newRealEstate.mainPhotoUrl = imageUriToString
                         realEstatePhotos.photoUri = imageUriToString
                         // le problème c'est que tu prends URI des images et tu l'affiches
                         // ce que tu dois faire convert URI to String et stocker ce dernier, ensuite
                         //                        // tu l'affiches.
 
-                      /* GlobalScope.launch(Dispatchers.IO) {
+                        /* GlobalScope.launch(Dispatchers.IO) {
                             RealEstateDatabase.getInstance(requireContext())?.realEstateDao?.insertRealEstate(newRealEstate)
 
                         }*/

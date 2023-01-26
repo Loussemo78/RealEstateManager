@@ -5,15 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.openclassrooms.realestatemanager.MainActivity"
+    tools:context="com.openclassrooms.realestatemanager.views.RealEstateFragment"
     android:gravity="center">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/activity_main_fragment_container_view_list"
+        android:name="com.openclassrooms.realestatemanager.views.RealEstateFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintHorizontal_weight="25"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"/>
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
+        tools:layout="@layout/fragment_real_estate_list"
+        />
 
     <View
         android:id="@+id/activity_main_vertical_view_divider"
@@ -29,9 +33,11 @@
         android:id="@+id/activity_main_fragment_container_view_detail"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        app:layout_constraintHorizontal_weight="35"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
-        app:layout_constraintStart_toEndOf="@id/activity_main_vertical_view_divider" />
+        app:layout_constraintStart_toEndOf="@id/activity_main_vertical_view_divider"
+        />
 
 
 

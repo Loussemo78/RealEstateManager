@@ -1,7 +1,7 @@
 package com.openclassrooms.realestatemanager.views
 
-import android.R
 import android.app.Activity.RESULT_OK
+import android.bluetooth.BluetoothClass.Device
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -9,12 +9,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.openclassrooms.realestatemanager.MainActivity
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
@@ -35,9 +38,7 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
         binding = FragmentRealEstateListBinding.inflate(inflater, container, false)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
-
         realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
-
         val isFiltered = arguments?.getBoolean("isFiltered")
         val minimumPrice = arguments?.getInt("minimumPrice")
         val maximumPrice = arguments?.getInt("maximumPrice")
@@ -48,10 +49,12 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
         val minimumSaleDate = arguments?.getString("minimumSaleDate")
 
 
-
         realEstateViewModel.getAllRealEstates(isFiltered, minimumPrice, maximumPrice, minimumSurface, maximumSurface, numberOfPhotos, minimumEntryDate, minimumSaleDate).observe(viewLifecycleOwner, Observer {
             //SELECT * FROM real_estate_db WHERE price >= 1 AND price <= 1 AND surface >= 1 AND surface <= 1  AND entryDate >= 06/10/2022 AND dateOfSale >= 06/10/2022 AND numberOfPhotos >= 1
-            recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it, this)
+            recyclerView.adapter = RealEstateRecyclerViewAdapter(activity as MainActivity, it, this).also {
+
+            }
+
         })
 
         return binding.root
@@ -60,6 +63,8 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
     }
 
@@ -83,6 +88,7 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
         const val EDIT_REAL_ESTATE = "RealEstateToEdit"
 
         fun isTablet(context: Context): Boolean {
+
             val xlarge = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_XLARGE
             val large = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_LARGE
             return xlarge || large
@@ -100,7 +106,7 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
     override fun onRealEstateClicked(realEstate: RealEstate) {
 
         //...
-        val tabletSize = resources.getBoolean(com.openclassrooms.realestatemanager.R.bool.isTablet)
+       val tabletSize = resources.getBoolean(com.openclassrooms.realestatemanager.R.bool.isTablet)
 
         val fragmentDetail = RealEstateDetailFragment()
         val bundle = Bundle()
@@ -109,6 +115,8 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
 
         val fragmentContainerViewDetail = activity?.supportFragmentManager?.findFragmentById(
                 com.openclassrooms.realestatemanager.R.id.activity_main_fragment_container_view_detail)
+
+
 
         /*if (context?.let { isTablet(it) } == false) {
             if (fragmentContainerViewDetail == null) {
@@ -124,7 +132,8 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
                         ?.commit()
             }
         } else {*/
-        if (tabletSize) {
+        if (!tabletSize) {
+
             activity?.supportFragmentManager
                     ?.beginTransaction()
                     ?.replace(com.openclassrooms.realestatemanager.R.id.activity_main_fragment_container_view_list, fragmentDetail)
@@ -135,7 +144,7 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
         } else {
             activity?.supportFragmentManager
                     ?.beginTransaction()
-                    ?.replace(com.openclassrooms.realestatemanager.R.id.activity_main_fragment_container_view_detail, fragmentDetail)
+                    ?.add(com.openclassrooms.realestatemanager.R.id.activity_main_fragment_container_view_detail, fragmentDetail)
                     ?.commit()
 
             // do something else
@@ -172,5 +181,5 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
         }
 
 
-    }
+}
 

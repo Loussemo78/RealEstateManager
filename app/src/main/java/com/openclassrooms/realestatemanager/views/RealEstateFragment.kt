@@ -107,24 +107,7 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
         bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
         fragmentDetail.arguments = bundle
 
-        val fragmentContainerViewDetail = activity?.supportFragmentManager?.findFragmentById(
-                com.openclassrooms.realestatemanager.R.id.activity_main_fragment_container_view_detail)
-
-        /*if (context?.let { isTablet(it) } == false) {
-            if (fragmentContainerViewDetail == null) {
-                activity?.supportFragmentManager
-                        ?.beginTransaction()
-                        ?.replace(R.id.activity_main_fragment_container_view_list, fragmentDetail)
-                        ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
-                        ?.commit()
-            } else if (!fragmentContainerViewDetail.isVisible) {
-                activity?.supportFragmentManager
-                        ?.beginTransaction()
-                        ?.add(R.id.activity_main_fragment_container_view_detail, fragmentDetail)
-                        ?.commit()
-            }
-        } else {*/
-        if (tabletSize) {
+        if (!tabletSize) {
             activity?.supportFragmentManager
                     ?.beginTransaction()
                     ?.replace(com.openclassrooms.realestatemanager.R.id.activity_main_fragment_container_view_list, fragmentDetail)
@@ -135,38 +118,11 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
         } else {
             activity?.supportFragmentManager
                     ?.beginTransaction()
-                    ?.replace(com.openclassrooms.realestatemanager.R.id.activity_main_fragment_container_view_detail, fragmentDetail)
+                    ?.replace(com.openclassrooms.realestatemanager.R.id.frame_layout_detail, fragmentDetail)
                     ?.commit()
 
             // do something else
-        }
-
-            // }
-
-
-            /* val fragmentDetail = RealEstateDetailFragment()
-         val bundle = Bundle()
-         bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
-         fragmentDetail.arguments = bundle
-
-         val fragmentContainerViewDetail = activity?.supportFragmentManager?.findFragmentById(
-                 R.id.activity_main_fragment_container_view_detail)
-
-
-         if (fragmentContainerViewDetail == null || !fragmentContainerViewDetail.isVisible) {
-             activity?.supportFragmentManager
-                     ?.beginTransaction()
-                     ?.replace(R.id.activity_main_fragment_container_view_list,
-                             fragmentDetail)
-                     ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
-                     ?.commit()
-         } else { //on tablet
-             activity?.supportFragmentManager
-                     ?.beginTransaction()
-                     ?.replace(R.id.activity_main_fragment_container_view_detail,
-                             fragmentDetail)
-                     ?.commit()
-         }*/
+            }
 
 
         }

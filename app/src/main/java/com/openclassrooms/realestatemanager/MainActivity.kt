@@ -83,6 +83,26 @@ class MainActivity : AppCompatActivity()   {
         viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
 
 
+        //A - We only add DetailFragment in Tablet mode (If found frame_layout_detail)
+        if (findViewById<View>(R.id.frame_layout_detail) != null)
+        {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.activity_main_fragment_container_view_list,
+                    RealEstateFragment()).commit()
+
+            val fragmentDetail = RealEstateDetailFragment()
+            val bundle = Bundle()
+            bundle.putInt(RealEstateFragment.KEY, 1)
+            fragmentDetail.arguments = bundle
+
+           supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frame_layout_detail,
+                    fragmentDetail)
+                .addToBackStack(RealEstateDetailFragment::class.java.simpleName)
+                .commit()
+        }
+        else
         supportFragmentManager.beginTransaction()
                 .replace(R.id.activity_main_fragment_container_view_list,
                         RealEstateFragment()).commit()
@@ -131,7 +151,7 @@ class MainActivity : AppCompatActivity()   {
     }
 
     private fun initializeBottomNavigationItemView(){
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+        binding.bottomNavigationView?.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
                 R.id.page1 -> supportFragmentManager.beginTransaction()
@@ -208,35 +228,12 @@ class MainActivity : AppCompatActivity()   {
             if (resultCode == RESULT_OK) {
                 /*val newRealEstate = data?.getSerializableExtra(ADD_REAL_ESTATE) as RealEstate?
                 realEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel)*/
-                showNotificationOnAddRealEstate()
+              //  showNotificationOnAddRealEstate()
             }
         }
     }
 
-    private fun showNotificationOnAddRealEstate() {
-        val title = "RealEstateManager"
-        val message = "Real Estate correctly added"
-        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
 
-        notificationBuilder
-            .setSmallIcon(R.drawable.icons8_android_os)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setAutoCancel(true)
-            .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-        val notificationManager = applicationContext
-            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelName: CharSequence = "RealEstateAddChannel"
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val notificationChannel = NotificationChannel(
-                CHANNEL_ID, channelName,
-                importance
-            )
-            notificationManager.createNotificationChannel(notificationChannel)
-        }
-        notificationManager.notify(NOTIFICATION_REQUEST_CODE, notificationBuilder.build())
-    }
 
 
 

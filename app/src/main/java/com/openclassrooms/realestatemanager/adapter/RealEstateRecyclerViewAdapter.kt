@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.adapter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -47,74 +48,43 @@ class RealEstateRecyclerViewAdapter(private val context: Context ,private val it
             binding.fragmentRealEstateItemPrice.text = "$" +realEstate.price.toString()
             val activity = context as MainActivity
 
-            /*binding.fragmentRealEstateImageView.setOnClickListener {
-
-                val fragmentDetail = RealEstateDetailFragment()
-                val bundle = Bundle()
-                bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
-                fragmentDetail.arguments = bundle
-
-                val fragmentContainerViewDetail =  activity.supportFragmentManager.findFragmentById(
-                        R.id.activity_main_fragment_container_view_detail)
-
-
-                if (fragmentContainerViewDetail == null || !fragmentContainerViewDetail.isVisible) {
-                    activity.supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.activity_main_fragment_container_view_list,
-                                    fragmentDetail)
-                            .addToBackStack(RealEstateDetailFragment::class.java.simpleName)
-                            .commit()
-                } else { //on tablet
-                    activity.supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.activity_main_fragment_container_view_detail,
-                                    fragmentDetail)
-                            .commit()
-                }
-            }*/
 
 
             binding.fragmentRealEstateImageView.setOnClickListener {
                 onRealEstateClickListener?.onRealEstateClicked(realEstate)
 
-                /*val fragmentDetail = RealEstateDetailFragment()
-                val bundle = Bundle()
-                bundle.putInt(RealEstateFragment.KEY, realEstate.id.toInt())
-                fragmentDetail.arguments = bundle
 
-                val fragmentContainerViewDetail =  activity.supportFragmentManager.findFragmentById(
-                        R.id.activity_main_fragment_container_view_detail)
-
-
-
-
-                if (fragmentContainerViewDetail == null) {
-                    activity.supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.activity_main_fragment_container_view_list,
-                                fragmentDetail)
-                            .addToBackStack(RealEstateDetailFragment::class.java.simpleName)
-                            .commit()
-                } else if (!fragmentContainerViewDetail.isVisible  ) { //on tablet
-                    activity.supportFragmentManager
-                            .beginTransaction()
-                            .add(R.id.activity_main_fragment_container_view_detail, fragmentDetail)
-                            .commit()
-                }*/
             }
              binding.fragmentRealEstateEditButton.setOnClickListener {
-                 val bundle = Bundle()
-                 bundle.putLong("id",realEstate.id)
+
+
+                 val tabletSize = activity.resources.getBoolean(com.openclassrooms.realestatemanager.R.bool.isTablet)
 
                  val fragmentEdit = AddOrCreateRealEstateFragment()
+                 val bundle = Bundle()
+
+                 bundle.putLong("id",realEstate.id)
                  fragmentEdit.arguments = bundle
-                 activity.supportFragmentManager
+
+                 if (!tabletSize) {
+
+                     activity.supportFragmentManager
                          .beginTransaction()
                          .replace(R.id.activity_main_fragment_container_view_list,
-                                 fragmentEdit)
+                             fragmentEdit)
                          .addToBackStack(AddOrCreateRealEstateFragment::class.java.simpleName)
                          .commit()
+
+
+                 } else {
+                     activity?.supportFragmentManager
+                         ?.beginTransaction()
+                         ?.replace(com.openclassrooms.realestatemanager.R.id.frame_layout_detail, fragmentEdit)
+                         ?.commit()
+
+                 }
+
+
              }
 
 

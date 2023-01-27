@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
  import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.dao.RealEstateDao
 import com.openclassrooms.realestatemanager.database.RealEstateDatabase
@@ -405,7 +406,20 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     TAG_REAL_ESTATE_FRAGMENT
             )
 
-            Toast.makeText(requireActivity(), "submit ok", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Nouvel appartement")
+            builder.setMessage("Vous venez de crée un nouvel appartement")
+            builder.setPositiveButton("Continuer") { dialog, _ ->
+                dialog.dismiss()
+            }
+           /* builder.setNegativeButton("Annuler") { dialog, _ ->
+                dialog.dismiss()
+            }*/
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+
+            // Toast.makeText(requireActivity(), "submit ok", Toast.LENGTH_SHORT).show()
 
 
         }

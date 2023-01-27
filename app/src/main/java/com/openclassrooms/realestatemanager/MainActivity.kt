@@ -126,23 +126,63 @@ class MainActivity : AppCompatActivity()   {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_add -> {
+                val tabletSize = resources.getBoolean(com.openclassrooms.realestatemanager.R.bool.isTablet)
 
-               supportFragmentManager
+                val fragmentEdit = AddOrCreateRealEstateFragment()
+
+                if (!tabletSize) {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.activity_main_fragment_container_view_list,
+                                    fragmentEdit)
+                            .addToBackStack(AddOrCreateRealEstateFragment::class.java.simpleName)
+                            .commit()
+
+
+                } else {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(com.openclassrooms.realestatemanager.R.id.frame_layout_detail, fragmentEdit)
+                            .commit()
+
+                }
+               /*supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.activity_main_fragment_container_view_list, AddOrCreateRealEstateFragment())
                     .addToBackStack(RealEstateFragment::class.java.simpleName)
-                    .commit()
+                    .commit()*/
 
 
             }
             R.id.menu_search -> {
 
+                val tabletSize = resources.getBoolean(com.openclassrooms.realestatemanager.R.bool.isTablet)
 
-                supportFragmentManager
+                val fragmentSearch = SearchRealEstateFragment()
+
+                if (!tabletSize) {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.activity_main_fragment_container_view_list,
+                                    fragmentSearch)
+                            .addToBackStack(SearchRealEstateFragment::class.java.simpleName)
+                            .commit()
+
+
+                } else {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(com.openclassrooms.realestatemanager.R.id.frame_layout_detail, fragmentSearch)
+                            .commit()
+
+                }
+
+
+                /*supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.activity_main_fragment_container_view_list, SearchRealEstateFragment())
                     .addToBackStack(RealEstateFragment::class.java.simpleName)
-                    .commit()
+                    .commit()*/
             }
 
             else -> return super.onOptionsItemSelected(item)
@@ -232,10 +272,4 @@ class MainActivity : AppCompatActivity()   {
             }
         }
     }
-
-
-
-
-
-
 }

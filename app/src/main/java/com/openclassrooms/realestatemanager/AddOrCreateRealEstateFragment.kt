@@ -30,6 +30,7 @@ import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simp
 import com.openclassrooms.realestatemanager.utility.LocationUtil
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
 import com.openclassrooms.realestatemanager.utility.Utils
+import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +68,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         realEstateViewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
 
 
+
     }
 
     override fun onCreateView(
@@ -75,6 +77,9 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             savedInstanceState: Bundle?
     ): View {
         binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
+
+
+
 
         Handler(Looper.getMainLooper()).post {
 
@@ -112,6 +117,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         }
         return binding.root
     }
+
+
 
     private fun initializeSpinners() {
         val spinnerType = binding.activityAddOrEditRealEstateTypeSpinner

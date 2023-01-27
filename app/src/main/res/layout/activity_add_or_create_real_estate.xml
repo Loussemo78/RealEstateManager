@@ -196,7 +196,7 @@
 
             <Button
                 android:id="@+id/activity_add_or_edit_real_estate_entry_date_button"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="30dp"
@@ -224,7 +224,7 @@
 
             <Button
                 android:id="@+id/activity_add_or_edit_real_estate_sale_date_button"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:background="@drawable/rounded_corners"

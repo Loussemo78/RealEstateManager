@@ -14,7 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class RealEstateViewModel(application: Application):AndroidViewModel(application) {
-    private val repository: RealEstateRepository = RealEstateRepository(application.applicationContext)
+     var repository: RealEstateRepository = RealEstateRepository(application.applicationContext)
+
     private var readAll: LiveData<List<RealEstate>> = repository.getAllRealEstates()
 
 

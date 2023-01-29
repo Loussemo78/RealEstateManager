@@ -39,9 +39,6 @@ interface RealEstateDao {
     @Query("SELECT * FROM real_estate_db")
     fun getRealEstatesWithCursor(): Cursor
 
-    //Content Provider
-//    @Query("SELECT * FROM real_estate_db")
-//    suspend fun getRealEstatesWithCursor(): Cursor?
 
     //Filter
     @Query("SELECT * FROM real_estate_db WHERE price >= :minimumPrice AND price <= :maximumPrice AND surface >= :minimumSurface AND numberOfPhotos >= :numberOfPhotos AND surface <= :maximumSurface  AND entryDate >= :minimumEntryDate AND dateOfSale >= :minimumSaleDate ")

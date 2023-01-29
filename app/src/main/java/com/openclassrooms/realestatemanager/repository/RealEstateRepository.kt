@@ -14,19 +14,19 @@ class RealEstateRepository( val context: Context) {
 
 
 
-    suspend fun insertRealEstate(realEstate: RealEstate) =
+     fun insertRealEstate(realEstate: RealEstate) =
             dao.insertRealEstate(realEstate)
 
-    suspend fun updateRealEstate(realEstate: RealEstate) =
+     fun updateRealEstate(realEstate: RealEstate) =
             dao.updateRealEstate(realEstate)
 
-    suspend fun deleteRealEstate(realEstate: RealEstate) =
+     fun deleteRealEstate(realEstate: RealEstate) =
             dao.deleteRealEstate(realEstate)
 
-    suspend fun deleteRealEstateWithID(id: Long) =
+     fun deleteRealEstateWithID(id: Long) =
         dao.deleteRealEstateWitID(id)
 
-    suspend fun deleteAll() =
+     fun deleteAll() =
             dao.deleteAll()
 
 
@@ -44,9 +44,7 @@ class RealEstateRepository( val context: Context) {
        return dao.getRealEstatesFiltered(minimumPrice,maximumPrice, minimumSurface, maximumSurface, numberOfPhotos, minimumEntryDate, minimumSaleDate )
     }
 
-//    fun gesEstatesBySearch(query: SimpleSQLiteQuery) : LiveData<List<RealEstate>>{
-//        return dao.getRealEstatesFiltered(query)
-//    }
+
 
 
 

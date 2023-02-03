@@ -194,13 +194,55 @@ class MainActivity : AppCompatActivity()   {
         binding.bottomNavigationView?.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
-                R.id.page1 -> supportFragmentManager.beginTransaction()
+                R.id.page1 -> {
+                    val tabletSize = resources.getBoolean(com.openclassrooms.realestatemanager.R.bool.isTablet)
+
+                    val fragmentList = RealEstateFragment()
+
+                    if (!tabletSize) {
+                        supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.activity_main_fragment_container_view_list,
+                                        fragmentList)
+                                .addToBackStack(RealEstateFragment::class.java.simpleName)
+                                .commit()
+
+
+                    } else {
+                        startActivity(Intent(this, MainActivity::class.java))
+                    }
+
+                    }
+
+                    /*supportFragmentManager.beginTransaction()
                         .replace(R.id.activity_main_fragment_container_view_list,
-                                RealEstateFragment()).commit()
+                                RealEstateFragment()).commit()*/
+
                 R.id.page2 -> {
-                    supportFragmentManager.beginTransaction()
+                    val tabletSize = resources.getBoolean(com.openclassrooms.realestatemanager.R.bool.isTablet)
+
+                    val fragmentMap = MapFragment()
+
+                    if (!tabletSize) {
+                        supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.activity_main_fragment_container_view_list,
+                                        fragmentMap)
+                                .addToBackStack(MapFragment::class.java.simpleName)
+                                .commit()
+
+
+                    } else {
+                        supportFragmentManager
+                                .beginTransaction()
+                                .replace(com.openclassrooms.realestatemanager.R.id.frame_layout_detail, fragmentMap)
+                                .commit()
+
+                    }
+
+                    /*supportFragmentManager.beginTransaction()
                             .replace(R.id.activity_main_fragment_container_view_list,
-                                    MapFragment()).commit()
+                                    MapFragment()).commit()*/
                 }
             }
             true

@@ -76,7 +76,7 @@ class RealEstateContentProviderTest {
       values.put("type", "Penthouse")
       values.put("place", "Queens")
       values.put("price", "50")
-      values.put("id", "3")
+      values.put("id", "2")
       return values
    }
 

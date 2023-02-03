@@ -4,10 +4,15 @@ import FileUtils
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,6 +22,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
  import com.bumptech.glide.Glide
@@ -406,7 +414,8 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                     TAG_REAL_ESTATE_FRAGMENT
             )
 
-            val builder = AlertDialog.Builder(requireContext())
+            context?.let { it1 -> createNotification(it1) }
+            /*val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Nouvel appartement")
             builder.setMessage("Vous venez de crée un nouvel appartement")
             builder.setPositiveButton("Continuer") { dialog, _ ->
@@ -416,7 +425,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 dialog.dismiss()
             }*/
             val dialog: AlertDialog = builder.create()
-            dialog.show()
+            dialog.show()*/
 
 
             // Toast.makeText(requireActivity(), "submit ok", Toast.LENGTH_SHORT).show()
@@ -429,6 +438,35 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         takePhotoOrGalleryOnActivityResult(requestCode, resultCode, data)
+    }
+
+
+    fun createNotification(context: Context){
+        // Créez une instance de NotificationCompat.Builder
+        val channelId = "my_notification_channel"
+
+        val builder = NotificationCompat.Builder(requireContext(), channelId)
+                .setSmallIcon(R.drawable.icons8_android_os)
+                .setContentTitle("RealEstateManager")
+                .setContentText("Vous venez d'ajouter un restaurant")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        // Obtenez un objet NotificationManager
+        val notificationManager = context.applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        // Si la version Android est supérieure ou égale à Oreo (26), vous devez créer un canal de notification
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.channel_name)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = descriptionText
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+// Afficher la notification
+        notificationManager.notify(0, builder.build())
     }
 
     private fun takePhotoOrGalleryOnActivityResult(

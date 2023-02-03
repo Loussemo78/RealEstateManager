@@ -11,6 +11,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="agent_in_charge">Agent in charge</string>
+    <string name="channel_name">App updates</string>
+    <string name="channel_description">Receive notifications for app updates.</string>
     <string name="type">Type</string>
     <string name="status">Status</string>
     <string name="surface">Surface</string>

@@ -17,6 +17,8 @@ class RealEstateRepository( val context: Context) {
      fun updateRealEstate(realEstate: RealEstate) =
             dao.updateRealEstate(realEstate)
 
+     fun deleteRealEstate(realEstate: RealEstate) =
+            dao.deleteRealEstate(realEstate)
 
     fun getAllRealEstates():LiveData<List<RealEstate>> =
             dao.getRealEstates()

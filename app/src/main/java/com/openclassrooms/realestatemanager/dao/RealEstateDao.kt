@@ -28,13 +28,6 @@ interface RealEstateDao {
     @Delete
       fun deleteRealEstate(realEstate: RealEstate?): Int
 
-
-    @Query("DELETE FROM real_estate_db WHERE id = :realEstateId ")
-    fun deleteRealEstateWitID(realEstateId: Long): Int
-
-    @Query("DELETE FROM real_estate_db")
-      fun deleteAll(): Int
-
     //Content Provider
     @Query("SELECT * FROM real_estate_db")
     fun getRealEstatesWithCursor(): Cursor

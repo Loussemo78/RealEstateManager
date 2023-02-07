@@ -11,23 +11,11 @@ class RealEstateRepository( val context: Context) {
 
     private val dao : RealEstateDao = RealEstateDatabase.getInstance(context)?.realEstateDao!!
 
-
-
-
      fun insertRealEstate(realEstate: RealEstate) =
             dao.insertRealEstate(realEstate)
 
      fun updateRealEstate(realEstate: RealEstate) =
             dao.updateRealEstate(realEstate)
-
-     fun deleteRealEstate(realEstate: RealEstate) =
-            dao.deleteRealEstate(realEstate)
-
-     fun deleteRealEstateWithID(id: Long) =
-        dao.deleteRealEstateWitID(id)
-
-     fun deleteAll() =
-            dao.deleteAll()
 
 
     fun getAllRealEstates():LiveData<List<RealEstate>> =

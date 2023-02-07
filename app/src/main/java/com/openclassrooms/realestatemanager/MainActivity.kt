@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity()   {
 
     companion object{
         private const val ALL_PERMISSIONS = 10
-        const val CHANNEL_ID = "notification_add_real_estate"
 
         const val ADD_REAL_ESTATE_REQUEST_CODE = 100
         const val ADD_REAL_ESTATE = "ADD_REAL_ESTATE"
@@ -77,7 +76,7 @@ class MainActivity : AppCompatActivity()   {
                     ,40.75691,"video")
 
             repository.insertRealEstate(realEstateObject)
-        }
+      }
         initializeBottomNavigationItemView()
 
         viewModel = ViewModelProvider(this)[RealEstateViewModel::class.java]
@@ -112,7 +111,6 @@ class MainActivity : AppCompatActivity()   {
 
         realEstateFilteredList = ArrayList()
 
-
     }
 
 
@@ -146,11 +144,7 @@ class MainActivity : AppCompatActivity()   {
                             .commit()
 
                 }
-               /*supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.activity_main_fragment_container_view_list, AddOrCreateRealEstateFragment())
-                    .addToBackStack(RealEstateFragment::class.java.simpleName)
-                    .commit()*/
+
 
 
             }
@@ -178,11 +172,7 @@ class MainActivity : AppCompatActivity()   {
                 }
 
 
-                /*supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.activity_main_fragment_container_view_list, SearchRealEstateFragment())
-                    .addToBackStack(RealEstateFragment::class.java.simpleName)
-                    .commit()*/
+
             }
 
             else -> return super.onOptionsItemSelected(item)
@@ -214,9 +204,7 @@ class MainActivity : AppCompatActivity()   {
 
                     }
 
-                    /*supportFragmentManager.beginTransaction()
-                        .replace(R.id.activity_main_fragment_container_view_list,
-                                RealEstateFragment()).commit()*/
+
 
                 R.id.page2 -> {
                     val tabletSize = resources.getBoolean(com.openclassrooms.realestatemanager.R.bool.isTablet)
@@ -240,9 +228,7 @@ class MainActivity : AppCompatActivity()   {
 
                     }
 
-                    /*supportFragmentManager.beginTransaction()
-                            .replace(R.id.activity_main_fragment_container_view_list,
-                                    MapFragment()).commit()*/
+
                 }
             }
             true
@@ -303,15 +289,4 @@ class MainActivity : AppCompatActivity()   {
         }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == ADD_REAL_ESTATE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                /*val newRealEstate = data?.getSerializableExtra(ADD_REAL_ESTATE) as RealEstate?
-                realEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel)*/
-              //  showNotificationOnAddRealEstate()
-            }
-        }
-    }
 }

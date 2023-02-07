@@ -59,7 +59,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     private lateinit var newRealEstate: RealEstate
     private lateinit var realEstateViewModel: RealEstateViewModel
     private lateinit var othersPhotosList: ArrayList<RealEstatePhotos>
-    private lateinit var listRealEstate: ArrayList<RealEstate>
 
     var lastSelectedDayOfMonth = 0
     var lastSelectedMonth = 0
@@ -415,20 +414,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             )
 
             context?.let { it1 -> createNotification(it1) }
-            /*val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Nouvel appartement")
-            builder.setMessage("Vous venez de crée un nouvel appartement")
-            builder.setPositiveButton("Continuer") { dialog, _ ->
-                dialog.dismiss()
-            }
-           /* builder.setNegativeButton("Annuler") { dialog, _ ->
-                dialog.dismiss()
-            }*/
-            val dialog: AlertDialog = builder.create()
-            dialog.show()*/
-
-
-            // Toast.makeText(requireActivity(), "submit ok", Toast.LENGTH_SHORT).show()
 
 
         }
@@ -442,19 +427,19 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
 
     fun createNotification(context: Context){
-        // Créez une instance de NotificationCompat.Builder
-        val channelId = "my_notification_channel"
+        //Create an instance of NotificationCompat.Builder
+        val channelId = "notification_add_real_estate"
 
         val builder = NotificationCompat.Builder(requireContext(), channelId)
                 .setSmallIcon(R.drawable.icons8_android_os)
                 .setContentTitle("RealEstateManager")
-                .setContentText("Vous venez d'ajouter un restaurant")
+                .setContentText("You have just added a property")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-        // Obtenez un objet NotificationManager
+
         val notificationManager = context.applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
-        // Si la version Android est supérieure ou égale à Oreo (26), vous devez créer un canal de notification
+        // If the Android version is greater than or equal to Oreo (26), you must create a notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.channel_name)
             val descriptionText = getString(R.string.channel_description)
@@ -465,7 +450,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             notificationManager.createNotificationChannel(channel)
         }
 
-// Afficher la notification
+        // Display notification
         notificationManager.notify(0, builder.build())
     }
 
@@ -556,20 +541,12 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
                         selectedPhotos.add(imageUri)
 
-                        // uriToString = ne retourne pas un string fonctionnel.
                         val realEstatePhotos = RealEstatePhotos()
                         val imageUriToString = RealEstatePhotos.uriToString(imageUri)
-                        // val imageUriToString = uriToString(imageUri)
-                        //newRealEstate.mainPhotoUrl = imageUriToString
+
                         realEstatePhotos.photoUri = imageUriToString
-                        // le problème c'est que tu prends URI des images et tu l'affiches
-                        // ce que tu dois faire convert URI to String et stocker ce dernier, ensuite
-                        //                        // tu l'affiches.
 
-                        /* GlobalScope.launch(Dispatchers.IO) {
-                            RealEstateDatabase.getInstance(requireContext())?.realEstateDao?.insertRealEstate(newRealEstate)
 
-                        }*/
 
                         othersPhotosList.add(realEstatePhotos)
 
@@ -581,16 +558,17 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
                 }
 
-                //implémenter GridView
-                // Ajouter des Strings au lieu des URI
+                //implement GridView
+                // Add Strings instead of URIs
 
                 val adapter = ImagesAdapter(selectedPhotos, activity)
                 binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
 
-                // ici la liste des photos séléctionnées
+                 // here the list of selected photos
             }
         }
     }
 }
+
 
 

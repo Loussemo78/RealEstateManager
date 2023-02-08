@@ -66,6 +66,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
+    //harmcrest
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+
     //Coroutines
     implementation"org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation"org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"

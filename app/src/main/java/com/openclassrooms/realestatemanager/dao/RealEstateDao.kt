@@ -10,8 +10,9 @@ interface RealEstateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
      fun insertRealEstate(realEstate: RealEstate?): Long
 
-
-
+    //for test
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+     fun insertAll(realEstates: List<RealEstate>)
 
     @Query("SELECT * FROM real_estate_db WHERE id = :realEstateId")
      fun getRealEstate(realEstateId: Long): LiveData<RealEstate>
@@ -22,11 +23,19 @@ interface RealEstateDao {
     @Query("SELECT * FROM real_estate_db")
      fun getRealEstates(): LiveData<List<RealEstate>>
 
+
     @Update
       fun updateRealEstate(realEstate: RealEstate?): Int
 
     @Delete
       fun deleteRealEstate(realEstate: RealEstate?): Int
+
+
+    @Query("DELETE FROM real_estate_db WHERE id = :realEstateId ")
+    fun deleteRealEstateWitID(realEstateId: Long): Int
+
+    @Query("DELETE FROM real_estate_db")
+      fun deleteAll(): Int
 
     //Content Provider
     @Query("SELECT * FROM real_estate_db")

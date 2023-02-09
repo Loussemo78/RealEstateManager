@@ -156,7 +156,6 @@ class SearchRealEstateFragment : Fragment() {
          var firstLocation: String? = "",
          var description: String? = "",
          var numberOfPhotos: Int? = 0,
-       //  var pointOfInterest: String? = "",
          var entryDateInDate: String? = "",
          var saleDateInDate: String? = "",
     ) {

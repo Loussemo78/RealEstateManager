@@ -14,8 +14,9 @@ class DateConverter {
     fun fromDate(date: Date?): Long? {
         return if (date == null) null else date.getTime()
     }
+
     companion object {
 
-            val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
     }
 }

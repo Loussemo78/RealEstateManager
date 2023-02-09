@@ -2,24 +2,17 @@ package com.openclassrooms.realestatemanager
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.RingtoneManager
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import com.openclassrooms.realestatemanager.di.DI
 import com.openclassrooms.realestatemanager.models.RealEstate
@@ -37,7 +30,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity()   {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var  realEstateHandlerThread: RealEstateHandlerThread
     private lateinit var viewModel: RealEstateViewModel
     private lateinit var  repository: RealEstateRepository
     private lateinit var  detailFragment: RealEstateDetailFragment
@@ -107,7 +99,6 @@ class MainActivity : AppCompatActivity()   {
                         RealEstateFragment()).commit()
 
 
-        realEstateHandlerThread = RealEstateHandlerThread("insertRealEstate")
 
         realEstateFilteredList = ArrayList()
 
@@ -161,20 +152,13 @@ class MainActivity : AppCompatActivity()   {
                                     fragmentSearch)
                             .addToBackStack(SearchRealEstateFragment::class.java.simpleName)
                             .commit()
-
-
                 } else {
                     supportFragmentManager
                             .beginTransaction()
                             .replace(com.openclassrooms.realestatemanager.R.id.frame_layout_detail, fragmentSearch)
                             .commit()
-
                 }
-
-
-
             }
-
             else -> return super.onOptionsItemSelected(item)
         }
         return true

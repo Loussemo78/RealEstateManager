@@ -42,7 +42,6 @@ class ImagesAdapter<T>(private val itemsList: ArrayList<T>, private var context:
             is Bitmap -> layout?.setImageBitmap(itemsList[position] as Bitmap)
             else -> throw IllegalArgumentException("Type T must be Uri or Bitmap")
         }
-        //layout?.setImageURI(itemsList[position])
 
         return convertView
     }

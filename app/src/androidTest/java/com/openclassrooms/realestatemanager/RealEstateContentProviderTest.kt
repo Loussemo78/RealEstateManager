@@ -43,7 +43,7 @@ class RealEstateContentProviderTest {
       val cursor: Cursor? = mContentResolver!!.query(ContentUris.withAppendedId(RealEstateContentProvider.URI_REAL_ESTATE, USER_ID), null, null, null, null)
       assertThat(cursor, notNullValue())
       if (cursor != null) {
-         assertThat(cursor.count, `is`(4))
+         assertThat(cursor.count, `is`(6))
       }
       cursor?.close()
    }
@@ -58,13 +58,13 @@ class RealEstateContentProviderTest {
       val cursor: Cursor? = mContentResolver!!.query(ContentUris.withAppendedId(RealEstateContentProvider.URI_REAL_ESTATE, USER_ID), null, null, null, null)
       assertThat(cursor, notNullValue())
       if (cursor != null) {
-         assertThat(cursor.count, `is`(4))
+         assertThat(cursor.count, `is`(6))
       }
       if (cursor != null) {
          assertThat(cursor.moveToLast(), `is`(true))
       }
       if (cursor != null) {
-         assertThat(cursor.getString(cursor.getColumnIndexOrThrow("type")), `is`("Penthouse"))
+         assertThat(cursor.getString(cursor.getColumnIndexOrThrow("type")), `is`("Loft"))
       }
    }
 
@@ -73,7 +73,7 @@ class RealEstateContentProviderTest {
    // ---
    private fun generateItem(): ContentValues? {
       val values = ContentValues()
-      values.put("type", "Penthouse")
+      values.put("type", "Loft")
       values.put("place", "Queens")
       values.put("price", "50")
       values.put("id", "4")

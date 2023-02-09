@@ -46,6 +46,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -454,6 +455,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         notificationManager.notify(0, builder.build())
     }
 
+
     private fun takePhotoOrGalleryOnActivityResult(
             requestCode: Int,
             resultCode: Int,
@@ -562,12 +564,13 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 // Add Strings instead of URIs
 
                 val adapter = ImagesAdapter(selectedPhotos, activity)
+                // here the list of selected photos
                 binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
 
-                 // here the list of selected photos
             }
         }
     }
+
 }
 
 

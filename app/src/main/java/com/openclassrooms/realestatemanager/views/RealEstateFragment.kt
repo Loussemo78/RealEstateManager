@@ -1,9 +1,5 @@
 package com.openclassrooms.realestatemanager.views
 
-import android.app.Activity.RESULT_OK
-import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.MainActivity
-import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.RealEstateRecyclerViewAdapter
-import com.openclassrooms.realestatemanager.database.RealEstateHandlerThread
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateListBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 
@@ -28,7 +22,6 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
     private lateinit var recyclerView: RecyclerView
 
 
-    private val EDIT_REQUEST_CODE = 25
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -58,43 +51,10 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == EDIT_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                val realEstate = data?.getSerializableExtra(EDIT_REAL_ESTATE) as RealEstate?
-                val realEstateHandlerThread = RealEstateHandlerThread("UpdateRealEstateInDatabase")
-                realEstateHandlerThread.startUpdateRealEstateHandler(realEstate, realEstateViewModel)
-            }
-        }
-    }
-    // Declare our interface that will be implemented by any container activity
-
-
     companion object {
         fun newInstance() = RealEstateFragment()
         const val KEY = "RealEstateClicked"
         const val EDIT_REAL_ESTATE = "RealEstateToEdit"
-
-        fun isTablet(context: Context): Boolean {
-            val xlarge = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_XLARGE
-            val large = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_LARGE
-            return xlarge || large
-        }
-
-        fun isTablet1(context: Context): Boolean {
-            val xlarge = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == 4
-            val large = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_LARGE
-            return xlarge || large
-        }
-
-
     }
 
     override fun onRealEstateClicked(realEstate: RealEstate) {
@@ -113,20 +73,13 @@ class RealEstateFragment: Fragment() , RealEstateRecyclerViewAdapter.OnRealEstat
                     ?.replace(com.openclassrooms.realestatemanager.R.id.activity_main_fragment_container_view_list, fragmentDetail)
                     ?.addToBackStack(RealEstateDetailFragment::class.java.simpleName)
                     ?.commit()
-            // do something
 
         } else {
             activity?.supportFragmentManager
                     ?.beginTransaction()
                     ?.replace(com.openclassrooms.realestatemanager.R.id.frame_layout_detail, fragmentDetail)
                     ?.commit()
-
-            // do something else
             }
-
-
         }
-
-
     }
 

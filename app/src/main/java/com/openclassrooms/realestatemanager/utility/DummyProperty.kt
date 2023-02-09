@@ -80,7 +80,5 @@ class DummyProperty {
 
 
         )
-
     }
-
 }

@@ -46,11 +46,11 @@ class EstateDaoTest {
         val estate = DummyProperty.getDummyProperty()
         dao.insertRealEstate(estate)
         val result = dao.getRealEstates().getOrAwaitValue()
-        assertEquals(1,result.size)
+        assertEquals(1, result.size)
     }
 
     @Test
-    fun updateEstate()  {
+    fun updateEstate() {
         val estate = DummyProperty.getDummyProperty()
 
         val propertyToUpdate = estate.copy(surface = 1000)
@@ -61,12 +61,12 @@ class EstateDaoTest {
         val updatedProperty = dao.getRealEstates().getOrAwaitValue().first()
         val result = dao.getRealEstates().getOrAwaitValue()
 
-        assertEquals(1,result.size)
-        assertEquals(updatedProperty.surface,1000)
+        assertEquals(1, result.size)
+        assertEquals(updatedProperty.surface, 1000)
     }
 
     @Test
-    fun getPropertyResearch()  {
+    fun getPropertyResearch() {
 
         val allProperties = DummyProperty.samplePropertyList
         dao.insertAll(allProperties)
@@ -89,7 +89,7 @@ class EstateDaoTest {
                 isMaxDate
         ).getOrAwaitValue()
 
-        assertThat(fetchedProperties.size , `is`(greaterThanOrEqualTo(0)))
+        assertThat(fetchedProperties.size, `is`(greaterThanOrEqualTo(0)))
         assertThat(fetchedProperties[0].surface, `is`(greaterThanOrEqualTo(8)))
         assertThat(fetchedProperties[0].surface, `is`(lessThanOrEqualTo(10)))
         assertThat(fetchedProperties[0].price, `is`(lessThanOrEqualTo(450)))
@@ -100,9 +100,8 @@ class EstateDaoTest {
     }
 
 
-
     @Test
-    fun deleteAllProperties()  {
+    fun deleteAllProperties() {
 
         val property = DummyProperty.getDummyProperty()
         dao.insertRealEstate(property)

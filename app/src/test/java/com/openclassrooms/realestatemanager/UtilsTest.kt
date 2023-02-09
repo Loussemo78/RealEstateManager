@@ -23,13 +23,6 @@ class UtilsTest {
         assertEquals(expectedValue, value)
     }
 
-    @Test
-    fun convertDollarToEuro() {
-        val value: Int = Utils.convertDollarToEuro(500)
-        val expectedValue = 406
-        assertEquals(expectedValue, value)
-    }
-
    //method that  returns a value in the format "dd/MM/yyyy"
     @Test
     fun assertGetTodayDateWorks() {

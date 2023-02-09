@@ -38,11 +38,6 @@ import kotlin.math.roundToInt
          * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
          * @return
          */
-        val todayDate: String
-            get() {
-                val dateFormat: DateFormat = simpleDateFormat
-                return dateFormat.format(Date())
-            }
 
         fun getTodayDateRefactor(): String?{
             val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
@@ -57,10 +52,6 @@ import kotlin.math.roundToInt
          * @return
          */
 
-        fun isInternetAvailable(context: Context): Boolean {
-            val wifi = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-            return wifi.isWifiEnabled
-        }
 
         fun isInternetAvailableSecond(context: Context): Boolean {
             val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -79,22 +70,6 @@ import kotlin.math.roundToInt
                     "In hac habitasse platea dictumst. Vestibulum nec hendrerit nisi. " +
                     "Nulla id leo ac diam pretium pretium a a nisi. " +
                     "Nulla blandit ornare est, vel condimentum risus. Pellentesque ac blandit arcu."
-        }
-
-        fun convertStringToDate(stringDate: String?): Date? {
-
-            var date: Date? = null
-            if (stringDate != null){
-                date = simpleDateFormat.parse(stringDate)
-            }
-            return date
-        }
-
-        //page details
-        fun convertDateToString(date: Date?): String? {
-            if (date == null) return ""
-            val simpleDateFormat = simpleDateFormat
-            return simpleDateFormat.format(date)
         }
     }
 

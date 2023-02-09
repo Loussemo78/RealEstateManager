@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.models
 
-import android.content.ClipData.Item
 import android.content.ContentValues
 import androidx.room.*
 import java.io.Serializable
@@ -112,16 +111,10 @@ data class RealEstate(
             if (values.containsKey("agentPhotoUrl")) item.agentPhotoUrl = values.getAsString("agentPhotoUrl")
             if (values.containsKey("videoId")) item.video = values.getAsString("videoId")
 
-            // continuer les attributs de la calsse RealEstate ici
 
             return item
         }
     }
-
-
-
-    // --- UTILS ---
-
 }
 
 

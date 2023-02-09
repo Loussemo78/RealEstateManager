@@ -14,8 +14,6 @@ class RealEstateRepository( val context: Context) {
      fun insertRealEstate(realEstate: RealEstate) =
             dao.insertRealEstate(realEstate)
 
-     fun updateRealEstate(realEstate: RealEstate) =
-            dao.updateRealEstate(realEstate)
 
      fun deleteRealEstate(realEstate: RealEstate) =
             dao.deleteRealEstate(realEstate)
@@ -33,9 +31,4 @@ class RealEstateRepository( val context: Context) {
     ): LiveData<List<RealEstate>>{
        return dao.getRealEstatesFiltered(minimumPrice,maximumPrice, minimumSurface, maximumSurface, numberOfPhotos, minimumEntryDate, minimumSaleDate )
     }
-
-
-
-
-
 }

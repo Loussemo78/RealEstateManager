@@ -31,7 +31,6 @@ class RealEstateDetailFragment:Fragment() {
 private lateinit var binding:FragmentRealEstateDetailBinding
 private lateinit var othersPhotosList: ArrayList<RealEstatePhotos>
 
-private lateinit var realEstate:RealEstate
 private var realEstateId:Int = 0
     private lateinit var  map: GoogleMap
 
@@ -73,9 +72,6 @@ private var realEstateId:Int = 0
           //gridView  uri
           // implémenter GridView
           val selectedPhotos = ArrayList<Uri>()
-
-
-
           if (realEstate.listPhotos != null){
 
                       for (item in realEstate.listPhotos!!){
@@ -96,14 +92,6 @@ private var realEstateId:Int = 0
           if(binding.fragmentRealEstateOtherPhotosGrid != null){
               binding.fragmentRealEstateOtherPhotosGrid!!.adapter = adapter
           }
-
-
-
-
-
-
-
-
 
           binding.fragmentOnClickRealEstateAgentName.text = realEstate.agent
 
@@ -131,7 +119,7 @@ private var realEstateId:Int = 0
         binding.fragmentOnClickRealEstatePriceValue.text = "$" + realEstate.price
         binding.fragmentOnClickRealEstateEntryDateValue.text = realEstate.entryDate
           binding.fragmentOnClickRealEstateSaleDateValue.text = dateOfSale
-   //Enregistrer gridView dans le detail fragment
+   //record gridView in  detail fragment
 
         val supportMapFragment = this.childFragmentManager
                 .findFragmentById(R.id.fragment_on_click_real_estate_map_fragment) as SupportMapFragment?
@@ -160,24 +148,10 @@ private var realEstateId:Int = 0
 
               youtubeWebView.loadUrl("https://www.youtube.com/embed/$myVideoYoutubeId")
           }
-
-
-              /*lifecycle.addObserver(binding.fragmentOnClickRealEstateVideo)
-              binding.fragmentOnClickRealEstateVideo.initialize(object : AbstractYouTubePlayerListener() {
-
-                  override fun onReady(youTubePlayer: YouTubePlayer) {
-                      if (realEstate.video.isNotEmpty()) {
-                          youTubePlayer.cueVideo(realEstate.video, 0f)
-                      }
-                  }
-              })*/
-
-
     }
 
 
     companion object {
-        //fun newInstance() = RealEstateDetailFragment()
         const val KEY_ESTATE_FOR_DETAILS: String = "ID_ESTATE"
 
         fun newInstance(id: Long): RealEstateDetailFragment {

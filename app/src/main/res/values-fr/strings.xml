@@ -1,50 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Real Estate Manager</string>
+    <string name="app_name">Gestionnaire immobilier</string>
     <string name="title_activity_add_or_create_real_estate">AddOrCreateRealEstateActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="first_fragment_label">Premier fragment</string>
+    <string name="second_fragment_label">Deuxième fragment</string>
+    <string name="next">Prochain</string>
+    <string name="previous">Précédent</string>
     <string name="description">Description</string>
     <string name="google_maps_api_key">AIzaSyBNaYHRy_wAQNg8c2zXiyJ3uLL_eFSFFTs</string>
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="agent_in_charge">Agent in charge</string>
-    <string name="channel_name">App updates</string>
-    <string name="channel_description">Receive notifications for app updates.</string>
+    <string name="hello_first_fragment">Salut  premier  fragment</string>
+    <string name="hello_second_fragment">Salut second fragment. Arg: %1$s</string>
+    <string name="agent_in_charge">Mandataire en charge</string>
+    <string name="channel_name">Mises à jour de l\application</string>
+    <string name="channel_description">Recevez des notifications pour les mises à jour de l\application.</string>
     <string name="type">Type</string>
-    <string name="status">Status</string>
+    <string name="status">Statut</string>
     <string name="surface">Surface</string>
-    <string name="number_of_rooms">Number of rooms</string>
-    <string name="number_of_bathrooms">Number of bathrooms</string>
-    <string name="number_of_bedrooms">Number of bedrooms</string>
+    <string name="number_of_rooms">Nombre de pièces</string>
+    <string name="number_of_bathrooms">Nombre de salle de bains</string>
+    <string name="number_of_bedrooms">Nombre de chambres</string>
     <string name="location">Location</string>
-    <string name="points_of_interest">Points of interest</string>
-    <string name="price">Price</string>
-    <string name="borough_or_neighborhood">Borough or Neighborhood</string>
-    <string name="price_in_dollar">Price in dollar</string>
-    <string name="add_main_photo">Add Main Photo</string>
-    <string name="add_other_photos">Add other photos</string>
-    <string name="search">Search</string>
-    <string name="minimum_price_in_dollar">Minimum price in dollar</string>
-    <string name="maximum_price_in_dollar">Maximum price in dollar</string>
-    <string name="minimum_surface_in_square_meters">Minimum surface in sq m</string>
-    <string name="maximum_surface_in_square_meters">Maximum surface in sq m</string>
-    <string name="minimum_number_of_photos">Minimum number of photos</string>
-    <string name="put_on_the_market_since_in_days">Put on the market since (dd/MM/yyyy)</string>
-    <string name="sale_since_in_days">Sale since (dd/MM/yyyy)</string>
-    <string name="surface_in_square_meter">Surface in square meter</string>
-    <string name="address">Address</string>
+    <string name="points_of_interest">Points d\interet</string>
+    <string name="price">Prix</string>
+    <string name="borough_or_neighborhood">Arrondissement ou quartier</string>
+    <string name="price_in_dollar">Prix en dollar</string>
+    <string name="add_main_photo">Ajouter une photo principale</string>
+    <string name="add_other_photos">Ajouter d\autres photos</string>
+    <string name="search">Rechercher</string>
+    <string name="minimum_price_in_dollar">Prix minimum en dollar</string>
+    <string name="maximum_price_in_dollar">Prix Maximum en dollar</string>
+    <string name="minimum_surface_in_square_meters"> Surface Minimum en sq m</string>
+    <string name="maximum_surface_in_square_meters">Surface Maximum en sq m </string>
+    <string name="minimum_number_of_photos">Nombre  de  photos minimum</string>
+    <string name="put_on_the_market_since_in_days">Mis sur le marché depuis (dd/MM/yyyy)</string>
+    <string name="sale_since_in_days">Vendu depuis (dd/MM/yyyy)</string>
+    <string name="surface_in_square_meter">Surface en metre carrés</string>
+    <string name="address">Adresse</string>
     <string name="ok">OK</string>
-    <string name="choose_date">Choose Date</string>
-    <string name="entry_date">Entry date</string>
-    <string name="sale_date">Sale date</string>
+    <string name="choose_date">choisir date</string>
+    <string name="entry_date"> date d\entrée</string>
+    <string name="sale_date"> date de vente </string>
     <string name="map">Map</string>
     <string name="media">Media</string>
     <string name="video">Video</string>
     <string name="video_id">Video Id (11 characters)</string>
-    <string name="click_on_an_element_in_the_list">Click on an element in the list to display details</string>
+    <string name="click_on_an_element_in_the_list">Cliquez sur un élément de la liste pour afficher les détails</string>
 
     <string-array name="real_estate_types">
         <item>Loft</item>
@@ -55,8 +56,8 @@
     </string-array>
 
     <string-array name="real_estate_status">
-        <item>For sale</item>
-        <item>Sold</item>
+        <item>A vendre </item>
+        <item>Vendu</item>
     </string-array>
 
     <string-array name="real_estate_agent">

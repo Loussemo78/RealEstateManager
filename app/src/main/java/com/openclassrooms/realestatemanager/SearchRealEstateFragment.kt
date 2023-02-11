@@ -162,5 +162,4 @@ class SearchRealEstateFragment : Fragment() {
 
     }
 
-
 }

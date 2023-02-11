@@ -43,7 +43,7 @@ class RealEstateContentProviderTest {
       val cursor: Cursor? = mContentResolver!!.query(ContentUris.withAppendedId(RealEstateContentProvider.URI_REAL_ESTATE, USER_ID), null, null, null, null)
       assertThat(cursor, notNullValue())
       if (cursor != null) {
-         assertThat(cursor.count, `is`(6))
+         assertThat(cursor.count, `is`(5))
       }
       cursor?.close()
    }
@@ -58,7 +58,7 @@ class RealEstateContentProviderTest {
       val cursor: Cursor? = mContentResolver!!.query(ContentUris.withAppendedId(RealEstateContentProvider.URI_REAL_ESTATE, USER_ID), null, null, null, null)
       assertThat(cursor, notNullValue())
       if (cursor != null) {
-         assertThat(cursor.count, `is`(6))
+         assertThat(cursor.count, `is`(5))
       }
       if (cursor != null) {
          assertThat(cursor.moveToLast(), `is`(true))

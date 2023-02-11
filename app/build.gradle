@@ -12,7 +12,7 @@ android {
     compileSdkVersion 33
     defaultConfig {
         applicationId "com.openclassrooms.realestatemanager"
-        minSdkVersion 19
+        minSdkVersion 21
         multiDexEnabled true
         targetSdkVersion 33
         versionCode 1

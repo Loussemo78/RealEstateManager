@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity()   {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: RealEstateViewModel
     private lateinit var  repository: RealEstateRepository
-    private lateinit var  detailFragment: RealEstateDetailFragment
 
 
     private lateinit var realEstateFilteredList: ArrayList<RealEstate>

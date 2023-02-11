@@ -313,7 +313,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.activityAddOrEditRealEstateSaleDateEditText.setText(
                 newRealEstate.dateOfSale
         )
-        binding.activityAddOrEditRealEstateVideoIdEditText.setText(newRealEstate.video)
     }
 
     private fun displayDataToUpdate(realEstate: RealEstate) {
@@ -346,7 +345,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.activityAddOrEditRealEstateAddressEditText.setText("" + realEstate.secondLocation)
         binding.activityAddOrEditRealEstateEntryDateEditText.setText("" + realEstate.entryDate).toString()
         binding.activityAddOrEditRealEstateSaleDateEditText.setText("" + realEstate.dateOfSale).toString()
-        binding.activityAddOrEditRealEstateVideoIdEditText.setText("" + realEstate.video)
         Looper.loop()
 
     }
@@ -371,7 +369,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
         val entryDate: String = binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
         val saleDate: String = binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
-        val videoId = binding.activityAddOrEditRealEstateVideoIdEditText.text.toString()
         newRealEstate.place = firstLocation
         newRealEstate.price = price
         newRealEstate.description = description
@@ -384,7 +381,6 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         LocationUtil.getLocationFromAddress(requireContext(), newRealEstate, secondLocation)
         newRealEstate.entryDate = entryDate.toString()
         newRealEstate.dateOfSale = saleDate.toString()
-        newRealEstate.video = videoId
 
 
         GlobalScope.launch(Dispatchers.Main) {

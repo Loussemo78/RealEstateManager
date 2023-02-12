@@ -43,10 +43,10 @@ interface RealEstateDao {
 
 
     //Filter
-    @Query("SELECT * FROM real_estate_db WHERE price >= :minimumPrice AND price <= :maximumPrice AND surface >= :minimumSurface AND numberOfPhotos >= :numberOfPhotos AND surface <= :maximumSurface  AND entryDate >= :minimumEntryDate AND dateOfSale >= :minimumSaleDate ")
+    @Query("SELECT * FROM real_estate_db WHERE price >= :minimumPrice AND price <= :maximumPrice AND surface >= :minimumSurface AND numberOfRooms >= :numberOfRooms AND surface <= :maximumSurface  AND entryDate >= :minimumEntryDate AND dateOfSale >= :minimumSaleDate ")
      fun getRealEstatesFiltered(
         minimumPrice: Int?,
-        maximumPrice: Int?, minimumSurface: Int?, maximumSurface: Int?, numberOfPhotos: Int?, minimumEntryDate: String?, minimumSaleDate: String?
+        maximumPrice: Int?, minimumSurface: Int?, maximumSurface: Int?, numberOfRooms: Int?, minimumEntryDate: String?, minimumSaleDate: String?
     ): LiveData<List<RealEstate>>
 
 

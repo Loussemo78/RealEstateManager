@@ -151,9 +151,9 @@ private var realEstateId:Int = 0
     }
 
 
-    companion object {
+   companion object {
         const val KEY_ESTATE_FOR_DETAILS: String = "ID_ESTATE"
-
+        // bundle to display in map fragment
         fun newInstance(id: Long): RealEstateDetailFragment {
             val fragment = RealEstateDetailFragment()
             val args = Bundle()

@@ -8,12 +8,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.openclassrooms.realestatemanager.dao.RealEstateDao
 import com.openclassrooms.realestatemanager.database.RealEstateDatabase
 import com.openclassrooms.realestatemanager.utility.DummyProperty
-import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
 import org.junit.*
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -75,7 +73,7 @@ class EstateDaoTest {
         val isNearMaxPrice = 450
         val isNearMinSurface = 8
         val isNearMaxSurface = 10
-        val isNumPhotos = 0
+        val isNumRooms = 4
         val isMinDate = "24/08/2022"
         val isMaxDate = "29/11/2022"
 
@@ -84,7 +82,7 @@ class EstateDaoTest {
                 isNearMaxPrice,
                 isNearMinSurface,
                 isNearMaxSurface,
-                isNumPhotos,
+                isNumRooms,
                 isMinDate,
                 isMaxDate
         ).getOrAwaitValue()
@@ -95,8 +93,6 @@ class EstateDaoTest {
         assertThat(fetchedProperties[0].price, `is`(lessThanOrEqualTo(450)))
 
         Log.d("getPropertyResearch", fetchedProperties.toString())
-
-
     }
 
 

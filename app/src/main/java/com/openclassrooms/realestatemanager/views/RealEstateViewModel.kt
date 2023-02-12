@@ -29,13 +29,13 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
     fun getAllRealEstates(
         isFiltered: Boolean?,
         minimumPrice: Int?, maximumPrice: Int?,
-        minimumSurface: Int?, maximumSurface: Int?, numberOfPhotos: Int?,
+        minimumSurface: Int?, maximumSurface: Int?, numberOfRooms: Int?,
         minimumEntryDate: String?,
         minimumSaleDate: String?
     ):LiveData<List<RealEstate>>{
 
         return if (isFiltered == true){
-            repository.getRealEstatesFiltered(minimumPrice,maximumPrice,minimumSurface,maximumSurface,numberOfPhotos ,minimumEntryDate,minimumSaleDate)
+            repository.getRealEstatesFiltered(minimumPrice,maximumPrice,minimumSurface,maximumSurface,numberOfRooms ,minimumEntryDate,minimumSaleDate)
         }else{
             readAll
         }
@@ -53,5 +53,4 @@ class RealEstateViewModel(application: Application):AndroidViewModel(application
             repository.deleteRealEstate(realEstate)
         }
     }
-
 }

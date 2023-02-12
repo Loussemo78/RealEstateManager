@@ -24,7 +24,7 @@
                 android:text="@string/type" />
 
             <Spinner
-                android:id="@+id/activity_add_or_edit_real_estate_type_spinner"
+                android:id="@+id/fragment_add_or_edit_real_estate_type_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -46,7 +46,7 @@
                 android:text="@string/status" />
 
             <Spinner
-                android:id="@+id/activity_add_or_edit_real_estate_status_spinner"
+                android:id="@+id/fragment_add_or_edit_real_estate_status_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -68,7 +68,7 @@
                 android:text="@string/agent_in_charge" />
 
             <Spinner
-                android:id="@+id/activity_add_or_edit_real_estate_agent_spinner"
+                android:id="@+id/fragment_add_or_edit_real_estate_agent_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -80,7 +80,7 @@
         <!-- First location -->
         <EditText
 
-            android:id="@+id/activity_add_or_edit_real_estate_first_location_edit_text"
+            android:id="@+id/fragment_add_or_edit_real_estate_first_location_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_add_real_estate_margin"
@@ -89,7 +89,7 @@
 
         <!-- Price -->
         <EditText
-            android:id="@+id/activity_add_or_edit_real_estate_price_edit_text"
+            android:id="@+id/fragment_add_or_edit_real_estate_price_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -99,7 +99,7 @@
 
         <!-- Description -->
         <EditText
-            android:id="@+id/activity_add_or_edit_real_estate_description_edit_text"
+            android:id="@+id/fragment_add_or_edit_real_estate_description_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -108,7 +108,7 @@
 
         <!-- Main Photo button-->
         <Button
-            android:id="@+id/activity_add_or_edit_real_estate_button_main_photo"
+            android:id="@+id/fragment_add_or_edit_real_estate_button_main_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -118,7 +118,7 @@
 
         <!-- Main Photo -->
         <ImageView
-            android:id="@+id/activity_add_or_edit_real_estate_main_photo"
+            android:id="@+id/fragment_add_or_edit_real_estate_main_photo"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
@@ -126,7 +126,7 @@
 
         <!-- Photos button -->
         <Button
-            android:id="@+id/activity_add_or_edit_real_estate_pick_photos_button"
+            android:id="@+id/fragment_add_or_edit_real_estate_pick_photos_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -138,7 +138,7 @@
 
         <!-- Surface -->
         <GridView
-            android:id="@+id/activity_add_or_edit_real_estate_pick_photos_grid"
+            android:id="@+id/fragment_add_or_edit_real_estate_pick_photos_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -146,7 +146,7 @@
             android:numColumns="auto_fit" />
 
         <EditText
-            android:id="@+id/activity_add_or_edit_real_estate_surface_edit_text"
+            android:id="@+id/fragment_add_or_edit_real_estate_surface_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -154,7 +154,7 @@
             android:inputType="number" />
 
         <EditText
-            android:id="@+id/activity_add_or_edit_real_estate_number_of_rooms_edit_text"
+            android:id="@+id/fragment_add_or_edit_real_estate_number_of_rooms_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -163,7 +163,7 @@
 
 
         <EditText
-            android:id="@+id/activity_add_or_edit_real_estate_address_edit_text"
+            android:id="@+id/fragment_add_or_edit_real_estate_address_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -178,7 +178,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/activity_add_or_edit_real_estate_entry_date_edit_text"
+                android:id="@+id/fragment_add_or_edit_real_estate_entry_date_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -186,7 +186,7 @@
                 android:inputType="date" />
 
             <Button
-                android:id="@+id/activity_add_or_edit_real_estate_entry_date_button"
+                android:id="@+id/fragment_add_or_edit_real_estate_entry_date_button"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -206,7 +206,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/activity_add_or_edit_real_estate_sale_date_edit_text"
+                android:id="@+id/fragment_add_or_edit_real_estate_sale_date_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -214,7 +214,7 @@
                 android:inputType="date|none" />
 
             <Button
-                android:id="@+id/activity_add_or_edit_real_estate_sale_date_button"
+                android:id="@+id/fragment_add_or_edit_real_estate_sale_date_button"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -226,7 +226,7 @@
 
 
         <Button
-            android:id="@+id/activity_add_or_edit_real_estate_ok_button"
+            android:id="@+id/fragment_add_or_edit_real_estate_ok_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

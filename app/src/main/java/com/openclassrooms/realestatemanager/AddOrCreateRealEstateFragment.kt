@@ -23,23 +23,18 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
  import com.bumptech.glide.Glide
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.openclassrooms.realestatemanager.adapter.ImagesAdapter
 import com.openclassrooms.realestatemanager.dao.RealEstateDao
 import com.openclassrooms.realestatemanager.database.RealEstateDatabase
-import com.openclassrooms.realestatemanager.databinding.ActivityAddOrCreateRealEstateBinding
+import com.openclassrooms.realestatemanager.databinding.FragmentAddOrCreateRealEstateBinding
 import com.openclassrooms.realestatemanager.models.RealEstate
 import com.openclassrooms.realestatemanager.models.RealEstatePhotos
 import com.openclassrooms.realestatemanager.utility.DateConverter.Companion.simpleDateFormat
 import com.openclassrooms.realestatemanager.utility.LocationUtil
 import com.openclassrooms.realestatemanager.utility.TAG_REAL_ESTATE_FRAGMENT
-import com.openclassrooms.realestatemanager.utility.Utils
-import com.openclassrooms.realestatemanager.views.RealEstateDetailFragment
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +51,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     val TAKE_PICTURE_FOR_OTHER_PHOTOS = 2
     val PICK_PHOTO_FOR_OTHER_PHOTOS = 3
 
-    private lateinit var binding: ActivityAddOrCreateRealEstateBinding
+    private lateinit var binding: FragmentAddOrCreateRealEstateBinding
     private lateinit var newRealEstate: RealEstate
     private lateinit var realEstateViewModel: RealEstateViewModel
     private lateinit var othersPhotosList: ArrayList<RealEstatePhotos>
@@ -85,7 +80,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        binding = ActivityAddOrCreateRealEstateBinding.inflate(layoutInflater)
+        binding = FragmentAddOrCreateRealEstateBinding.inflate(layoutInflater)
 
 
 
@@ -130,9 +125,9 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
 
     private fun initializeSpinners() {
-        val spinnerType = binding.activityAddOrEditRealEstateTypeSpinner
-        val spinnerStatus = binding.activityAddOrEditRealEstateStatusSpinner
-        val spinnerAgent = binding.activityAddOrEditRealEstateAgentSpinner
+        val spinnerType = binding.fragmentAddOrEditRealEstateTypeSpinner
+        val spinnerStatus = binding.fragmentAddOrEditRealEstateStatusSpinner
+        val spinnerAgent = binding.fragmentAddOrEditRealEstateAgentSpinner
         initializeSpinnerAdapter(spinnerType, R.array.real_estate_types)
         initializeSpinnerAdapter(spinnerStatus, R.array.real_estate_status)
         initializeSpinnerAdapter(spinnerAgent, R.array.real_estate_agent)
@@ -154,13 +149,13 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
-        if (p0?.id == R.id.activity_add_or_edit_real_estate_type_spinner)
+        if (p0?.id == R.id.fragment_add_or_edit_real_estate_type_spinner)
             type = p0.getItemAtPosition(i).toString()
 
-        if (p0?.id == R.id.activity_add_or_edit_real_estate_status_spinner)
+        if (p0?.id == R.id.fragment_add_or_edit_real_estate_status_spinner)
             status = p0.getItemAtPosition(i).toString();
 
-        if (p0?.id == R.id.activity_add_or_edit_real_estate_agent_spinner)
+        if (p0?.id == R.id.fragment_add_or_edit_real_estate_agent_spinner)
             agent = p0.getItemAtPosition(i).toString();
     }
 
@@ -169,7 +164,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     }
 
     private fun selectMainPhotoIntent() {
-        binding.activityAddOrEditRealEstateButtonMainPhoto.setOnClickListener { view ->
+        binding.fragmentAddOrEditRealEstateButtonMainPhoto.setOnClickListener { view ->
             val options =
                     arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Cancel")
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
@@ -194,7 +189,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
     }
 
     private fun selectOtherPhotosIntent() {
-        binding.activityAddOrEditRealEstatePickPhotosButton.setOnClickListener { view ->
+        binding.fragmentAddOrEditRealEstatePickPhotosButton.setOnClickListener { view ->
             val options =
                     arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Cancel")
             val builder =
@@ -227,17 +222,17 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
 
     private fun initializeButtonSelectEntryDate() {
-        binding.activityAddOrEditRealEstateEntryDateButton.setOnClickListener { view ->
+        binding.fragmentAddOrEditRealEstateEntryDateButton.setOnClickListener { view ->
             selectDate(
-                    binding.activityAddOrEditRealEstateEntryDateEditText
+                    binding.fragmentAddOrEditRealEstateEntryDateEditText
             )
         }
     }
 
     private fun initializeButtonSelectSaleDate() {
-        binding.activityAddOrEditRealEstateSaleDateButton.setOnClickListener { view ->
+        binding.fragmentAddOrEditRealEstateSaleDateButton.setOnClickListener { view ->
             selectDate(
-                    binding.activityAddOrEditRealEstateSaleDateEditText
+                    binding.fragmentAddOrEditRealEstateSaleDateEditText
             )
         }
     }
@@ -281,36 +276,36 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         agent = newRealEstate.agent
         for (i in types.indices) {
             if (type == types[i]) {
-                binding.activityAddOrEditRealEstateTypeSpinner.setSelection(i)
+                binding.fragmentAddOrEditRealEstateTypeSpinner.setSelection(i)
             }
         }
         for (i in statusArray.indices) {
             if (status == statusArray[i]) {
-                binding.activityAddOrEditRealEstateStatusSpinner.setSelection(i)
+                binding.fragmentAddOrEditRealEstateStatusSpinner.setSelection(i)
             }
         }
         for (i in agents.indices) {
             if (agent == agents[i]) {
-                binding.activityAddOrEditRealEstateAgentSpinner.setSelection(i)
+                binding.fragmentAddOrEditRealEstateAgentSpinner.setSelection(i)
             }
         }
         val price = newRealEstate.price.toString()
         val surface = newRealEstate.surface.toString()
         val numberOfRooms = newRealEstate.numberOfRooms.toString()
-        Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
+        Glide.with(binding.fragmentAddOrEditRealEstateMainPhoto.context)
                 .load(newRealEstate.mainPhotoUrl)
-                .into(binding.activityAddOrEditRealEstateMainPhoto)
-        binding.activityAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
-        binding.activityAddOrEditRealEstatePriceEditText.setText(newRealEstate.price)
-        binding.activityAddOrEditRealEstateDescriptionEditText.setText(newRealEstate.description)
+                .into(binding.fragmentAddOrEditRealEstateMainPhoto)
+        binding.fragmentAddOrEditRealEstateFirstLocationEditText.setText(newRealEstate.place)
+        binding.fragmentAddOrEditRealEstatePriceEditText.setText(newRealEstate.price)
+        binding.fragmentAddOrEditRealEstateDescriptionEditText.setText(newRealEstate.description)
         newRealEstate.listPhotos?.let { othersPhotosList.addAll(it) }
-        binding.activityAddOrEditRealEstateSurfaceEditText.setText(surface)
-        binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(numberOfRooms)
-        binding.activityAddOrEditRealEstateAddressEditText.setText(newRealEstate.secondLocation)
-        binding.activityAddOrEditRealEstateEntryDateEditText.setText(
+        binding.fragmentAddOrEditRealEstateSurfaceEditText.setText(surface)
+        binding.fragmentAddOrEditRealEstateNumberOfRoomsEditText.setText(numberOfRooms)
+        binding.fragmentAddOrEditRealEstateAddressEditText.setText(newRealEstate.secondLocation)
+        binding.fragmentAddOrEditRealEstateEntryDateEditText.setText(
                 newRealEstate.entryDate
         )
-        binding.activityAddOrEditRealEstateSaleDateEditText.setText(
+        binding.fragmentAddOrEditRealEstateSaleDateEditText.setText(
                 newRealEstate.dateOfSale
         )
     }
@@ -325,26 +320,26 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             realEstate.agentPhotoUrl = "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg"
         }
         Looper.prepare() // to be able to make toast
-        binding.activityAddOrEditRealEstateFirstLocationEditText.setText(realEstate.firstLocation)
+        binding.fragmentAddOrEditRealEstateFirstLocationEditText.setText(realEstate.firstLocation)
 
 
 
         activity?.runOnUiThread(Runnable {
-            Glide.with(binding.activityAddOrEditRealEstateMainPhoto.context)
+            Glide.with(binding.fragmentAddOrEditRealEstateMainPhoto.context)
                     .load("" + realEstate.mainPhotoUrl)
-                    .into(binding.activityAddOrEditRealEstateMainPhoto)
+                    .into(binding.fragmentAddOrEditRealEstateMainPhoto)
 
 
         })
 
-        binding.activityAddOrEditRealEstatePriceEditText.setText("" + realEstate.price)
-        binding.activityAddOrEditRealEstateFirstLocationEditText.setText("" + realEstate.place)
-        binding.activityAddOrEditRealEstateDescriptionEditText.setText("" + realEstate.description)
-        binding.activityAddOrEditRealEstateSurfaceEditText.setText("" + realEstate.surface)
-        binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText("" + realEstate.numberOfRooms)
-        binding.activityAddOrEditRealEstateAddressEditText.setText("" + realEstate.secondLocation)
-        binding.activityAddOrEditRealEstateEntryDateEditText.setText("" + realEstate.entryDate).toString()
-        binding.activityAddOrEditRealEstateSaleDateEditText.setText("" + realEstate.dateOfSale).toString()
+        binding.fragmentAddOrEditRealEstatePriceEditText.setText("" + realEstate.price)
+        binding.fragmentAddOrEditRealEstateFirstLocationEditText.setText("" + realEstate.place)
+        binding.fragmentAddOrEditRealEstateDescriptionEditText.setText("" + realEstate.description)
+        binding.fragmentAddOrEditRealEstateSurfaceEditText.setText("" + realEstate.surface)
+        binding.fragmentAddOrEditRealEstateNumberOfRoomsEditText.setText("" + realEstate.numberOfRooms)
+        binding.fragmentAddOrEditRealEstateAddressEditText.setText("" + realEstate.secondLocation)
+        binding.fragmentAddOrEditRealEstateEntryDateEditText.setText("" + realEstate.entryDate).toString()
+        binding.fragmentAddOrEditRealEstateSaleDateEditText.setText("" + realEstate.dateOfSale).toString()
         Looper.loop()
 
     }
@@ -360,15 +355,15 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             newRealEstate.agentPhotoUrl = "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg"
         }
 
-        val firstLocation = binding.activityAddOrEditRealEstateFirstLocationEditText.text.toString()
-        val price = binding.activityAddOrEditRealEstatePriceEditText.text.toString().toInt()
-        val description = binding.activityAddOrEditRealEstateDescriptionEditText.text.toString()
-        val surface = binding.activityAddOrEditRealEstateSurfaceEditText.text.toString().toInt()
+        val firstLocation = binding.fragmentAddOrEditRealEstateFirstLocationEditText.text.toString()
+        val price = binding.fragmentAddOrEditRealEstatePriceEditText.text.toString().toInt()
+        val description = binding.fragmentAddOrEditRealEstateDescriptionEditText.text.toString()
+        val surface = binding.fragmentAddOrEditRealEstateSurfaceEditText.text.toString().toInt()
         val numberOfRooms =
-                binding.activityAddOrEditRealEstateNumberOfRoomsEditText.text.toString().toInt()
-        val secondLocation = binding.activityAddOrEditRealEstateAddressEditText.text.toString()
-        val entryDate: String = binding.activityAddOrEditRealEstateEntryDateEditText.text.toString()
-        val saleDate: String = binding.activityAddOrEditRealEstateSaleDateEditText.text.toString()
+                binding.fragmentAddOrEditRealEstateNumberOfRoomsEditText.text.toString().toInt()
+        val secondLocation = binding.fragmentAddOrEditRealEstateAddressEditText.text.toString()
+        val entryDate: String = binding.fragmentAddOrEditRealEstateEntryDateEditText.text.toString()
+        val saleDate: String = binding.fragmentAddOrEditRealEstateSaleDateEditText.text.toString()
         newRealEstate.place = firstLocation
         newRealEstate.price = price
         newRealEstate.description = description
@@ -399,7 +394,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
         //Set mNewRealEstate all value selected previously
         // If intent comes from Main Activity to add a real estate so pass data back
         // Else if intent comes from Real Estate Fragment to edit a real estate so pass data back
-        binding.activityAddOrEditRealEstateOkButton.setOnClickListener {
+        binding.fragmentAddOrEditRealEstateOkButton.setOnClickListener {
 
 
             setNewRealEstateValue(newRealEstate)
@@ -461,7 +456,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             if (resultCode == RESULT_OK) {
                 //set image in ImageView from camera
                 val selectedImage = data1!!.extras!!["data"] as Bitmap
-                binding.activityAddOrEditRealEstateMainPhoto.setImageBitmap(selectedImage)
+                binding.fragmentAddOrEditRealEstateMainPhoto.setImageBitmap(selectedImage)
                 val imageUri: Uri = RealEstatePhotos.bitmapToImageUri(requireActivity(), selectedImage)
                 // convert uri to URL
                 val fileUtils = context?.let { FileUtils(it) }
@@ -474,7 +469,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
             if (resultCode == RESULT_OK) {
                 //set image in ImageView from gallery
                 val selectedImage = data1!!.data
-                binding.activityAddOrEditRealEstateMainPhoto.setImageURI(selectedImage)
+                binding.fragmentAddOrEditRealEstateMainPhoto.setImageURI(selectedImage)
                 val selectedImageToString = RealEstatePhotos.uriToString(selectedImage!!)
                 newRealEstate.mainPhotoUrl = selectedImageToString
             }
@@ -501,7 +496,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
                 }
 
                 val adapter = ImagesAdapter(selectedImage, activity)
-                binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
+                binding.fragmentAddOrEditRealEstatePickPhotosGrid.adapter = adapter
 
             }
         } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
@@ -561,7 +556,7 @@ class AddOrCreateRealEstateFragment : Fragment(), AdapterView.OnItemSelectedList
 
                 val adapter = ImagesAdapter(selectedPhotos, activity)
                 // here the list of selected photos
-                binding.activityAddOrEditRealEstatePickPhotosGrid.adapter = adapter
+                binding.fragmentAddOrEditRealEstatePickPhotosGrid.adapter = adapter
 
             }
         }

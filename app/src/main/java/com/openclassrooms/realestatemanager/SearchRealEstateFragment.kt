@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.openclassrooms.realestatemanager.databinding.ActivitySearchRealEstateBinding
+import com.openclassrooms.realestatemanager.databinding.FragmentSearchRealEstateBinding
 import com.openclassrooms.realestatemanager.repository.RealEstateRepository
 import com.openclassrooms.realestatemanager.views.RealEstateFragment
 import com.openclassrooms.realestatemanager.views.RealEstateViewModel
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 class SearchRealEstateFragment : Fragment() {
 
-    private lateinit var binding: ActivitySearchRealEstateBinding
+    private lateinit var binding: FragmentSearchRealEstateBinding
     private lateinit var viewModel: RealEstateViewModel
     private lateinit var repository: RealEstateRepository
 
@@ -33,33 +33,33 @@ class SearchRealEstateFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        binding = ActivitySearchRealEstateBinding.inflate(layoutInflater)
+        binding = FragmentSearchRealEstateBinding.inflate(layoutInflater)
         val view: View = binding.root
         initializeSearchItems()
         return view
     }
 
     private fun initializeSearchItems() {
-        binding.activitySearchRealEstateButtonSearch.setOnClickListener {
+        binding.fragmentSearchRealEstateButtonSearch.setOnClickListener {
 
             val critaries = SearchCritaries()
-            val minimumPrice = binding.activitySearchRealEstatePriceMinimumEditText.text.toString()
-            val maximumPrice = binding.activitySearchRealEstatePriceMaximumEditText.text.toString()
+            val minimumPrice = binding.fragmentSearchRealEstatePriceMinimumEditText.text.toString()
+            val maximumPrice = binding.fragmentSearchRealEstatePriceMaximumEditText.text.toString()
             val minimumSurface =
-                binding.activitySearchRealEstateSurfaceMinimumEditText.text.toString()
+                    binding.fragmentSearchRealEstateSurfaceMinimumEditText.text.toString()
             val maximumSurface =
-                binding.activitySearchRealEstateSurfaceMaximumEditText.text.toString()
+                    binding.fragmentSearchRealEstateSurfaceMaximumEditText.text.toString()
             val firstLocation =
-                binding.activitySearchRealEstateFirstLocationEditText.text.toString()
-            val numberOfPhotos =
-                binding.activitySearchRealEstateNumberPhotosEditText.text.toString()
+                    binding.fragmentSearchRealEstateFirstLocationEditText.text.toString()
+            val numberOfRooms =
+                    binding.fragmentSearchRealEstateNumberRoomsEditText.text.toString()
 
-            val entryDate = binding.activitySearchRealEstateEntryDateSinceEditText.text.toString()
-            val saleDate = binding.activitySearchRealEstateSaleDateSinceEditText.text.toString()
+            val entryDate = binding.fragmentSearchRealEstateEntryDateSinceEditText.text.toString()
+            val saleDate = binding.fragmentSearchRealEstateSaleDateSinceEditText.text.toString()
 
             try {
                 critaries.minimumPrice = minimumPrice.toInt()
@@ -91,7 +91,7 @@ class SearchRealEstateFragment : Fragment() {
             }
 
             try {
-                critaries.numberOfPhotos = numberOfPhotos.toInt()
+                critaries.numberOfRooms = numberOfRooms.toInt()
             } catch (t: Throwable) {
                 t.printStackTrace() //if it's not an integer
             }
@@ -117,7 +117,7 @@ class SearchRealEstateFragment : Fragment() {
 
             GlobalScope.launch(Dispatchers.Main) {
 
-                Toast.makeText(requireActivity(),"filter submit ok", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "filter submit ok", Toast.LENGTH_SHORT).show()
                 val bundle = Bundle()
                 bundle.putBoolean("isFiltered", true)
                 bundle.putInt("minimumPrice", minimumPrice.toInt())
@@ -125,7 +125,7 @@ class SearchRealEstateFragment : Fragment() {
                 bundle.putInt("minimumSurface", minimumSurface.toInt())
                 bundle.putInt("maximumSurface", maximumSurface.toInt())
                 bundle.putString("firstLocation", firstLocation)
-                bundle.putInt("numberOfPhotos", numberOfPhotos.toInt())
+                bundle.putInt("numberOfRooms", numberOfRooms.toInt())
                 bundle.putString("minimumEntryDate", entryDateInDate.toString())
                 bundle.putString("minimumSaleDate", saleDateInDate.toString())
 
@@ -133,12 +133,11 @@ class SearchRealEstateFragment : Fragment() {
                 val fragment = RealEstateFragment()
                 fragment.arguments = bundle
 
-
-                     requireActivity().supportFragmentManager
-                         .beginTransaction()
-                         .replace(R.id.activity_main_fragment_container_view_list, fragment)
-                          .addToBackStack(RealEstateFragment::class.java.simpleName)
-                         .commit();
+                requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.activity_main_fragment_container_view_list, fragment)
+                        .addToBackStack(RealEstateFragment::class.java.simpleName)
+                        .commit();
 
 
             }
@@ -149,17 +148,16 @@ class SearchRealEstateFragment : Fragment() {
     }
 
     data class SearchCritaries(
-         var minimumPrice: Int? = 0,
-         var maximumPrice: Int? = 0,
-         var minimumSurface: Int? = 0,
-         var maximumSurface: Int? = 0,
-         var firstLocation: String? = "",
-         var description: String? = "",
-         var numberOfPhotos: Int? = 0,
-         var entryDateInDate: String? = "",
-         var saleDateInDate: String? = "",
+            var minimumPrice: Int? = 0,
+            var maximumPrice: Int? = 0,
+            var minimumSurface: Int? = 0,
+            var maximumSurface: Int? = 0,
+            var firstLocation: String? = "",
+            var description: String? = "",
+            var numberOfRooms: Int? = 0,
+            var entryDateInDate: String? = "",
+            var saleDateInDate: String? = "",
     ) {
 
     }
-
 }

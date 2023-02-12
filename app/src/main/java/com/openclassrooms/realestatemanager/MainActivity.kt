@@ -39,11 +39,6 @@ class MainActivity : AppCompatActivity()   {
 
     companion object{
         private const val ALL_PERMISSIONS = 10
-
-        const val ADD_REAL_ESTATE_REQUEST_CODE = 100
-        const val ADD_REAL_ESTATE = "ADD_REAL_ESTATE"
-        const val NOTIFICATION_REQUEST_CODE = 20
-
     }
 
 

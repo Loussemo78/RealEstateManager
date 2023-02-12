@@ -31,7 +31,7 @@
     <string name="maximum_price_in_dollar">Maximum price in dollar</string>
     <string name="minimum_surface_in_square_meters">Minimum surface in sq m</string>
     <string name="maximum_surface_in_square_meters">Maximum surface in sq m</string>
-    <string name="minimum_number_of_photos">Minimum number of photos</string>
+    <string name="minimum_number_of_rooms">Minimum number of rooms</string>
     <string name="put_on_the_market_since_in_days">Put on the market since (dd/MM/yyyy)</string>
     <string name="sale_since_in_days">Sale since (dd/MM/yyyy)</string>
     <string name="surface_in_square_meter">Surface in square meter</string>

@@ -13,7 +13,7 @@
 
         <!-- Price -->
         <EditText
-            android:id="@+id/activity_search_real_estate_price_minimum_edit_text"
+            android:id="@+id/fragment_search_real_estate_price_minimum_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
@@ -22,7 +22,7 @@
             android:inputType="numberDecimal" />
 
         <EditText
-            android:id="@+id/activity_search_real_estate_price_maximum_edit_text"
+            android:id="@+id/fragment_search_real_estate_price_maximum_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
@@ -34,7 +34,7 @@
 
         <!-- Surface -->
         <EditText
-            android:id="@+id/activity_search_real_estate_surface_minimum_edit_text"
+            android:id="@+id/fragment_search_real_estate_surface_minimum_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
@@ -43,7 +43,7 @@
             android:inputType="number" />
 
         <EditText
-            android:id="@+id/activity_search_real_estate_surface_maximum_edit_text"
+            android:id="@+id/fragment_search_real_estate_surface_maximum_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
@@ -55,7 +55,7 @@
 
         <!-- First location (Borough or neighborhood) -->
         <EditText
-            android:id="@+id/activity_search_real_estate_first_location_edit_text"
+            android:id="@+id/fragment_search_real_estate_first_location_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
           
@@ -64,16 +64,16 @@
 
         <!-- Number of photos -->
         <EditText
-            android:id="@+id/activity_search_real_estate_number_photos_edit_text"
+            android:id="@+id/fragment_search_real_estate_number_rooms_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
           
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
-            android:hint="@string/minimum_number_of_photos"/>
+            android:hint="@string/minimum_number_of_rooms"/>
 
         <EditText
-            android:id="@+id/activity_search_real_estate_description_edit_text"
+            android:id="@+id/fragment_search_real_estate_description_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
           
@@ -83,7 +83,7 @@
 
         <!-- Entry date -->
         <EditText
-            android:id="@+id/activity_search_real_estate_entry_date_since_edit_text"
+            android:id="@+id/fragment_search_real_estate_entry_date_since_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -92,7 +92,7 @@
 
         <!-- Sale date -->
         <EditText
-            android:id="@+id/activity_search_real_estate_sale_date_since_edit_text"
+            android:id="@+id/fragment_search_real_estate_sale_date_since_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
@@ -101,7 +101,7 @@
 
         <!-- Button finish -->
         <Button
-            android:id="@+id/activity_search_real_estate_button_search"
+            android:id="@+id/fragment_search_real_estate_button_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

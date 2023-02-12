@@ -12,7 +12,7 @@ class DateConverter {
 
     @TypeConverter
     fun fromDate(date: Date?): Long? {
-        return if (date == null) null else date.getTime()
+        return if (date == null) null else date.time
     }
 
     companion object {

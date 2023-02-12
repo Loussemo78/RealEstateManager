@@ -24,11 +24,11 @@ class RealEstateRepository( val context: Context) {
     fun getRealEstate(id: Long): LiveData<RealEstate> =
             dao.getRealEstate(id)
 
-    //minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation,numberOfPhotos, description ,pointOfInterest.toString(),minimumEntryDate,minimumSaleDate
+    //minimumPrice,maximumPrice,minimumSurface,maximumSurface,firstLocation,numberOfRooms, description ,pointOfInterest.toString(),minimumEntryDate,minimumSaleDate
     fun getRealEstatesFiltered(
         minimumPrice: Int?,
-        maximumPrice: Int?, minimumSurface: Int?, maximumSurface: Int?, numberOfPhotos: Int?, minimumEntryDate: String?, minimumSaleDate: String?
+        maximumPrice: Int?, minimumSurface: Int?, maximumSurface: Int?, numberOfRooms: Int?, minimumEntryDate: String?, minimumSaleDate: String?
     ): LiveData<List<RealEstate>>{
-       return dao.getRealEstatesFiltered(minimumPrice,maximumPrice, minimumSurface, maximumSurface, numberOfPhotos, minimumEntryDate, minimumSaleDate )
+       return dao.getRealEstatesFiltered(minimumPrice,maximumPrice, minimumSurface, maximumSurface, numberOfRooms, minimumEntryDate, minimumSaleDate )
     }
 }
